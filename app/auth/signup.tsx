@@ -1,5 +1,5 @@
-import { View, Text, Image, TextInput, Pressable,  Alert  } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, Image, TextInput, Pressable,  Alert, Button  } from 'react-native'
+import React, { useState, useRef } from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
@@ -11,6 +11,7 @@ import { SubmitButton } from '@component/form/CustomButton'
 import { PrimaryButton } from '@component/general/CustomButton'
 import { Separator } from 'tamagui'
 import { Ionicons } from '@expo/vector-icons'
+import Countdown, { CountdownRef } from '@component/general/Countdown'
 
 const logo = require('../../assets/images/logo/logo.png')
 const palmfone = require('../../assets/images/foreground/acctcreated.png')
@@ -37,6 +38,8 @@ const Signup: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
 
   const [userid, setUserId] = React.useState()
+
+  const countdownRef = useRef<CountdownRef>(null);
   
   const { renderForm, formState: { isValid }, values, } = useForm({
     defaultValues: {
@@ -49,22 +52,16 @@ const Signup: React.FC = () => {
     validationSchema: signupSchema,
   });
 
-  // const handleChange = (text:any) => {
-  //   let strength = passwordStrength
-  //   window.alert(strength.length)
-  //   // const sanitizedText = text.replace('');
-  //   // // Limit the input to 5 characters
-  //   // if (sanitizedText.length <= 5) {
-  //   //   window.alert('0')
-  //   // }
-  //   // const strength = text.length;
-  //   // window.alert('hello')
-  //   // setPasswordStrength(strength);
-  //   // if(strength === 3){
-  //   //   window.alert('3')
+  const handleTimerEnd = () => {
+    Alert.alert('Countdown Finished', 'The countdown has reached zero!');
+    
+  };
 
-  //   // }
-  // }
+  const handleRestartClick = () => {
+    if (countdownRef.current) {
+      countdownRef.current.restart();
+    }
+  };
   
   const handleOtpInput_1Change = (text: any) => {
     // Ensure that the input contains only numbers
@@ -186,6 +183,7 @@ const Signup: React.FC = () => {
       console.log(message)
       // console.log(response)
       Alert.alert('Success', message)
+      handleRestartClick()
       
     } catch (error) {
       // Handle errors
@@ -392,7 +390,9 @@ const Signup: React.FC = () => {
                       <CustomText variant={'xs'} fontSize={14} style={{color:'#2D66DD', fontWeight:'800'}}>Resend</CustomText>
                   </Pressable>
                   </TouchableOpacity>
-                  <Text>(0:05s)</Text>
+                  <Countdown ref={countdownRef} initialTime={60} onTimerEnd={handleTimerEnd} />
+                  {/* <Button title="Restart" onPress={handleRestartClick} /> */}
+                  {/* <Text>(0:05s)</Text> */}
                 </Box>
                 <Box height={'45%'} flexDirection={'row'} alignItems={'flex-end'}>
                 <Box height={5} width={'100%'}  flexDirection={'row'} justifyContent={'center'} >
