@@ -6,14 +6,14 @@ import { useTheme } from "@shopify/restyle";
 import { Theme } from "../../theme";
 
 interface IProps {
-  onSubmit: (data: any) => void;
+  onSubmit: () => void; 
   label: string;
   isLoading?: boolean;
   width: number | string;
 }
 
 export const SubmitButton = ({
-  onSubmit,
+  // onSubmit,
   label,
   isLoading,
   width = "100%",
@@ -23,6 +23,12 @@ export const SubmitButton = ({
     formState: { isDirty, isValid, isSubmitting },
   } = useFormContext();
   const theme = useTheme<Theme>();
+
+  const onSubmit = ({onSubmit}:any) => {
+    // Perform any additional actions or call another submit function here
+    // console.log("Form data:", data);
+    console.log('form')
+  };
 
   //disabled={!isDirty || !isValid  ? true: false}
 
@@ -41,7 +47,7 @@ export const SubmitButton = ({
         }}
       >
         <CustomText
-          variant="header"
+          variant="subheader"
           style={{
             fontSize: 16,
             color: "#FFFFFF",

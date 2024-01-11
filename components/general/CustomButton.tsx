@@ -5,7 +5,7 @@ import { useTheme } from "@shopify/restyle";
 import { Theme } from "../../theme";
 
 interface IProps {
-  onPress: () => void;
+  onPress: any;
   label: string;
   isLoading?: boolean;
   width: number | string;
