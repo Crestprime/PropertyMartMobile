@@ -58,7 +58,7 @@ const Countdown: React.ForwardRefRenderFunction<CountdownRef, CountdownProps> = 
     },
   }));
 
-  return <Text>0:{time}</Text>;
+  return <Text> (0:{time}s)</Text>;
 };
 
 export default React.forwardRef(Countdown);

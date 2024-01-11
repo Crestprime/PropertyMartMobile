@@ -18,32 +18,27 @@ const palmfone = require('../../assets/images/foreground/acctcreated.png')
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import HttpClient from '../../utils/httpService'
-import { useMutation } from 'react-query'
-import useToast from '../../hooks/useToast'
 
 const Signup: React.FC = () => {
-
+// OTP form Values
   const [otpInput_1, setOtpInput_1] = useState('');
   const [otpInput_2, setOtpInput_2] = useState('');
   const [otpInput_3, setOtpInput_3] = useState('');
   const [otpInput_4, setOtpInput_4] = useState('');
   const [otpInput_5, setOtpInput_5] = useState('');
   const [otpInput_6, setOtpInput_6] = useState('');
-
   const [otpNumber, setOtpNumber] = useState('your email');
-
-  const [step,setStep ] = useState(1);
-  const [passwordStrength, setPasswordStrength] = useState('')
+ // UI states
+  const [step,setStep ] = useState(0);
   const [checked, setChecked] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false)
-
-  const [userid, setUserId] = React.useState()
-
+  // store server props
+  const [userId, setUserId] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const countdownRef = useRef<CountdownRef>(null);
   
   const { renderForm, formState: { isValid }, values, } = useForm({
     defaultValues: {
-      // firstname: '',
       name: '',
       email: '',
       phone: '',
@@ -53,8 +48,8 @@ const Signup: React.FC = () => {
   });
 
   const handleTimerEnd = () => {
-    Alert.alert('Countdown Finished', 'The countdown has reached zero!');
-    
+    // Alert.alert('Countdown Finished', 'The countdown has reached zero!');
+    console.log('Time ended') 
   };
 
   const handleRestartClick = () => {
@@ -101,30 +96,40 @@ const Signup: React.FC = () => {
       setOtpInput_6(sanitizedText);
     }
   };
-
   const back = () => {
      setStep(0);
   }
-  const showToast = useToast
+  // const showToast = useToast
   const handleSubmit = async () => {
     if(!checked){
       Alert.alert('You have to accept our term & conditions to continue')
     } else{
       try {
         const formdata = values()
-        console.log(formdata);
+        // console.log(formdata);
         setIsLoading(true)
         const response = await HttpClient.post('/authentication/create-account', formdata);;
         // Handle the response as needed
-        console.log('Response:', response.data);
-        // const userid = response.data._id
-        const {_id} = response.data
-        const {message} = response.data
-        console.log(_id)
-        console.log(message)
+        // console.log('Response', response.data.data);
+        const { message } = response.data;
+        const { _id, email } = response.data.data;
+        console.log(_id, message, email)
+      
         setUserId(_id)
+        setUserEmail(email)
 
-        // console.log(response)
+        // if (userId) {
+        //   console.log('userID stored:', userId);
+        // } else {
+        //   console.log('userID not stored');
+        // }
+  
+        // if (userEmail) {
+        //   console.log('userEmail stored:', userEmail);
+        // } else {
+        //   console.log('userEmail not stored');
+        // }
+
         Alert.alert('Success', message);
         setIsLoading(false)
         setStep(1);
@@ -133,13 +138,12 @@ const Signup: React.FC = () => {
         setIsLoading(false)
         // Handle errors
         console.error('Error:', error);
-        Alert.alert('Error', 'Failed to send data');
+        Alert.alert('Error', 'An account with that email already exist');
       }
 
     }
     
   };
-
   const handleVerify = async () => {
      let otpData = otpInput_1 + otpInput_2 + otpInput_3 + otpInput_4 + otpInput_5 + otpInput_6 ;
      console.log(otpData)
@@ -150,8 +154,8 @@ const Signup: React.FC = () => {
       const formdata = otpData
       Alert.alert(formdata)
       try {
-        const userId = "659fbdabb46bac0d71e953cd";
-        console.log(userId)
+        // const userId = "659fbdabb46bac0d71e953cd";
+        // console.log(userId)
         const response = await HttpClient.put(`/authentication/user/verify-email-otp/${formdata}/${userId}`,);
         // Handle the response as needed
         console.log('Response:', response.data);
@@ -167,24 +171,22 @@ const Signup: React.FC = () => {
         // const {message} = error;
         // console.log('message',message)
         
-        Alert.alert('Error', 'Failed to send data');
+        Alert.alert('Invalid OTP code');
         
       }
      }
   }
-
   const handleResend = async () => {
     try {
-      const userMail = 'xenxei46@gmail.com'
-      const response = await HttpClient.get(`/authentication/user/resend-email-verification-otp/${userMail}`);;
+      // const userMail = 'xenxei46@gmail.com'
+      const response = await HttpClient.get(`/authentication/user/resend-email-verification-otp/${userEmail}`);;
       // Handle the response as needed
       console.log('Resend init:', response.data);
       const {message} = response.data
       console.log(message)
       // console.log(response)
-      Alert.alert('Success', message)
-      handleRestartClick()
-      
+      Alert.alert('We have sent you a code again')
+      handleRestartClick() 
     } catch (error) {
       // Handle errors
       console.error('Error:', error);
@@ -297,8 +299,7 @@ const Signup: React.FC = () => {
             </Box>
             </> 
             : step === 1?
-            <>
-          
+            <>     
             <Box>
               <Box marginTop={'xl'}>
                 <TouchableOpacity>
@@ -382,15 +383,16 @@ const Signup: React.FC = () => {
                         <PrimaryButton label='Verify' width='100%' onPress={handleVerify} isLoading={isLoading}/>
                     </Box>
                 </TouchableOpacity>
-                <Box width='100%' marginTop={'lg'} flexDirection={'row'} height={50} justifyContent={'center'} alignItems={'center'}>
-                  <CustomText variant={'xs'}>Didn’t get a code? 
-                  </CustomText>
+                <Box width='100%' marginTop={'xs'} flexDirection={'row'} height={50} justifyContent={'center'} alignItems={'center'}>
+                  <CustomText variant={'xs'} marginRight={'xs'}>Didn’t get a code?</CustomText>
                   <TouchableOpacity>
-                  <Pressable onPress={handleResend}>
-                      <CustomText variant={'xs'} fontSize={14} style={{color:'#2D66DD', fontWeight:'800'}}>Resend</CustomText>
-                  </Pressable>
+                    <Pressable onPress={handleResend}>
+                        <CustomText variant={'xs'} fontSize={14} style={{color:'#2D66DD', fontWeight:'800'}}>Resend</CustomText>
+                    </Pressable>
                   </TouchableOpacity>
-                  <Countdown ref={countdownRef} initialTime={60} onTimerEnd={handleTimerEnd} />
+                  <CustomText>
+                    <Countdown ref={countdownRef} initialTime={60} onTimerEnd={handleTimerEnd} />
+                  </CustomText>
                   {/* <Button title="Restart" onPress={handleRestartClick} /> */}
                   {/* <Text>(0:05s)</Text> */}
                 </Box>
@@ -406,10 +408,14 @@ const Signup: React.FC = () => {
             : step === 2?
             <>
              <Box width={'100%'} height={'100%'}>
-                  <Box height={'30%'} width={'100%'} >
-                    <CustomText variant={'xs'} textAlign={'right'} fontSize={12} lineHeight={20} 
-                      color={'btnBlue'} fontWeight={'800'}>I’ll do this later
-                    </CustomText>
+                  <Box height={'30%'} width={'100%'} flexDirection={'row'} justifyContent={'flex-end'} >
+                    <Link href={'/auth/login'}>
+                      <TouchableOpacity>
+                        <CustomText variant={'xs'} fontSize={12} lineHeight={20} 
+                          color={'btnBlue'} fontWeight={'800'}>I’ll do this later
+                        </CustomText>
+                      </TouchableOpacity>
+                    </Link>
                   </Box> 
                 <Box height={'70%'} width={'100%'} flexDirection={'column'} alignItems={'center'}>
                   <Box height={'20%'} paddingBottom={'xl'}>
@@ -427,9 +433,8 @@ const Signup: React.FC = () => {
                     </CustomText>
                   </Box>
                   <Box width={'100%'} marginTop={'xl'}>
-                    <PrimaryButton onPress={function (): void {
-                            throw new Error('Function not implemented.')
-                          } } label={'Continue to account set up'} width={'100%'} />
+                    <PrimaryButton onPress={()=>{console.log('not yet up')}}
+                           label={'Continue to account set up'} width={'100%'} />
                   </Box>
                   <Box height={'40%'} flexDirection={'row'} alignItems={'flex-end'}>
                     <Box height={5} width={'100%'}  flexDirection={'row'} justifyContent={'center'} >
