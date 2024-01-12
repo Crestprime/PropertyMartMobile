@@ -13,6 +13,7 @@ import {
   import CustomText from "../general/CustomText";
   import { Ionicons } from "@expo/vector-icons";
   
+  
   interface IProps {
     required?: boolean;
     name: string;
@@ -121,7 +122,7 @@ import {
           }}
         />
         {errors[props.name] && (
-          <CustomText variant="xs" marginTop={'xs'} style={{ color: "red" }}>
+          <CustomText variant="xs" fontSize={10} marginTop={'xs'} style={{ color: "red" }}>
             {errors[props.name]?.message as any}
           </CustomText>
         )}
