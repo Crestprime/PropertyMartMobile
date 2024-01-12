@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput, Pressable,  Alert, Button  } from 'react-native'
+import { Text, Image, TextInput, Pressable,  Alert } from 'react-native'
 import React, { useState, useRef } from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
@@ -27,7 +27,7 @@ const Signup: React.FC = () => {
   const [otpInput_4, setOtpInput_4] = useState('');
   const [otpInput_5, setOtpInput_5] = useState('');
   const [otpInput_6, setOtpInput_6] = useState('');
-  const [otpNumber, setOtpNumber] = useState('your email');
+  // const [otpNumber, setOtpNumber] = useState('your email');
  // UI states
   const [step,setStep ] = useState(0);
   const [checked, setChecked] = React.useState(false);
@@ -316,7 +316,7 @@ const Signup: React.FC = () => {
               </CustomText>
                <CustomText variant={'xs'} textAlign={'left'} fontSize={14} lineHeight={20}  marginTop={'xs'}
                     color={'black'} fontWeight={'400'}>
-                     Please enter the OTP code sent to {otpNumber}
+                     Please enter the OTP code sent to {userEmail}
                </CustomText>
 
                 <Box marginTop={'lg'} marginBottom={'lg'}>
