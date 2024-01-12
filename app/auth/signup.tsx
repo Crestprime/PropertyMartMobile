@@ -12,12 +12,15 @@ import { PrimaryButton } from '@component/general/CustomButton'
 import { Separator } from 'tamagui'
 import { Ionicons } from '@expo/vector-icons'
 import Countdown, { CountdownRef } from '@component/general/Countdown'
+import { Checkbox } from 'tamagui'
 
 const logo = require('../../assets/images/logo/logo.png')
 const palmfone = require('../../assets/images/foreground/acctcreated.png')
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import HttpClient from '../../utils/httpService'
+import { useMutation } from 'react-query'
+import httpService from '../../utils/httpService'
 
 const Signup: React.FC = () => {
 // OTP form Values
@@ -46,6 +49,23 @@ const Signup: React.FC = () => {
     },
     validationSchema: signupSchema,
   });
+
+  // This is the method we use for mutation
+  // do not use the httpService directly
+  // we use react-query for all queries and mutations
+  // signup mutation
+  const { isLoading: signupMutationLoading, mutate } = useMutation({
+    mutationFn: (data: any) => httpService.post(`/authentication/create-account`, data),
+    onSuccess: (data) => {
+      setStep(1)
+      console.log(data.data);
+      setUserEmail(data.data.data.email);
+      setUserId(data.data.data._id);
+    },
+    onError: (error: any) => {
+      alert(error?.message)
+    },
+  })
 
   const handleTimerEnd = () => {
     // Alert.alert('Countdown Finished', 'The countdown has reached zero!');
@@ -100,50 +120,16 @@ const Signup: React.FC = () => {
      setStep(0);
   }
   // const showToast = useToast
-  const handleSubmit = async () => {
+  const handleSubmit = async (data: any) => {
     if(!checked){
       Alert.alert('You have to accept our term & conditions to continue')
     } else{
-      try {
-        const formdata = values()
-        // console.log(formdata);
-        setIsLoading(true)
-        const response = await HttpClient.post('/authentication/create-account', formdata);;
-        // Handle the response as needed
-        // console.log('Response', response.data.data);
-        const { message } = response.data;
-        const { _id, email } = response.data.data;
-        console.log(_id, message, email)
-      
-        setUserId(_id)
-        setUserEmail(email)
-
-        // if (userId) {
-        //   console.log('userID stored:', userId);
-        // } else {
-        //   console.log('userID not stored');
-        // }
-  
-        // if (userEmail) {
-        //   console.log('userEmail stored:', userEmail);
-        // } else {
-        //   console.log('userEmail not stored');
-        // }
-
-        Alert.alert('Success', message);
-        setIsLoading(false)
-        setStep(1);
-        
-      } catch (error) {
-        setIsLoading(false)
-        // Handle errors
-        console.error('Error:', error);
-        Alert.alert('Error', 'An account with that email already exist');
-      }
-
+      mutate(data);
     }
     
   };
+
+  // remove this and handle it with react query
   const handleVerify = async () => {
      let otpData = otpInput_1 + otpInput_2 + otpInput_3 + otpInput_4 + otpInput_5 + otpInput_6 ;
      console.log(otpData)
@@ -176,6 +162,8 @@ const Signup: React.FC = () => {
       }
      }
   }
+
+  // remove this and handle it with react query
   const handleResend = async () => {
     try {
       // const userMail = 'xenxei46@gmail.com'
@@ -240,20 +228,11 @@ const Signup: React.FC = () => {
                   <Box width='100%' marginBottom={'sm'} height={40} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
                 {/* <Link href="/auth/forgotpassword"> */}
 
-                 <Box borderRadius={5} borderColor={'primaryColor'} 
-                   borderWidth={1.5} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
-                    <TouchableOpacity>
-                      <Pressable onPress={() => setChecked((prev) => !prev)}>
-                        <Box style={{height:15, width:15,}} flexDirection={'row'} justifyContent={'center'} alignItems={'center'} >
-                          <Ionicons
-                            name={checked? "checkmark" : "remove"}
-                            size={checked?14:14}
-                            color={checked? "#2D66DD":"#FFFFFF"}
-                          />
-                        </Box>
-                      </Pressable>
-                    </TouchableOpacity>
-                  </Box> 
+                 <Checkbox onCheckedChange={(checked)=> setChecked(checked as boolean)} checked={checked}>
+                  <Checkbox.Indicator>
+                    <Ionicons name="checkmark-circle" size={20} color="#2D66DD" />
+                  </Checkbox.Indicator>
+                 </Checkbox>
 
                   <CustomText variant={'xs'}  fontSize={12} fontWeight={'800'} marginLeft={'xs'} >
                       I agree to our  <Link href="/" style={{color:'#2D66DD'}}> Terms of Service & Privacy Policy </Link> 
@@ -261,20 +240,7 @@ const Signup: React.FC = () => {
                 {/* </Link> */}
                   </Box>
 
-                  {
-                    isValid?
-                    <>
-                      <Text>is valid</Text>
-                      </>
-                    : 
-                    <>
-                    {/* <SubmitButton label='Create an Account' width='100%'  onSubmit={() => {}} /> */}
-                    <TouchableOpacity>
-                        <PrimaryButton label='Create an Account' width='100%' onPress={handleSubmit} isLoading={isLoading}/>
-                        {/* <SubmitButton label='Create an Account' width='100%' onSubmit={onsubmit} /> */}
-                    </TouchableOpacity>
-                    </>
-                  }
+                  <SubmitButton label='Create an Account' width='100%' onSubmit={(data) => handleSubmit(data)} isLoading={isLoading} />
 
                   <Box width='100%' flexDirection={'row'} height={60} alignItems={'center'} >
                     <Separator />
