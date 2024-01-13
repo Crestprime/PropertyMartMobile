@@ -1,3 +1,18 @@
+import { Text, View } from 'react-native'
+import React, { Component } from 'react'
+import Box from '@component/general/Box'
+
+export default class test extends Component {
+  render() {
+    return (
+      <Box width={'100%'} height={'100%'}  flexDirection={'row'} alignItems={'center'} justifyContent={'center'}>
+       
+      <Text>This is a test screen that shows that the user is logged successfully logged in</Text>
+      
+      </Box>
+    )
+  }
+}
 // import react, { useRef } from 'react'
 // import { View, TextInput,NativeSyntheticEvent,TextInputKeyPressEventData, StyleSheet, Text, Button } from 'react-native';
 // import { useForm, Controller, useController } from 'react-hook-form';

@@ -23,6 +23,9 @@ const loginSchema = z.object({
     email: z.string().email('Invalid email').min(3, 'Email is required'),
     password: z.string().min(6, 'Password is required'),
   });
+const requestOTPSchema = z.object({
+    email: z.string().email('Invalid email').min(3, 'Email is required'),
+  });
 
   
-export { loginSchema, signupSchema }
+export { loginSchema, signupSchema, requestOTPSchema }

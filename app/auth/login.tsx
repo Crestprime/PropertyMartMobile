@@ -6,7 +6,7 @@ import useForm from '@hooks/useForm'
 import { loginSchema } from '@services/validation'
 import { Styles } from './styles'
 import { CustomTextInput } from '@component/form/CustomInput'
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { SubmitButton } from '@component/form/CustomButton'
 import { Separator } from 'tamagui'
 import { useMutation } from 'react-query'
@@ -27,6 +27,7 @@ const Login = () => {
     mutationFn: (data: any) => httpService.post(`/authentication/login`, data),
     onSuccess: (data) => {
       console.log(data.data);
+      router.push('/auth/test')
     },
     onError: (error: any) => {
       alert(error?.message)

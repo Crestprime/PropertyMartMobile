@@ -23,7 +23,7 @@ const  NewPassword = ({userId}:any) => {
     validationSchema: loginSchema,
   })
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const Router = router
   const login = () => {
