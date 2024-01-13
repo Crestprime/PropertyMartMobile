@@ -215,7 +215,7 @@ const SignupVerify = ({userEmail, step, setStep, userId, }:any) => {
                     </Box>
                 </Box>
         </Box>
-        </Box>
+       </Box>
     </Box>
   )
 }
