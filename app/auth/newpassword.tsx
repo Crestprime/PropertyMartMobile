@@ -4,7 +4,7 @@ import { Image,Alert } from 'react-native'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
-import { loginSchema } from '@services/validation'
+import { newPasswordSchema } from '@services/validation'
 import { Styles } from './styles'
 import { CustomTextInput } from '@component/form/CustomInput'
 import { Link } from 'expo-router';
@@ -13,6 +13,9 @@ import { Ionicons } from '@expo/vector-icons'
 import { PrimaryButton } from '@component/general/CustomButton'
 const palmfone = require('../../assets/images/foreground/acctcreated.png')
 import HttpClient from '../../utils/httpService'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useMutation } from 'react-query'
+import httpService from '../../utils/httpService'
 
 const  NewPassword = ({userId}:any) => {
 
@@ -20,17 +23,30 @@ const  NewPassword = ({userId}:any) => {
     defaultValues: {
       newPassword: '',
     },
-    validationSchema: loginSchema,
+    validationSchema: newPasswordSchema,
   })
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const Router = router
   const login = () => {
     Router.push("/auth/login") 
   }
+  const { isLoading: Saving, mutate } = useMutation({
+    mutationFn: (data: any) => httpService.put('/authentication/user/reset-password/', data),
+    onSuccess: (data) => {
+      setStep(1)
+      setIsLoading(false)
+      const {message} = data.data;
+      console.log(data.data);
+      Alert.alert(message);
+    },
+    onError: (error: any) => {
+      alert(error?.message)
+    },
+  })
 
-  const SaveChanges = async () => {
+  const SaveChanges = async ({data}:any) => {
     const formdata = values()
     console.log(formdata)
     const password = formdata.newPassword
@@ -44,37 +60,10 @@ const  NewPassword = ({userId}:any) => {
     }; 
     
     console.log(newformdata)
-    try {
-      const formdata = values()
-      const resetEmail = formdata.email
-      console.log(resetEmail);
+    if(formdata){
+      let data = newformdata
       setIsLoading(true)
-      const response = await HttpClient.put('/authentication/user/reset-password', newformdata);
-      // const { message } = response.data;
-      // const { id } = response.data.data;
-      // console.log(id, message)
-    
-     
-      // if (userId) {
-      //   console.log('userID stored:', userId);
-      // } else {
-      //   console.log('userID not stored');
-      // }
-
-      // if (userEmail) {
-      //   console.log('userEmail stored:', userEmail);
-      // } else {
-      //   console.log('userEmail not stored');
-      // }
-      // Alert.alert('Success', message);
-      // setIsLoading(false)
-      setStep(1);
-      
-    } catch (error) {
-      setIsLoading(false)
-      // Handle errors
-      console.error('Error:', error);
-      Alert.alert('Error', 'Failed');
+      mutate(data)
     }
 };
 
@@ -98,9 +87,14 @@ const  NewPassword = ({userId}:any) => {
                   <CustomTextInput name='confirmPassword' placeholder='****' label='Confirm Password' isPassword  />
               </Box>
 
-              <Box width='100%' marginTop={'xl'} height={40} justifyContent={'center'} alignItems={'flex-end'}>
-              <PrimaryButton label='Save Changes ' width={'100%'} onPress={SaveChanges}/>
-              </Box>
+              {/* <Box width='100%' marginTop={'xl'} height={40} justifyContent={'center'} alignItems={'flex-end'}> */}
+              <TouchableOpacity>
+                  <Box width='100%' marginTop={'xs'} height={50} justifyContent={'center'} alignItems={'flex-end'}>
+                      {/* <PrimaryButton label='Request OTP' width='100%' onPress={handleRequest} isLoading={isLoading}/> */}
+                      <SubmitButton label='Save Changes' width='100%' onSubmit={(data) => SaveChanges(data)} isLoading={isLoading} /> 
+                  </Box>
+              </TouchableOpacity>
+              {/* </Box> */}
           </Box>
         </Box>
         <Box height={'20%'} flexDirection={'row'} alignItems={'flex-end'}>

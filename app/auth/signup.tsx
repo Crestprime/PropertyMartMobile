@@ -11,35 +11,24 @@ import { SubmitButton } from '@component/form/CustomButton'
 import { PrimaryButton } from '@component/general/CustomButton'
 import { Separator } from 'tamagui'
 import { Ionicons } from '@expo/vector-icons'
-import Countdown, { CountdownRef } from '@component/general/Countdown'
 import { Checkbox } from 'tamagui'
-
-const logo = require('../../assets/images/logo/logo.png')
-const palmfone = require('../../assets/images/foreground/acctcreated.png')
 import { TouchableOpacity } from 'react-native-gesture-handler'
-
-import HttpClient from '../../utils/httpService'
 import { useMutation } from 'react-query'
 import httpService from '../../utils/httpService'
+import SignupVerify from './signupVerify'
+
+const logo = require('../../assets/images/logo/logo.png')
 
 const Signup: React.FC = () => {
-// OTP form Values
-  const [otpInput_1, setOtpInput_1] = useState('');
-  const [otpInput_2, setOtpInput_2] = useState('');
-  const [otpInput_3, setOtpInput_3] = useState('');
-  const [otpInput_4, setOtpInput_4] = useState('');
-  const [otpInput_5, setOtpInput_5] = useState('');
-  const [otpInput_6, setOtpInput_6] = useState('');
-  // const [otpNumber, setOtpNumber] = useState('your email');
- // UI states
-  const [step,setStep ] = useState(0);
+
+  const [step,setStep ] = useState(1);
   const [checked, setChecked] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false)
+
   // store server props
   const [userId, setUserId] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
-  const countdownRef = useRef<CountdownRef>(null);
-  
+   
   const { renderForm, formState: { isValid }, values, } = useForm({
     defaultValues: {
       name: '',
@@ -59,6 +48,8 @@ const Signup: React.FC = () => {
     onSuccess: (data) => {
       setStep(1)
       console.log(data.data);
+      const {email} = data.data;
+      console.log(email)
       setUserEmail(data.data.data.email);
       setUserId(data.data.data._id);
     },
@@ -67,121 +58,19 @@ const Signup: React.FC = () => {
     },
   })
 
-  const handleTimerEnd = () => {
-    // Alert.alert('Countdown Finished', 'The countdown has reached zero!');
-    console.log('Time ended') 
-  };
-
-  const handleRestartClick = () => {
-    if (countdownRef.current) {
-      countdownRef.current.restart();
-    }
-  };
-  
-  const handleOtpInput_1Change = (text: any) => {
-    // Ensure that the input contains only numbers
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    // Limit the input to 5 characters
-    if (sanitizedText.length <= 5) {
-      setOtpInput_1(sanitizedText);
-    }
-  };
-  const handleOtpInput_2Change = (text: any) => {
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    if (sanitizedText.length <= 5) {
-      setOtpInput_2(sanitizedText);
-    }
-  };
-  const handleOtpInput_3Change = (text: any) => {
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    if (sanitizedText.length <= 5) {
-      setOtpInput_3(sanitizedText);
-    }
-  };
-  const handleOtpInput_4Change = (text: any) => {
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    if (sanitizedText.length <= 5) {
-      setOtpInput_4(sanitizedText);
-    }
-  };
-  const handleOtpInput_5Change = (text: any) => {
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    if (sanitizedText.length <= 5) {
-      setOtpInput_5(sanitizedText);
-    }
-  };
-  const handleOtpInput_6Change = (text: any) => {
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    if (sanitizedText.length <= 5) {
-      setOtpInput_6(sanitizedText);
-    }
-  };
-  const back = () => {
-     setStep(0);
-  }
   // const showToast = useToast
   const handleSubmit = async (data: any) => {
     if(!checked){
       Alert.alert('You have to accept our term & conditions to continue')
     } else{
       mutate(data);
-    }
-    
+    } 
   };
 
-  // remove this and handle it with react query
-  const handleVerify = async () => {
-     let otpData = otpInput_1 + otpInput_2 + otpInput_3 + otpInput_4 + otpInput_5 + otpInput_6 ;
-     console.log(otpData)
+  const back = () => {
+    setStep(0);
+ }
 
-     if(otpData.length < 6){
-      Alert.alert('You must enter 6 digits')
-     } else {
-      const formdata = otpData
-      Alert.alert(formdata)
-      try {
-        // const userId = "659fbdabb46bac0d71e953cd";
-        // console.log(userId)
-        const response = await HttpClient.put(`/authentication/user/verify-email-otp/${formdata}/${userId}`,);
-        // Handle the response as needed
-        console.log('Response:', response.data);
-        const {message} = response.data;
-        Alert.alert( message);
-        setIsLoading(false)
-        setStep(2);
-        
-      } catch (error:any) {
-        setIsLoading(false)
-        // Handle errors
-        console.error(error);
-        // const {message} = error;
-        // console.log('message',message)
-        
-        Alert.alert('Invalid OTP code');
-        
-      }
-     }
-  }
-
-  // remove this and handle it with react query
-  const handleResend = async () => {
-    try {
-      // const userMail = 'xenxei46@gmail.com'
-      const response = await HttpClient.get(`/authentication/user/resend-email-verification-otp/${userEmail}`);;
-      // Handle the response as needed
-      console.log('Resend init:', response.data);
-      const {message} = response.data
-      console.log(message)
-      // console.log(response)
-      Alert.alert('We have sent you a code again')
-      handleRestartClick() 
-    } catch (error) {
-      // Handle errors
-      console.error('Error:', error);
-      Alert.alert('Error', 'Failed to resend');
-    }  
-  }
-  
   return renderForm(
     <Box style={[Styles.martContainer, Styles.flex]} >
       <Box style={Styles.subContainer}>
@@ -203,9 +92,6 @@ const Signup: React.FC = () => {
                     <Box width={'100%'}>
                       <CustomTextInput name='name' placeholder='Name' label='Name' isPassword={false} />
                     </Box>
-                    {/* <Box width={'48%'}>
-                      <CustomTextInput name='lastname' placeholder='Last Name' label='Last Name' isPassword={false}  />
-                    </Box> */}
                   </Box>
 
                   <Box marginTop={'sm'}>
@@ -226,7 +112,6 @@ const Signup: React.FC = () => {
                   </Box>
 
                   <Box width='100%' marginBottom={'sm'} height={40} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
-                {/* <Link href="/auth/forgotpassword"> */}
 
                  <Checkbox onCheckedChange={(checked)=> setChecked(checked as boolean)} checked={checked}>
                   <Checkbox.Indicator>
@@ -237,11 +122,11 @@ const Signup: React.FC = () => {
                   <CustomText variant={'xs'}  fontSize={12} fontWeight={'800'} marginLeft={'xs'} >
                       I agree to our  <Link href="/" style={{color:'#2D66DD'}}> Terms of Service & Privacy Policy </Link> 
                   </CustomText>
-                {/* </Link> */}
+
                   </Box>
-
-                  <SubmitButton label='Create an Account' width='100%' onSubmit={(data) => handleSubmit(data)} isLoading={isLoading} />
-
+                  <TouchableOpacity>
+                    <SubmitButton label='Create an Account' width='100%' onSubmit={(data) => handleSubmit(data)} isLoading={isLoading} />
+                  </TouchableOpacity>
                   <Box width='100%' flexDirection={'row'} height={60} alignItems={'center'} >
                     <Separator />
                     <CustomText variant={'xs'} fontSize={12} fontWeight={'800'} color={'black'}>OR</CustomText>
@@ -265,9 +150,8 @@ const Signup: React.FC = () => {
             </Box>
             </> 
             : step === 1?
-            <>     
-            <Box>
-              <Box marginTop={'xl'}>
+            <>  
+            <Box marginTop={'xl'}>
                 <TouchableOpacity>
                   <Pressable   onPress={back} >
                   <Ionicons
@@ -276,147 +160,12 @@ const Signup: React.FC = () => {
                     />
                     </Pressable>
                  </TouchableOpacity>
-              </Box>
-              <CustomText variant={'subheader'} textAlign={'left'} fontSize={25} lineHeight={25} marginTop={'xl'} 
-                    color={'black'} fontWeight={'800'}>Verify your Email
-              </CustomText>
-               <CustomText variant={'xs'} textAlign={'left'} fontSize={14} lineHeight={20}  marginTop={'xs'}
-                    color={'black'} fontWeight={'400'}>
-                     Please enter the OTP code sent to {userEmail}
-               </CustomText>
-
-                <Box marginTop={'lg'} marginBottom={'lg'}>
-                <Box style={Styles.container}>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_1}
-                      onChangeText={handleOtpInput_1Change}
-                    />
-                  </Box>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_2}
-                      onChangeText={handleOtpInput_2Change}
-                    />
-                  </Box>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_3}
-                      onChangeText={handleOtpInput_3Change}
-                    />
-                  </Box>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_4}
-                      onChangeText={handleOtpInput_4Change}
-                    />
-                  </Box>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_5}
-                      onChangeText={handleOtpInput_5Change}
-                    />
-                  </Box>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_6}
-                      onChangeText={handleOtpInput_6Change}
-                    />
-                  </Box>
-                </Box>
-                </Box>
-                <TouchableOpacity>
-                    <Box width='100%' marginTop={'xl'} height={50} justifyContent={'center'} alignItems={'center'}>
-                      {/* <SubmitButton label='Verify' width='100%'  onSubmit={() => {}} /> */}
-                        <PrimaryButton label='Verify' width='100%' onPress={handleVerify} isLoading={isLoading}/>
-                    </Box>
-                </TouchableOpacity>
-                <Box width='100%' marginTop={'xs'} flexDirection={'row'} height={50} justifyContent={'center'} alignItems={'center'}>
-                  <CustomText variant={'xs'} marginRight={'xs'}>Didn’t get a code?</CustomText>
-                  <TouchableOpacity>
-                    <Pressable onPress={handleResend}>
-                        <CustomText variant={'xs'} fontSize={14} style={{color:'#2D66DD', fontWeight:'800'}}>Resend</CustomText>
-                    </Pressable>
-                  </TouchableOpacity>
-                  <CustomText>
-                    <Countdown ref={countdownRef} initialTime={60} onTimerEnd={handleTimerEnd} />
-                  </CustomText>
-                  {/* <Button title="Restart" onPress={handleRestartClick} /> */}
-                  {/* <Text>(0:05s)</Text> */}
-                </Box>
-                <Box height={'45%'} flexDirection={'row'} alignItems={'flex-end'}>
-                <Box height={5} width={'100%'}  flexDirection={'row'} justifyContent={'center'} >
-                    <Box height={5} width={'30%'} backgroundColor={'black'} borderRadius={10}>
-                        <CustomText>Hello</CustomText>
-                    </Box>
-                </Box>
-        </Box>
-            </Box>
+              </Box>   
+            <SignupVerify userEmail={userEmail} userId={userId} />
             </>
-            : step === 2?
-            <>
-             <Box width={'100%'} height={'100%'}>
-                  <Box height={'30%'} width={'100%'} flexDirection={'row'} justifyContent={'flex-end'} >
-                    <Link href={'/auth/login'}>
-                      <TouchableOpacity>
-                        <CustomText variant={'xs'} fontSize={12} lineHeight={20} 
-                          color={'btnBlue'} fontWeight={'800'}>I’ll do this later
-                        </CustomText>
-                      </TouchableOpacity>
-                    </Link>
-                  </Box> 
-                <Box height={'70%'} width={'100%'} flexDirection={'column'} alignItems={'center'}>
-                  <Box height={'20%'} paddingBottom={'xl'}>
-                    <Image source={palmfone} resizeMode="cover" style={{width:100, height:100}} />
-                  </Box>
-                  <Box height={10}></Box>
-                  <Box height={'10%'} marginTop={'xl'}>
-                    <CustomText variant={'subheader'} textAlign={'left'} fontSize={20} lineHeight={25} marginTop={'sm'} 
-                        color={'black'} fontWeight={'800'}>Account created successfully!
-                    </CustomText>
-                  </Box>
-                  <Box height={'10%'}>
-                    <CustomText variant={'xs'} textAlign={'center'} fontSize={14} lineHeight={20} 
-                      color={'black'} fontWeight={'400'}>We’re so happy to have you! Let’s get your account up and running
-                    </CustomText>
-                  </Box>
-                  <Box width={'100%'} marginTop={'xl'}>
-                    <PrimaryButton onPress={()=>{console.log('not yet up')}}
-                           label={'Continue to account set up'} width={'100%'} />
-                  </Box>
-                  <Box height={'40%'} flexDirection={'row'} alignItems={'flex-end'}>
-                    <Box height={5} width={'100%'}  flexDirection={'row'} justifyContent={'center'} >
-                        <Box height={5} width={'30%'} backgroundColor={'black'} borderRadius={10}>
-                            <CustomText>Hello</CustomText>
-                        </Box>
-                    </Box>
-                  </Box>
-                </Box>
-                
-            </Box>
-            </> 
             : null
           }
         </Box>
-
       </Box>
     </Box>
   )
