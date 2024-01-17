@@ -21,7 +21,7 @@ const logo = require('../../assets/images/logo/logo.png')
 
 const Signup: React.FC = () => {
 
-  const [step,setStep ] = useState(1);
+  const [step,setStep ] = useState(0);
   const [checked, setChecked] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false)
 
