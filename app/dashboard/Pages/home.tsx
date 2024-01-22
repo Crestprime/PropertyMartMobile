@@ -7,7 +7,7 @@ import { Styles } from './styles'
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Swiper from 'react-native-swiper'
-import CustomCarousel from '../../../components/carousel'
+
 
 const sidebar = require('../../../assets/images/foreground/breadcrumb.png')
 const setup_icon = require('../../../assets/images/foreground/setup-icon.png')
