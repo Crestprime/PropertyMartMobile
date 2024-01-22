@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable } from 'react-native'
+import { View, Text, Image, Pressable,AppRegistry, } from 'react-native'
 import React, { useState } from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
@@ -6,13 +6,19 @@ import { ScrollView } from 'tamagui'
 import { Styles } from './styles'
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import Swiper from 'react-native-swiper'
+import CustomCarousel from '../../../components/carousel'
 
 const sidebar = require('../../../assets/images/foreground/breadcrumb.png')
 const setup_icon = require('../../../assets/images/foreground/setup-icon.png')
 const Home = () => {
 
   const [username, setUsername] = useState('Jude');
-  
+  const images = [
+    { id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
+    { id: 2, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
+    { id: 3, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
+  ];
 
   return (
     <ScrollView>
@@ -100,6 +106,19 @@ const Home = () => {
                      
                    </Box>
                   
+            </Box>
+            <Box height={200} style={Styles.containerS}>
+            <Swiper
+                dotColor="#ffffff"
+                activeDotColor="#2D66DD"
+                showsPagination={true}
+              >
+                {images?.map((image) => (
+                  <View key={image?.id} style={Styles.slide}>
+                    <Image source={{ uri: image?.uri }} style={Styles.image} />
+                  </View>
+                ))}
+            </Swiper>
             </Box>
           </Box>
         </Box>

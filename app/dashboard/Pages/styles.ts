@@ -38,5 +38,20 @@ export const Styles = StyleSheet.create({
       width: 50, // Adjust width based on your design
       textAlign: 'center',
     },
+    containerS: {
+      flex: 1,
+    },
+    slide: {
+      flex: 1,
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      backgroundColor: 'transparent',
+    },
+    image: {
+      width: '90%',
+      height: '80%',
+      borderRadius:10,
+      resizeMode: 'cover',
+    },
 
 });
