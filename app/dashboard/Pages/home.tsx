@@ -11,6 +11,8 @@ import CustomCarousel from '../../../components/carousel'
 
 const sidebar = require('../../../assets/images/foreground/breadcrumb.png')
 const setup_icon = require('../../../assets/images/foreground/setup-icon.png')
+const location = require('../../../assets/images/foreground/Icon.png')
+const verified = require('../../../assets/images/foreground/Verified.png')
 const Home = () => {
 
   const [username, setUsername] = useState('Jude');
@@ -18,6 +20,21 @@ const Home = () => {
     { id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
     { id: 2, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
     { id: 3, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
+  ];
+  const cardImg = [
+    { 
+      id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705890068/card_pwrye9.png',
+      header:'Land at Ludgbe', sqm:'465', subheader:'Capital City Development', text:'Ludgbe-Abuja, Nigeria' 
+    },
+    { 
+      id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705890068/card_pwrye9.png',
+      header:'Land at Umagwa', sqm:'445', subheader:'Capital City Development', text:'Port-Harcourt, Nigeria' 
+    },
+    { 
+      id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705890068/card_pwrye9.png',
+      header:'Land at Ikwere road', sqm:'567', subheader:'Capital City Development', text:'Port-Harcourt, Nigeria' 
+    }
+   
   ];
 
   return (
@@ -107,18 +124,71 @@ const Home = () => {
                    </Box>
                   
             </Box>
-            <Box height={200} style={Styles.containerS}>
-            <Swiper
-                dotColor="#ffffff"
-                activeDotColor="#2D66DD"
-                showsPagination={true}
-              >
-                {images?.map((image) => (
-                  <View key={image?.id} style={Styles.slide}>
-                    <Image source={{ uri: image?.uri }} style={Styles.image} />
-                  </View>
-                ))}
-            </Swiper>
+            <Box height={220} style={Styles.containerS}>
+                <Swiper
+                    dotColor="#ffffff"
+                    activeDotColor="#2D66DD"
+                    showsPagination={true}
+                  >
+                    {images?.map((image) => (
+                      <View key={image?.id} style={Styles.slide}>
+                        <Image source={{ uri: image?.uri }} style={Styles.image} />
+                      </View>
+                    ))}
+                </Swiper>
+            </Box>
+            <Box height={350} style={Styles.containerS}>
+                 <Box height={50} flexDirection={'row'} paddingLeft={'md'} paddingRight={'md'}>
+                    <Box width={'50%'}>
+                      <CustomText variant="subheader" fontSize={16}>Suggested for you</CustomText>
+                    </Box>
+                    <Box width={'50%'} alignItems={'flex-end'}>
+                      <CustomText variant="subheader" color={'btnBlue'} fontSize={14}>View all</CustomText>
+                    </Box>
+                 </Box>
+                <Swiper
+                    dotColor="#ffffff"
+                    activeDotColor="#2D66DD"
+                    showsPagination={false}
+                  >
+                  
+                    {cardImg?.map((image) => (
+                      <Box key={image?.id} style={Styles.slide1}>
+                       
+                        <Image source={{ uri: image?.uri }} style={Styles.image1} />
+                        <Box style={Styles.content}>
+                            <Box width={'100%'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
+                              <Box width={'90%'} height={130} justifyContent={'center'}>
+                              <Box>
+                                      <Box flexDirection={'row'}>
+                                          <Box width={'50%'} flexDirection={'row'}>
+                                            <CustomText variant={'subheader'} fontSize={16}>{image?.header}</CustomText>
+                                            <Box justifyContent={'center'} padding={'xs'}>
+                                              <Image source={verified} resizeMode="cover" />
+                                            </Box>
+                                          </Box>
+                                          <Box width={'50%'} alignItems={'flex-end'}>
+                                            <CustomText variant={'subheader'} fontSize={16} color={'primaryColor'} >{image?.sqm} SQM</CustomText>
+                                          </Box>
+                                      </Box>
+                                        <CustomText variant={'subheader'} fontSize={12} color={'textColor'} >{image.subheader}</CustomText>
+                                      <Box flexDirection={'row'}>
+                                        <Box justifyContent={'center'} paddingRight={'xs'}>
+                                          <Image source={location} resizeMode="cover" />
+                                        </Box>
+                                          <CustomText variant={'subheader'} fontWeight={'100'} fontSize={12} color={'textColor'}>{image?.text}</CustomText>
+                                        </Box>
+                                  </Box>
+                              </Box>
+                            </Box>
+                        </Box>
+                      </Box>
+                    
+                    ))}
+                </Swiper>
+            </Box>
+            <Box height={50}>
+
             </Box>
           </Box>
         </Box>
@@ -128,3 +198,4 @@ const Home = () => {
 }
 
 export default Home;
+

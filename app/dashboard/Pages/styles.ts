@@ -46,12 +46,45 @@ export const Styles = StyleSheet.create({
       justifyContent: 'flex-start',
       alignItems: 'center',
       backgroundColor: 'transparent',
+      
     },
     image: {
       width: '90%',
       height: '80%',
-      borderRadius:10,
+      borderRadius:8,
       resizeMode: 'cover',
     },
+    slide1: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'transparent',
+      borderRadius:10,
+      
+    },
+    slideContainer: {
+      flex: 1,
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      backgroundColor: 'transparent',
+      borderRadius:10,
+    },
+    image1: {
+      width: '95%',
+      height: '55%',
+      resizeMode: 'cover',
+      borderTopRightRadius:10,
+      borderTopLeftRadius:10,
+    },
+    content: {
+      width: '95%',
+      height: '45%',
+      borderBottomRightRadius:10,
+      borderBottomLeftRadius:10,
+      borderLeftWidth: 1,
+      borderRightWidth: 1,
+      borderBottomWidth: 1,
+      borderColor:'#667085'
+    }
 
 });
