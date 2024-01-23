@@ -85,6 +85,12 @@ export const Styles = StyleSheet.create({
       borderRightWidth: 1,
       borderBottomWidth: 1,
       borderColor:'#667085'
+    },
+    sidebar: {
+      height: '100%',
+      width: '100%',
+      position: 'absolute',
+      zIndex:999
     }
 
 });
