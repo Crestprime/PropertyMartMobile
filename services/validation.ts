@@ -30,6 +30,16 @@ const newPasswordSchema = z.object({
     newPassword: z.string().min(6, 'Password is required'),
     confirmPassword: z.string().min(6, 'Password is required'),
   });
+const setAddressSchema = z.object({
+    country: z.string().min(3, 'Country is required'),
+    email: z.string().email('Invalid email').min(3, 'Email is required'),
+    state: z.string().min(3, 'State is required'),
+    city: z.string().min(3, 'City is required'),
+    street: z.string().min(3, 'Street is required'),
+    postalCode: z.string().min(3, 'PostalCode is required'),
+    apartmentNo: z.string().min(0, 'Apartment No is required'),
+    landMark: z.string().min(0, 'Land Mark No is required'),
+  });
 
   
-export { loginSchema, signupSchema, requestOTPSchema, newPasswordSchema }
+export { loginSchema, signupSchema, requestOTPSchema, newPasswordSchema, setAddressSchema }

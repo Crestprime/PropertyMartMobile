@@ -1,5 +1,5 @@
-import { Text, Image, TextInput, Pressable,  Alert } from 'react-native'
-import React, { useState, useRef } from 'react'
+import { Image, Alert, Pressable } from 'react-native'
+import React, { useState } from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
