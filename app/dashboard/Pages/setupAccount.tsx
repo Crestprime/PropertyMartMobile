@@ -7,26 +7,63 @@ import CustomText from '@component/general/CustomText'
 import { Ionicons } from '@expo/vector-icons'
 import { PrimaryButton } from '@component/general/CustomButton'
 import { Pressable } from 'react-native'
-
+import SetAddress from './setAddress'
+import SetBVN from './setBVN'
+import SetNIN from './setNIN'
 
 export default function setupAccount() {
  const [selectAddress, setSelectAddress ] = useState(0)
  const [selectBVN, setSelectBVN ] = useState(0)
  const [selectNIN, setSelectNIN ] = useState(0)
- const [homeInput, sethomeInput ] = useState(false)
+ const [homeInput, showHomeInput ] = useState(0)
+ const [BVNInput, showBVNinput ] = useState(0)
+ const [NINInput, showNINinput ] = useState(0)
+
+ const displayHomeInput = () => {
+    showHomeInput(1)
+    setSelectAddress(0)
+ }
+ const displayBVNInput = () => {
+    showBVNinput(1)
+    setSelectBVN(0)
+   
+ }
+ const displayNINInput = () => {
+    showNINinput(1)
+    setSelectNIN(0)
+ }
+ const toggleHome = () => { 
+    showHomeInput(0)
+  }
+ const toggleBVN = () => { 
+    showBVNinput(0)
+  }
+ const toggleNIN = () => { 
+    showNINinput(0)
+  }
+ const setStep1 = () =>(
+    setSelectAddress(1)
+ )
+ const setStep2 = () =>(
+    setSelectBVN(1)
+ )
+ const setStep3 = () =>(
+    setSelectNIN(1)
+ )
  
   return (
+    <>{homeInput === 0 && BVNInput === 0 && NINInput === 0?
     <Box style={Styles.martContainer}alignItems={'center'} justifyContent={'center'} >
         <Box width={'90%'} height={'95%'}>
             <Box height={'60%'} >
                 <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                     <TouchableOpacity>
-                        <Link href='/dashboard/Pages/home'>
+                        <Pressable onPress={()=>toggleHome()}>
                             <Ionicons 
                             name="arrow-back-outline"
                             size={25}
                             />
-                        </Link>
+                        </Pressable>
                     </TouchableOpacity>
                 </Box>
                 <Box height={30}>
@@ -42,7 +79,7 @@ export default function setupAccount() {
                 </Box>
                 {/* stepper Form */}
                 <Box style={{height:'60%'}}  marginTop={'lg'}>
-                   <Pressable onPress={()=>router.push('/dashboard/Pages/setAddress')}>
+                   <Pressable onPress={()=> displayHomeInput()}>
                         <Box height={50} flexDirection={'row'}>
                                 <Box width={'10%'} alignItems={'center'} paddingTop={'xs'}>
                                         <Box height={20} width={20} borderRadius={100} borderWidth={selectAddress === 1?2:1} style={{backgroundColor:selectAddress ===1?'#e6f2ff':'transparent'}}
@@ -70,7 +107,7 @@ export default function setupAccount() {
                                 </Box>
                         </Box>
                     </Pressable>
-                    <Pressable onPress={()=>router.push('/dashboard/Pages/setBVN')}>
+                    <Pressable onPress={()=>displayBVNInput()}>
                         <Box height={50} flexDirection={'row'} marginTop={'xl'}>
                                 <Box width={'10%'} alignItems={'center'} paddingTop={'xs'}>
                                     <Box height={20} width={20} borderRadius={100} borderWidth={selectAddress === 1?2:1} style={{backgroundColor:selectAddress ===1 ?'#e6f2ff':'transparent'}}
@@ -82,7 +119,7 @@ export default function setupAccount() {
                                         // <Ionicons name="checkmark-outline" size={15} color={'#2D66DD'} />
                                         }   
                                     </Box>
-                                    <Box style={{height:'100%'}} width={1} borderWidth={1} borderColor={selectAddress === 1?'btnBlue' : 'textInputBorderColor' }></Box>
+                                    <Box style={{height:'100%'}} width={1} borderWidth={1} borderColor={selectBVN === 1?'btnBlue' : 'textInputBorderColor' }></Box>
                                 </Box>
                                 <Box width={'90%'}>
                                     <Box>
@@ -102,19 +139,19 @@ export default function setupAccount() {
                                 </Box>
                         </Box>
                     </Pressable>
-                    <Pressable onPress={()=>router.push('/dashboard/Pages/setNIN')}>
+                    <Pressable onPress={()=>displayNINInput()}>
                         <Box height={50} flexDirection={'row'} marginTop={'xl'}>
                                     <Box width={'10%'} alignItems={'center'} paddingTop={'xs'}>
-                                        <Box height={20} width={20} borderRadius={100} borderWidth={selectAddress === 1?2:1} style={{backgroundColor:selectAddress === 1?'#e6f2ff':'transparent'}}
-                                        borderColor={selectAddress === 1?'btnBlue' : 'textInputBorderColor' } alignItems={'center'} justifyContent={'center'}>
-                                            {selectAddress? 
+                                        <Box height={20} width={20} borderRadius={100} borderWidth={selectBVN === 1?2:1} style={{backgroundColor:selectBVN === 1?'#e6f2ff':'transparent'}}
+                                        borderColor={selectBVN === 1?'btnBlue' : 'textInputBorderColor' } alignItems={'center'} justifyContent={'center'}>
+                                            {selectBVN? 
                                             <>
                                             <Box height={5} width={5} borderRadius={100} backgroundColor={'btnBlue'}></Box>
                                             </> : null
                                             // <Ionicons name="checkmark-outline" size={15} color={'#2D66DD'} />
                                             }   
                                         </Box>
-                                        <Box style={{height:'100%'}} width={1} borderWidth={1} borderColor={selectAddress?'btnBlue' : 'textInputBorderColor' }></Box>
+                                        <Box style={{height:'100%'}} width={1} borderWidth={1} borderColor={selectNIN?'btnBlue' : 'textInputBorderColor' }></Box>
                                     </Box>
                                     <Box width={'90%'}>
                                         <Box>
@@ -152,7 +189,25 @@ export default function setupAccount() {
                   </Box>
                 </Box>
             </Box>
+            
         </Box>
     </Box>
+   : homeInput === 1?
+    <Box>
+        <SetAddress toggleHome={toggleHome} setStep1={setStep1}/> 
+    </Box>
+    : BVNInput === 1? 
+    <>
+     <SetBVN toggleBVN={toggleBVN} setStep2={setStep2}/>
+    </> 
+    : NINInput === 1 ?
+    <>
+    <SetNIN toggleNIN={toggleNIN} setStep3={setStep3}/>
+    </>
+    : null 
+   }
+ 
+   
+    </>
   )
 }

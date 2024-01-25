@@ -15,7 +15,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'
 // const logo = require('../../assets/images/logo/logo.png')
 
-const SetAddress = () => {
+const SetAddress = ({toggleHome, setStep1}:any) => {
+  
   const [checked, setChecked] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const { renderForm, formState: { isValid } } = useForm({
@@ -32,22 +33,24 @@ const SetAddress = () => {
     validationSchema: setAddressSchema,
   })
 
-  function handleSubmit(data: any): void {
-    throw new Error('Function not implemented.')
+  const handleSubmit = (data: any) => {
+    toggleHome()
+    setStep1()
   }
+ 
 
   return renderForm(
     <Box style={Styles.martContainer} alignItems={'center'} justifyContent={'center'}>
         <Box width={'90%'} height={'95%'}>
         <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                     <TouchableOpacity>
-                        <Link href='/dashboard/Pages/setupAccount'>
+                        <Pressable onPress={()=> toggleHome()}>
                             <Ionicons 
                             name="arrow-back-outline"
                             size={25}
                             />
-                        </Link>
-                    </TouchableOpacity>
+                       </Pressable>
+                    </TouchableOpacity> 
                 </Box>
                 <Box height={30}>
                     <CustomText variant={'subheader'} textAlign={'left'} fontSize={16} lineHeight={25} 
@@ -98,10 +101,10 @@ const SetAddress = () => {
                         <CustomTextInput name='postalCode' placeholder='Postal Code' label='Postal Code' isPassword={false} 
                         /><Box marginBottom={'sm'} />
 
-                        <CustomTextInput name='appartmentNo' placeholder='Apartment No' label='Apartment No' isPassword={false} 
+                        <CustomTextInput name='appartmentNo' placeholder='Apartment No' label='Apartment No (Optional)' isPassword={false} 
                         /><Box marginBottom={'sm'} />
 
-                        <CustomTextInput name='landMark' placeholder='Land Mark' label='Land Mark' isPassword={false} 
+                        <CustomTextInput name='landMark' placeholder='Land Mark' label='Land Mark (Optional)' isPassword={false} 
                         /><Box marginBottom={'sm'} />
                         <Box flexDirection={'row'} paddingBottom={'md'}>
                           <Checkbox onCheckedChange={(checked)=> setChecked(checked as boolean)} checked={checked}>
@@ -120,4 +123,4 @@ const SetAddress = () => {
     </Box>
   )
 }
-export default SetAddress
+export default SetAddress;
