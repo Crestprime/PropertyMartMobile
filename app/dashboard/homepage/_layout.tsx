@@ -15,7 +15,7 @@ const Icon = ({ focused, name }: {
 
 const _layout = () => {
   return (
-    <Tabs safeAreaInsets={{ bottom: 30, left: 10, right: 10  }}>
+    <Tabs safeAreaInsets={{ bottom: 30, left: 10, right: 10  }} screenOptions={{ headerShown: false }}>
         <Tabs.Screen name='home' options={{
             tabBarIcon: ({ focused}) => <Icon focused={focused} name={'home-outline'} />,
             tabBarLabelStyle: {
