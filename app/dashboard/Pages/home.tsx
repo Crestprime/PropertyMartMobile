@@ -9,6 +9,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import Swiper from 'react-native-swiper'
 import { SafeAreaView } from 'react-native'
 import { Link } from 'expo-router'
+import { useRouter } from 'expo-router'
+// import { useNavigation } from '@react-navigation/native';
 
 
 const sidebar = require('../../../assets/images/foreground/breadcrumb.png')
@@ -27,9 +29,11 @@ const star = require('../../../assets/images/foreground/star.png')
 const logout = require('../../../assets/images/foreground/logout.png')
 
 const Home = () => {
-
+  
   const [username, setUsername] = useState('Jude');
   const [showSidebar, setShowSidebar] = useState(false)
+  const router = useRouter()
+
   const images = [
     { id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
     { id: 2, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
@@ -53,11 +57,11 @@ const Home = () => {
       header:'Land at Ludgbe', sqm:'465', subheader:'Capital City Development', text:'Ludgbe-Abuja, Nigeria' 
     },
     { 
-      id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705890068/card_pwrye9.png',
+      id: 2, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705890068/card_pwrye9.png',
       header:'Land at Umagwa', sqm:'445', subheader:'Capital City Development', text:'Port-Harcourt, Nigeria' 
     },
     { 
-      id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705890068/card_pwrye9.png',
+      id: 3, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705890068/card_pwrye9.png',
       header:'Land at Ikwere road', sqm:'567', subheader:'Capital City Development', text:'Port-Harcourt, Nigeria' 
     }
    
@@ -65,10 +69,13 @@ const Home = () => {
    const toggleSidebar = () => {
       setShowSidebar(previousState => !previousState)
    }
+  
+   const propertyDetails = () => {
+      router.push('/dashboard/Pages/propertyDetails',)
+   }
   return (
  
-      <SafeAreaView>
-        
+      <SafeAreaView> 
         {/* <ScrollView> */}
           <Box style={Styles.martContainer} >
             <Box flexDirection={'row'} height={'100%'} width={'100%'} alignItems={'center'} justifyContent={'center'} >
@@ -187,8 +194,8 @@ const Home = () => {
                         >
                         
                           {cardImg?.map((image) => (
-                            <Box key={image?.id} style={Styles.slide1}>
-                            
+                          
+                            <Pressable key={image?.id} android_ripple={{color:'#000000c0'}} style={Styles.slide1} onPress={()=>propertyDetails()}>
                               <Image source={{ uri: image?.uri }} style={Styles.image1} />
                               <Box style={Styles.content}>
                                   <Box width={'100%'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
@@ -216,7 +223,7 @@ const Home = () => {
                                     </Box>
                                   </Box>
                               </Box>
-                            </Box>
+                            </Pressable>
                           
                           ))}
                       </Swiper>

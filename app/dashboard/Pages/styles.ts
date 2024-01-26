@@ -91,6 +91,11 @@ export const Styles = StyleSheet.create({
       width: '100%',
       position: 'absolute',
       zIndex:999
+    },
+    propDtls: {
+      width: '100%',
+      height: '100%',
+      resizeMode: 'cover',
     }
 
 });

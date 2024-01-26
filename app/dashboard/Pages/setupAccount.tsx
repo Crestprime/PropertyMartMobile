@@ -58,12 +58,13 @@ export default function setupAccount() {
             <Box height={'60%'} >
                 <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                     <TouchableOpacity>
-                        <Pressable onPress={()=>toggleHome()}>
+                        <Link href='/dashboard/Pages/home'>
                             <Ionicons 
                             name="arrow-back-outline"
                             size={25}
                             />
-                        </Pressable>
+                        </Link>
+                      
                     </TouchableOpacity>
                 </Box>
                 <Box height={30}>
