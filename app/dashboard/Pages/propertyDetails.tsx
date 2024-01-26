@@ -7,6 +7,7 @@ import { Pressable, Image, ImageBackground } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { ScrollView } from 'tamagui'
 import { PrimaryButton } from '@component/general/CustomButton'
+import { OutlineButtonColored } from '@component/general/OutlineButtonColored'
 
 const property = require('../../../assets/images/foreground/property.png')
 const backIcon = require('../../../assets/images/foreground/back.png')
@@ -24,8 +25,8 @@ const propertyDetails = () => {
   
   const [isLike, setLiked] = useState(false)
   const propertyImg = [
-    {id: 1, image: property, isLiked:isLike, backArrow:backIcon},
-    {id: 2, image: property, isLiked:false, backArrow:backIcon},
+    {id: 111, image: property, isLiked:isLike, backArrow:backIcon},
+    {id: 222, image: property, isLiked:false, backArrow:backIcon},
   ]
 
   const features = [
@@ -44,6 +45,10 @@ const propertyDetails = () => {
   {id:9, sqm:'465', CGC:'01', isSold: true , price:'5,000,000'},
   {id:10, sqm:'465', CGC:'01', isSold: false, price:'5,000,000'},
   {id:11, sqm:'465', CGC:'01', isSold: false, price:'5,000,000'},
+  {id:12, sqm:'465', CGC:'01', isSold: false, price:'5,000,000'},
+  {id:13, sqm:'465', CGC:'01', isSold: false, price:'5,000,000'},
+  {id:14, sqm:'465', CGC:'01', isSold: false, price:'5,000,000'},
+  {id:15, sqm:'465', CGC:'01', isSold: false, price:'5,000,000'},
   
   ]
 
@@ -223,7 +228,7 @@ const propertyDetails = () => {
                 </Box>
                 <Box flexDirection={'row'} justifyContent={'space-between'} marginTop={'lg'}>
                   <Box width={'48%'}>
-                  <PrimaryButton label='Make Reservations' onPress={() => console.log('err')} width={'100%'}/>
+                  <OutlineButtonColored label='Schedule Inspection' onPress={() => console.log('err')} width={'100%'}/>
                   </Box>
                   <Box width={'48%'}>
                     <PrimaryButton label='Make Reservations' onPress={() => console.log('err')} width={'100%'}/>
