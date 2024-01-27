@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { ScrollView } from 'tamagui'
 import { PrimaryButton } from '@component/general/CustomButton'
 import { OutlineButtonColored } from '@component/general/OutlineButtonColored'
+import { Link } from 'expo-router'
 
 const property = require('../../../assets/images/foreground/property.png')
 const backIcon = require('../../../assets/images/foreground/back.png')
@@ -123,7 +124,9 @@ const propertyDetails = () => {
                 </Pressable>
               </Box>
               <Box>
-                <CustomText textDecorationLine={'underline'} fontSize={12} fontWeight={'800'} style={{color:'#2D66DD'}}>Land Reviews (10)</CustomText>
+                <Link href="/dashboard/Pages/landReviews">
+                  <CustomText textDecorationLine={'underline'} fontSize={12} fontWeight={'800'} style={{color:'#2D66DD'}}>Land Reviews (10)</CustomText>
+                </Link>
               </Box>
               <Box marginTop={'md'}>
                 <CustomText fontSize={16} fontWeight={'800'}>Features</CustomText>
