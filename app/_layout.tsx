@@ -6,7 +6,7 @@ import { TamaguiProvider } from 'tamagui'
 import config from '../tamagui.config';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ThemeProvider } from '@shopify/restyle'
-import theme from '@theme/index';
+import theme from '@theme/themes';
 
 export {
   // Catch any errors thrown by the Layout component.

@@ -2,6 +2,7 @@ import React from 'react'
 import {
   useRouter  
 } from 'expo-router';
+import Onboarding from './splash/onboarding'
 
 
 const Home = () => {
