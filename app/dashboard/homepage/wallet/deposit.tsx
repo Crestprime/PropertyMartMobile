@@ -8,6 +8,8 @@ import CustomText from '@component/general/CustomText'
 import { useRouter } from 'expo-router'
 import { PrimaryButton } from '@component/general/CustomButton'
 import { RoundedButton } from '@component/general/RoundedButton'
+import ModalWarpper from '@component/modals/ModalWarpper'
+import DepositMethodModal from '@component/modals/DepositMethodModal'
 
 type IKeypadDetails = {
     label: string;
@@ -84,7 +86,9 @@ const KeypadDetails: IKeypadDetails[] = [
 ];
 
 const Deposit = () => {
-    const [amount, setAmount] = React.useState('0.00')
+    const [amount, setAmount] = React.useState('0.00');
+    const [showModal, setShowModal] = React.useState(false);
+    const [method, setMethod] = React.useState<'card'|'bank'>('card')
     const theme = useTheme<Theme>();
     const router = useRouter();
 
@@ -106,8 +110,23 @@ const Deposit = () => {
     }
     }
 
+    const navigate = () => {
+        if (amount === '0.00') {
+            alert('Please enter an amount');
+            return;
+        }
+        if (method === 'bank') {
+            router.push('/dashboard/homepage/wallet/paywithbank');
+        } else {
+            router.push('/dashboard/homepage/wallet/paywithcard');
+        }
+    }
+
   return (
     <Box flex={1} bg='white' paddingHorizontal={'md'}>
+        {/* MODAL SECTION */}
+        <DepositMethodModal isOpen={showModal} toggle={() => setShowModal(prev => !prev)} setType={(data) => setMethod(data)} />
+
         <Box width='100%' height={100} justifyContent={'flex-end'}>
             <Feather name='arrow-left' color={theme.colors.black} size={25} onPress={() => router.back()} />
             <CustomText variant={'medium'} color={'black'} fontSize={22} marginTop={'md'}>How much do you want to fund?</CustomText>
@@ -119,10 +138,21 @@ const Deposit = () => {
 
         <Box width={'100%'} height={80}>
             <CustomText variant={'medium'} fontSize={16} style={{ color: 'grey' }}>Selected method</CustomText>
-            <Box paddingHorizontal={'md'} flexDirection={'row'} justifyContent={'space-between'} borderWidth={0.3} borderColor={'lightGrey'} alignItems={'center'} height={45} borderRadius={10}>
-                <CustomText>Debit Card</CustomText>
+            <Pressable 
+            onPress={() => setShowModal(true)}
+            style={{
+                paddingHorizontal: 20,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                borderWidth: 0.3,
+                borderColor: 'lightgrey',
+                alignItems: 'center',
+                height: 45,
+                borderRadius: 10
+            }}>
+                <CustomText variant={'medium'} fontSize={18}>{method === 'card' ? 'Pay with Card' : 'Bank Transfer'}</CustomText>
                 <Feather name='chevron-right' size={25} color={theme.colors.black} />
-            </Box>
+            </Pressable>
         </Box>
 
         <Box flex={0.9}  flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'} flexWrap={'wrap'}>
@@ -148,7 +178,7 @@ const Deposit = () => {
             ))}
         </Box>
 
-        <RoundedButton label='Continue' onPress={() => {}} width={'100%'} height={48} borderRadius={8} backgroundColor={theme.colors.primaryColor} textColor='white' />
+        <RoundedButton label='Continue' onPress={navigate} width={'100%'} height={48} borderRadius={8} backgroundColor={theme.colors.primaryColor} textColor='white' />
     </Box>
   )
 }
