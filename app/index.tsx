@@ -2,14 +2,17 @@ import React from 'react'
 import {
   useRouter  
 } from 'expo-router';
-import Onboarding from './onboarding/onboarding'
 
 
 const Home = () => {
   const router = useRouter();
+
+  React.useEffect(() => {
+    router.push('/splash/onboarding');
+  }, [])
   return (
     <>
-    <Onboarding/>
+    
     </>
   )
 }

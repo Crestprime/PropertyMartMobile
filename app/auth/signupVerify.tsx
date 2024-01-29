@@ -9,7 +9,7 @@ import { PrimaryButton } from '@component/general/CustomButton'
 
 import { useMutation } from 'react-query'
 import httpService from '../../utils/httpService'
-import { router } from 'expo-router'
+import { router, useRouter } from 'expo-router'
 import { SubmitButton } from '@component/form/CustomButton'
 
 
