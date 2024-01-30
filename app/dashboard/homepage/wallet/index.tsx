@@ -32,7 +32,7 @@ const Wallets = () => {
         <Box flexDirection={'row'} justifyContent={'center'} marginTop={'2xl'}>
           <RoundedButton label='Deposit' width={138} height={48} borderRadius={40} onPress={() => navigation.push('/dashboard/homepage/wallet/deposit')} icon={<MoneyRecive color={theme.colors.white} size={15} variant='Linear' />} textColor='white'backgroundColor={theme.colors.primaryColor} />
             <Box width={10} />
-          <RoundedButton label='Withdraw' width={138} height={48} borderRadius={40} onPress={() => {}} icon={<MoneySend color={theme.colors.white} size={15} variant='Linear' />} textColor='white'backgroundColor={theme.colors.primaryColor} />
+          <RoundedButton label='Withdraw' width={138} height={48} borderRadius={40} onPress={() => navigation.push('/dashboard/homepage/wallet/withdraw')} icon={<MoneySend color={theme.colors.white} size={15} variant='Linear' />} textColor='white'backgroundColor={theme.colors.primaryColor} />
         </Box>
       </Box>
 

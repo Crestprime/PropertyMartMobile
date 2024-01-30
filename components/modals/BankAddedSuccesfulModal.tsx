@@ -9,7 +9,7 @@ import { useTheme } from '@shopify/restyle'
 import { Theme } from '@theme/themes'
 import { useRouter } from 'expo-router'
 
-const DepositCompleteModal = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void}) => {
+const BankAddedCompleteModal = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void}) => {
     const { height } = useWindowDimensions();
     const theme = useTheme<Theme>();
     const router = useRouter();
@@ -18,17 +18,17 @@ const DepositCompleteModal = ({ isOpen, toggle }: { isOpen: boolean, toggle: () 
         toggle();
         router.push('/dashboard/homepage/wallet/');
     }
+    
   return (
     <ModalWarpper isOpen={isOpen} toggle={() => {}} height={height/100*100} isRounded={false}>
         <Box flex={1} justifyContent={'center'} alignItems={'center'} paddingHorizontal={'md'}>
-            <Image source={require('../../assets/images/piggy.png')} contentFit='contain' style={{ width: 200, height: 200 }} />
-            <CustomText variant={'medium'} fontSize={24} marginTop={'md'}>Deposit Completed!</CustomText>
-            <CustomText fontSize={16}>You have toped up your wallet balance with</CustomText>
-            <CustomText variant={'subheader'} fontSize={16} marginBottom={'md'}>N100,000</CustomText>
-            <RoundedButton width={'100%'} height={48} onPress={() => close()} label={'Done'} backgroundColor={theme.colors.primaryColor} textColor='white' />
+            <Image source={require('../../assets/images/bankAdded.png')} contentFit='contain' style={{ width: 200, height: 200 }} />
+            <CustomText variant={'medium'} fontSize={24} marginTop={'md'}>Bank account added successful</CustomText>
+            <CustomText fontSize={16} marginBottom={'md'}>Bank account successfully added to your account.</CustomText>
+            <RoundedButton width={'100%'} height={48} onPress={() => close()} label={'Withdraw money'} backgroundColor={theme.colors.primaryColor} textColor='white' />
         </Box>
     </ModalWarpper>
   )
 }
 
-export default DepositCompleteModal
+export default BankAddedCompleteModal
