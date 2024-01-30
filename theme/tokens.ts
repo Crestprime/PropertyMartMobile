@@ -14,6 +14,7 @@ export const tokens = createTokens({
         secondaryBg: 'whitesmoke',
         white: 'white',
         black: 'black',
+        lightGrey: '#98A2B3',
     },
     space: {
         xs: 4,

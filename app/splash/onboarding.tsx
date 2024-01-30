@@ -38,7 +38,7 @@ const Onboarding = () => {
                             <PrimaryButton width={'100%'} isDisabled={false} label='Create an account' onPress={() => router.push('/auth/signup')} />
                         </Box>
                         <Box width={'100%'} style={{paddingTop:10}}>
-                            <OutlineButton width={'100%'} isDisabled={false} label='Login' onPress={() => router.push('/dashboard/home/home')} />
+                            <OutlineButton width={'100%'} isDisabled={false} label='Login' onPress={() => router.push('/dashboard/homepage/home')} />
                         </Box>
                     </Box>
                 </Box>
