@@ -106,7 +106,9 @@ const MakeReservation = () => {
         </Box>
         <Box height={'20%'} width={'100%'} alignItems={'center'} justifyContent={'center'}> 
             <Box width={'90%'} height={'90%'}>
-                <PrimaryButton onPress={() => console.log('err')} label={'continue'} width={'100%'}/>
+                <TouchableOpacity>
+                    <PrimaryButton onPress={() => console.log('err')} label={'continue'} width={'100%'}/>
+                </TouchableOpacity>
                 
                 <Box height={'60%'} alignItems={'center'} justifyContent={'flex-end'}>
                     <Box height={5} width={'100%'} alignItems={'center'} justifyContent={'center'} >
