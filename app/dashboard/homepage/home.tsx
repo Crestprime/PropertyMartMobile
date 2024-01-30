@@ -71,7 +71,7 @@ const Home = () => {
    }
   
    const propertyDetails = () => {
-      router.push('/dashboard/Pages/propertyDetails',)
+      router.push('/dashboard/homepage/propertyDetails',)
    }
   return (
  
@@ -120,7 +120,7 @@ const Home = () => {
                         <Box paddingTop={'md'}>
                           <Box style={{backgroundColor:'#D92D20'}} width={'40%'} flexDirection={'row'} justifyContent={'center'} borderRadius={10}>
                             <TouchableOpacity>
-                                  <Link href={'/dashboard/Pages/setupAccount'}>
+                                  <Link href={'/dashboard/homepage/setupAccount'}>
                                     <CustomText variant={'subheader'} color={'secondaryBackgroundColor'} fontSize={12}>Setup now</CustomText>
                                   </Link>
                             </TouchableOpacity>

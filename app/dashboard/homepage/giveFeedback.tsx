@@ -113,7 +113,7 @@ const UserReplies = () => {
             <Box height={'100%'}> 
                 <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                       <TouchableOpacity>
-                          <Link href='/dashboard/Pages/landReviews'>
+                          <Link href='/dashboard/homepage/landReviews'>
                               <Ionicons 
                               name="arrow-back-outline"
                               size={25}
@@ -332,7 +332,7 @@ const UserReplies = () => {
                       </Box>
                         <TouchableOpacity>
                           <Box marginTop={'xl'}>
-                            <PrimaryButton onPress={()=>router.push('/dashboard/Pages/home')} label='Back to home' width='100%'/>
+                            <PrimaryButton onPress={()=>router.push('/dashboard/homepage/home')} label='Back to home' width='100%'/>
                           </Box>
                         </TouchableOpacity>
                       </Box>

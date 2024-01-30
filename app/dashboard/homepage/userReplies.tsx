@@ -47,7 +47,7 @@ const UserReplies = () => {
             <Box height={'100%'}> 
                 <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                       <TouchableOpacity>
-                          <Link href='/dashboard/Pages/landReviews'>
+                          <Link href='/dashboard/homepage/landReviews'>
                               <Ionicons 
                               name="arrow-back-outline"
                               size={25}

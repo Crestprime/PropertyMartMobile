@@ -58,7 +58,7 @@ export default function setupAccount() {
             <Box height={'60%'} >
                 <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                     <TouchableOpacity>
-                        <Link href='/dashboard/Pages/home'>
+                        <Link href='/dashboard/homepage/home'>
                             <Ionicons 
                             name="arrow-back-outline"
                             size={25}

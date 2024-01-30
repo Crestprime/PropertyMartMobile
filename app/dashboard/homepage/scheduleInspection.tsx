@@ -37,7 +37,7 @@ const ScheduleInspection = () => {
         <Box width={'90%'} height={'90%'}>
                 <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                     <TouchableOpacity>
-                        <Link href={'/dashboard/Pages/propertyDetails'}>
+                        <Link href={'/dashboard/homepage/propertyDetails'}>
                             <Ionicons 
                             name="arrow-back-outline"
                             size={25}

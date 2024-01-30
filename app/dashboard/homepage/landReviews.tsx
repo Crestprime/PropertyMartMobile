@@ -36,7 +36,7 @@ export default function setupAccount() {
               <Box height={'100%'}>
                   <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                       <TouchableOpacity>
-                          <Link href='/dashboard/Pages/propertyDetails'>
+                          <Link href='/dashboard/homepage/propertyDetails'>
                               <Ionicons 
                               name="arrow-back-outline"
                               size={25}
@@ -51,7 +51,7 @@ export default function setupAccount() {
                         </CustomText> 
                       </Box>
                       <Box width={'40%'} justifyContent={'center'}>
-                        <PrimaryButton label='Give Feedback' onPress={()=>router.push('/dashboard/Pages/giveFeedback')} width={'100%'}/>
+                        <PrimaryButton label='Give Feedback' onPress={()=>router.push('/dashboard/homepage/giveFeedback')} width={'100%'}/>
                       </Box>
                   </Box>
                   <Box marginTop={'xs'}>
@@ -191,7 +191,7 @@ export default function setupAccount() {
                               </Box>
                                 <Box width={'50%'} flexDirection={'row'} justifyContent={'flex-end'} alignItems={'center'}>
                                 <CustomText textDecorationLine={'underline'} fontSize={10} fontWeight={'800'} style={{color:'#2D66DD'}}>
-                                  <Link href='/dashboard/Pages/userReplies'>
+                                  <Link href='/dashboard/homepage/userReplies'>
                                   {item.replies} {item.replies == 1 || 0? 'Reply':'Replies'}
                                   </Link>
                                 </CustomText>

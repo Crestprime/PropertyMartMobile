@@ -61,7 +61,7 @@ const ReservationForm = () => {
            <Box width={'90%'} height={'95%'}>
                 <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                             <TouchableOpacity>
-                                <Link href={'/dashboard/Pages/makeReservations'}>
+                                <Link href={'/dashboard/homepage/makeReservations'}>
                                     <Ionicons 
                                     name="arrow-back-outline"
                                     size={25}
@@ -120,7 +120,7 @@ const ReservationForm = () => {
               <Box width={'90%'} height={'95%'}>
                 <Box marginTop={'md'} height={30} justifyContent={'center'} >
                             <TouchableOpacity>
-                                <Link href={'/dashboard/Pages/makeReservations'}>
+                                <Link href={'/dashboard/homepage/makeReservations'}>
                                     <Ionicons 
                                     name="arrow-back-outline"
                                     size={25}
@@ -168,7 +168,7 @@ const ReservationForm = () => {
                 </Box>
                 <Box>
                   <Box marginTop={'xl'}>
-                    <PrimaryButton onPress={()=>router.push('/dashboard/Pages/makePayment')} label='Continue' width='100%'/>
+                    <PrimaryButton onPress={()=>router.push('/dashboard/homepage/makePayment')} label='Continue' width='100%'/>
                   </Box>
                   <Box marginTop={'sm'}>
                           <OutlineButton onPress={()=>console.log('helo')} label='Reserve and continue later' width='100%'/>

@@ -75,7 +75,7 @@ const propertyDetails = () => {
                               <ImageBackground source={item.image} style={Styles.propDtls}>
                                 <Box height={50} alignItems={'center'} flexDirection={'row'} >
                                   <Box width={'50%'} alignItems={'flex-start'} paddingLeft={'md'}>
-                                    <Link href={'/dashboard/Pages/home'}>
+                                    <Link href={'/dashboard/homepage/home'}>
                                      <Image resizeMode='cover' source={backIcon}/>
                                     </Link>
                                   </Box>
@@ -128,7 +128,7 @@ const propertyDetails = () => {
                 </Pressable>
               </Box>
               <Box>
-                <Link href="/dashboard/Pages/landReviews">
+                <Link href="/dashboard/homepage/landReviews">
                   <CustomText textDecorationLine={'underline'} fontSize={12} fontWeight={'800'} style={{color:'#2D66DD'}}>Land Reviews (10)</CustomText>
                 </Link>
               </Box>
@@ -235,10 +235,10 @@ const propertyDetails = () => {
                 </Box>
                 <Box flexDirection={'row'} justifyContent={'space-between'} marginTop={'lg'}>
                   <Box width={'48%'}>
-                  <OutlineButtonColored label='Schedule Inspection' onPress={()=>router.push('/dashboard/Pages/scheduleInspection')} width={'100%'}/>
+                  <OutlineButtonColored label='Schedule Inspection' onPress={()=>router.push('/dashboard/homepage/scheduleInspection')} width={'100%'}/>
                   </Box>
                   <Box width={'48%'}>
-                    <PrimaryButton label='Make Reservations' onPress={()=>router.push('/dashboard/Pages/makeReservations')} width={'100%'}/>
+                    <PrimaryButton label='Make Reservations' onPress={()=>router.push('/dashboard/homepage/makeReservations')} width={'100%'}/>
                   </Box>
                 </Box>
               </Box>

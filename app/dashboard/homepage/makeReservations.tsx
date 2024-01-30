@@ -62,7 +62,7 @@ const MakeReservation = () => {
         <Box width={'90%'} height={'70%'} >
                 <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                     <TouchableOpacity>
-                        <Link href={'/dashboard/Pages/propertyDetails'}>
+                        <Link href={'/dashboard/homepage/propertyDetails'}>
                             <Ionicons 
                             name="arrow-back-outline"
                             size={25}
@@ -107,7 +107,7 @@ const MakeReservation = () => {
         <Box height={'20%'} width={'100%'} alignItems={'center'} justifyContent={'center'}> 
             <Box width={'90%'} height={'90%'}>
                 <TouchableOpacity>
-                    <PrimaryButton onPress={() => router.push('/dashboard/Pages/reservationForm')} label={'continue'} width={'100%'}/>
+                    <PrimaryButton onPress={() => router.push('/dashboard/homepage/reservationForm')} label={'continue'} width={'100%'}/>
                 </TouchableOpacity>
                 
                   <CustomText fontSize={12} marginTop={'md'} textAlign={'center'}>Next: <CustomText fontSize={12} fontWeight={'800'}>Reservation Form</CustomText></CustomText>
