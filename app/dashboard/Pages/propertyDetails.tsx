@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { ScrollView } from 'tamagui'
 import { PrimaryButton } from '@component/general/CustomButton'
 import { OutlineButtonColored } from '@component/general/OutlineButtonColored'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 
 const property = require('../../../assets/images/foreground/property.png')
 const backIcon = require('../../../assets/images/foreground/back.png')
@@ -231,7 +231,7 @@ const propertyDetails = () => {
                 </Box>
                 <Box flexDirection={'row'} justifyContent={'space-between'} marginTop={'lg'}>
                   <Box width={'48%'}>
-                  <OutlineButtonColored label='Schedule Inspection' onPress={() => console.log('err')} width={'100%'}/>
+                  <OutlineButtonColored label='Schedule Inspection' onPress={()=>router.push('/dashboard/Pages/scheduleInspection')} width={'100%'}/>
                   </Box>
                   <Box width={'48%'}>
                     <PrimaryButton label='Make Reservations' onPress={() => console.log('err')} width={'100%'}/>

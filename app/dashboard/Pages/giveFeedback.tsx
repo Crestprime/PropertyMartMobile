@@ -22,11 +22,11 @@ const UserReplies = () => {
    const [fair, setFair] = useState(false)
    const [indifferent, setIndifferent] = useState(false)
    const [happy, setHappy] = useState(false)
-   const [excited, setExcited] = useState(true)
+   const [excited, setExcited] = useState(false)
 
    const [submit, setSubmit] = useState(false)
    const [isSubmit, setIsSubmit] = useState(false)
-   const [addFeedBack, setFeedBack] = useState(true)
+   const [addFeedBack, setFeedBack] = useState(false)
    const [feedSelect, setFeedSelect] = useState({
     slow: false,
     easy: false,
@@ -273,7 +273,7 @@ const UserReplies = () => {
                 </Box>
                 <Box marginTop={'xl'}>
                   <TouchableOpacity>
-                    <PrimaryButton onPress={()=>setSubmit(true)} label={'Submit'} width={''}/>
+                    <PrimaryButton onPress={()=>setIsSubmit(true)} label={'Submit'} width={'100%'}/>
                   </TouchableOpacity>
                 </Box>
             </Box> 
@@ -305,10 +305,10 @@ const UserReplies = () => {
                         <CustomText fontSize={14} style={{color:'grey'}}>Thanks for your feedback! Feel Free to give more feedbacks</CustomText>
                       </Box>
                         <Box marginTop={'xl'}>
-                          <PrimaryButton onPress={undefined} label='Give more feedback' width='100%'/>
+                          <PrimaryButton onPress={()=>[setFeedBack(true), setSubmit(false)]} label='Give more feedback' width='100%'/>
                         </Box>
                         <Box marginTop={'md'}>
-                          <OutlineButton onPress={()=>setSubmit(false)} label='Close' width='100%'/>
+                          <OutlineButton onPress={()=>[setSubmit(false), setIsSubmit(true)]} label='Close' width='100%'/>
                         </Box>
                     </Box>
                   </Box>   

@@ -40,6 +40,11 @@ const setAddressSchema = z.object({
     apartmentNo: z.string().min(0, 'Apartment No is required'),
     landMark: z.string().min(0, 'Land Mark No is required'),
   });
+const InspectionSchema = z.object({
+    date: z.string().min(3, 'Date is required'),
+    time: z.string().min(3, 'Time is required'),
+    notes: z.string().min(0, 'Notes is required'),
+  });
 
   
-export { loginSchema, signupSchema, requestOTPSchema, newPasswordSchema, setAddressSchema }
+export { loginSchema, signupSchema, requestOTPSchema, newPasswordSchema, setAddressSchema, InspectionSchema }
