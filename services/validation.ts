@@ -45,6 +45,28 @@ const InspectionSchema = z.object({
     time: z.string().min(3, 'Time is required'),
     notes: z.string().min(0, 'Notes is required'),
   });
+  const reservationSchema = z.object({
+    name: z.string().min(3, 'Name is required'),
+    email: z.string().email('Invalid email').min(3, 'Email is required'),
+    phone: z
+    .string()
+    .refine((value) => phoneRegExp.test(value), {
+      message: 'Invalid phone number format',
+    })
+    .refine((value) => value.length >= 11, {
+      message: 'Phone number should be at least 11 digits',
+    }),
+    address: z.string().min(3, 'Address is required'),
+    country: z.string().min(3, 'Country is required'),
+    state: z.string().min(3, 'State of Origin is required'),
+    dob: z.string().min(3, 'Date of Birth is required'),
+    gender: z.string().min(3, 'Gender is required'),
+    occupation: z.string().min(0, 'Occupation is required'),
+  });
 
   
-export { loginSchema, signupSchema, requestOTPSchema, newPasswordSchema, setAddressSchema, InspectionSchema }
+export { loginSchema, signupSchema,
+   requestOTPSchema, newPasswordSchema,
+    setAddressSchema, InspectionSchema,
+    reservationSchema,
+   }

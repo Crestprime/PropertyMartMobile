@@ -24,10 +24,11 @@ const plots = require('../../../assets/images/foreground/plotsx.png')
 
 const propertyDetails = () => {
   
-  const [isLike, setLiked] = useState(false)
+  // const [isLike, setLiked] = useState(false)
+
   const propertyImg = [
-    {id: 111, image: property, isLiked:isLike, backArrow:backIcon},
-    {id: 222, image: property, isLiked:false, backArrow:backIcon},
+    {id: 123, image: property, isLiked:true,},
+    {id: 222, image: property, isLiked:false,},
   ]
 
   const features = [
@@ -54,14 +55,15 @@ const propertyDetails = () => {
   ]
 
   const addToFavourites = () => {
-     setLiked(previous => !previous)
+    //  setLiked(previous => !previous)
+    window.alert('hullo')
   }
 
   return (
     <Box style={Styles.martContainer } justifyContent={'center'}>
       <Box width={'100%'} height={'90%'}>
         <Box height={'35%'}>
-        <Swiper
+              <Swiper
                           dotColor="#ffffff"
                           activeDotColor="#2D66DD"
                           showsPagination={true}
@@ -69,14 +71,16 @@ const propertyDetails = () => {
                         
                           {propertyImg.map((item) => (
                           
-                            <Pressable key={item?.id} android_ripple={{color:'#000000c0'}} style={Styles.slide1} onPress={()=>propertyDetails()}>
+                            <Pressable key={item.id} android_ripple={{color:'#000000c0'}} style={Styles.slide1} onPress={()=>propertyDetails()}>
                               <ImageBackground source={item.image} style={Styles.propDtls}>
                                 <Box height={50} alignItems={'center'} flexDirection={'row'} >
                                   <Box width={'50%'} alignItems={'flex-start'} paddingLeft={'md'}>
-                                     <Image resizeMode='cover' source={item.backArrow}/>
+                                    <Link href={'/dashboard/Pages/home'}>
+                                     <Image resizeMode='cover' source={backIcon}/>
+                                    </Link>
                                   </Box>
                                   <Box width={'50%'} alignItems={'flex-end'} paddingRight={'md'}>
-                                    <Pressable onPress={()=>addToFavourites()} android_ripple={{color: '#000000c0'}} style={{borderRadius:100}}>
+                                    <Pressable onPress={null} android_ripple={{color: '#000000c0'}} style={{borderRadius:100}}>
                                         {   item.isLiked === false? <Ionicons name='heart-outline' size={25} color={'white'}/>
                                         : item.isLiked === true? <Ionicons name='heart' size={25} color={'red'}/> : null
                                         }

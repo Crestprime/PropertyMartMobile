@@ -46,14 +46,14 @@ const MakeReservation = () => {
   };
 
   const reservations = [
-    {id: 62457, plot:'469.94', price:'5,000,000'},
-    {id: 62452, plot:'469.94', price:'5,000,000'},
-    {id: 62451, plot:'469.94', price:'5,000,000'},
-    {id: 62450, plot:'469.94', price:'5,000,000'},
-    {id: 620573, plot:'469.94', price:'5,000,000'},
-    {id: 620572, plot:'469.94', price:'5,000,000'},
+    {id: 22457, plot:'469.94', price:'5,000,000'},
+    {id: 12452, plot:'469.94', price:'5,000,000'},
+    {id: 32451, plot:'469.94', price:'5,000,000'},
+    {id: 42450, plot:'469.94', price:'5,000,000'},
+    {id: 52057, plot:'469.94', price:'5,000,000'},
+    {id: 20572, plot:'469.94', price:'5,000,000'},
     {id: 62857, plot:'469.94', price:'5,000,000'},
-    {id: 69827, plot:'469.94', price:'5,000,000'},
+    {id: 90827, plot:'469.94', price:'5,000,000'},
   ]
  
 
@@ -107,10 +107,12 @@ const MakeReservation = () => {
         <Box height={'20%'} width={'100%'} alignItems={'center'} justifyContent={'center'}> 
             <Box width={'90%'} height={'90%'}>
                 <TouchableOpacity>
-                    <PrimaryButton onPress={() => console.log('err')} label={'continue'} width={'100%'}/>
+                    <PrimaryButton onPress={() => router.push('/dashboard/Pages/reservationForm')} label={'continue'} width={'100%'}/>
                 </TouchableOpacity>
                 
-                <Box height={'60%'} alignItems={'center'} justifyContent={'flex-end'}>
+                  <CustomText fontSize={12} marginTop={'md'} textAlign={'center'}>Next: <CustomText fontSize={12} fontWeight={'800'}>Reservation Form</CustomText></CustomText>
+                
+                <Box height={'50%'} alignItems={'center'} justifyContent={'flex-end'}>
                     <Box height={5} width={'100%'} alignItems={'center'} justifyContent={'center'} >
                         <Box height={5} width={'30%'} backgroundColor={'black'} borderRadius={10}>
                             <CustomText>Hello</CustomText>
