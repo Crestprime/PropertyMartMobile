@@ -234,7 +234,7 @@ const propertyDetails = () => {
                   <OutlineButtonColored label='Schedule Inspection' onPress={()=>router.push('/dashboard/Pages/scheduleInspection')} width={'100%'}/>
                   </Box>
                   <Box width={'48%'}>
-                    <PrimaryButton label='Make Reservations' onPress={() => console.log('err')} width={'100%'}/>
+                    <PrimaryButton label='Make Reservations' onPress={()=>router.push('/dashboard/Pages/makeReservations')} width={'100%'}/>
                   </Box>
                 </Box>
               </Box>
