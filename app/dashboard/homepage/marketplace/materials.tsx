@@ -59,15 +59,18 @@ const Materials = () => {
                       {
                         materials.map((mat)=>{
                           return(
+                        
                           <Box width={'45%'} height={180} marginTop={'md'} borderRadius={20} borderWidth={1} borderColor={'textInputBorderColor'} key={mat.id}>
-                            <Image borderTopLeftRadius={20} borderTopRightRadius={20} style={{width:'auto', height:'45%'}} source={mat.item} resizeMode='cover'/>
-                            <Box height={'55%'} padding={'md'}>
-                              <CustomText fontSize={12} lineHeight={14}>{mat.header}</CustomText>
-                              <CustomText fontSize={12} lineHeight={25} variant={'subheader'}>{mat.price}</CustomText>
-                              <Box>
-                                <OutlineButtonColored onPress={()=>window.alert('added to cart')} label={'Add to Cart'} height={35} width={'100%'}/>
+                            <Pressable onPress={()=>router.push('/dashboard/homepage/marketplace/productDetails')}>
+                              <Image borderTopLeftRadius={20} borderTopRightRadius={20} style={{width:'auto', height:'45%'}} source={mat.item} resizeMode='cover'/>
+                              <Box height={'55%'} padding={'md'}>
+                                <CustomText fontSize={12} lineHeight={14}>{mat.header}</CustomText>
+                                <CustomText fontSize={12} lineHeight={25} variant={'subheader'}>{mat.price}</CustomText>
+                                <Box>
+                                  <OutlineButtonColored onPress={()=>window.alert('added to cart')} label={'Add to Cart'} height={35} width={'100%'}/>
+                                </Box>
                               </Box>
-                            </Box>
+                            </Pressable>
                           </Box>
                           )
                         })
