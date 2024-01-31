@@ -96,6 +96,42 @@ export const Styles = StyleSheet.create({
       width: '100%',
       height: '100%',
       resizeMode: 'cover',
-    }
+    },
+
+    // dropdown container
+    selectCont: {
+      // backgroundColor: 'white',
+      paddingTop: 40,
+    },
+    dropdown: {
+      height: 40,
+      borderColor: 'gray',
+      borderWidth: 0.5,
+      borderRadius: 8,
+      paddingHorizontal: 8,
+    },
+    icon: {
+      marginRight: 5,
+      color:'grey',
+    },
+    label: {
+      position: 'absolute',
+      // backgroundColor: 'red',
+      left: 0,
+      top: 8,
+      zIndex: 999,
+      paddingHorizontal: 8,
+      fontSize: 12,
+    },
+    placeholderStyle: {
+      fontSize: 14,
+    },
+    selectedTextStyle: {
+      fontSize: 14,
+    },
+    iconStyle: {
+      width: 20,
+      height: 20,
+    },
 
 });

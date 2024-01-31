@@ -50,8 +50,7 @@ const ReservationForm = () => {
   ]
 
   const handleSubmit = (data: any) => {
-    // toggleHome()
-    // setStep1()
+    setSummary(true)
   }
  
 
@@ -80,11 +79,6 @@ const ReservationForm = () => {
                             Ensure that the information below is correct
                         </CustomText>
                 </Box>
-                <Box width='100%' flexDirection={'row'} height={50} alignItems={'center'} >
-                        <Separator />
-                        <CustomText variant={'xs'} fontSize={12} fontWeight={'800'} color={'black'}>OR</CustomText>
-                        <Separator />
-                </Box>
                 <ScrollView>
                 <Box marginTop={'sm'}>
                             <CustomTextInput name='name' placeholder='Enter Full Name' label='Buyers FullName' isPassword={false}  />
@@ -93,6 +87,8 @@ const ReservationForm = () => {
                             <CustomTextInput name='email' placeholder='Email' label='Email Address' isPassword={false}  />
                             <Box marginBottom={'sm'} />
                             <CustomTextInput name='phone' placeholder='Phone' label='Mobile Number' isPassword={false}  />
+                            <Box marginBottom={'sm'} />
+                            <CustomTextInput name='address' placeholder='Address' label='Enter Address' isPassword={false}  />
                             <Box marginBottom={'sm'} />
 
                             <CustomTextInput name='country' placeholder='Country' label='Country' isPassword={false} 

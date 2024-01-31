@@ -64,9 +64,16 @@ const InspectionSchema = z.object({
     occupation: z.string().min(0, 'Occupation is required'),
   });
 
+  const PaymentSchema = z.object({
+    mode_of_payment: z.string().min(3, 'Date is required'),
+    method_of_payment: z.string().min(3, 'Time is required'),
+    amount: z.string().min(0, 'Notes is required'),
+  });
+
+
   
 export { loginSchema, signupSchema,
    requestOTPSchema, newPasswordSchema,
     setAddressSchema, InspectionSchema,
-    reservationSchema,
+    reservationSchema, PaymentSchema
    }
