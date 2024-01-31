@@ -2,17 +2,18 @@ import { tokens } from './tokens'
 import { createTheme } from "@shopify/restyle";
 
 
-const lightTheme = {
-    background: tokens.color.white,
-    textColor: tokens.color.textColor,
-    primaryColor: tokens.color.primaryBtnBg,
-    errorColor: tokens.color.primaryError,
-    warningColor: tokens.color.primaryWarning,
-    successColor: tokens.color.primarySuccess,
-    btnBlue: tokens.color.primaryBtnBg,
-    headerTextColor: tokens.color.headerColor,
-    textInputBorderColor: tokens.color.textInputBorderColor,
-}
+// const lightTheme = {
+//     background: tokens.color.white,
+//     textColor: tokens.color.textColor,
+//     primaryColor: tokens.color.primaryBtnBg,
+//     errorColor: tokens.color.primaryError,
+//     warningColor: tokens.color.primaryWarning,
+//     successColor: tokens.color.primarySuccess,
+//     btnBlue: tokens.color.primaryBtnBg,
+//     headerTextColor: tokens.color.headerColor,
+//     textInputBorderColor: tokens.color.textInputBorderColor,
+//     lightGrey: tokens.color.lightGrey,
+// }
 
 const COLOR_PALLET = {
   background: tokens.color.white.val,
@@ -28,6 +29,7 @@ const COLOR_PALLET = {
   secondaryBackgroundColor: tokens.color.secondaryBg.val,
   white: 'white',
   black: 'black',
+  lightGrey: tokens.color.lightGrey.val,
 };
 
 const theme = createTheme({
@@ -122,4 +124,4 @@ export const darkTheme: Theme = {
 };
 
 
-export { lightTheme }
+// export { lightTheme }

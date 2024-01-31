@@ -16,6 +16,7 @@ const COLOR_PALLET = {
   secondaryBackgroundColor: tokens.color.secondaryBg.val,
   white: 'white',
   black: 'black',
+  lightGrey: tokens.color.lightGrey.val
 };
 
 const theme = createTheme({

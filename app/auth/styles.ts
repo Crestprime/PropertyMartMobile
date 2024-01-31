@@ -20,9 +20,23 @@ export const Styles = StyleSheet.create({
    
    logo: {
       width:100,
-      height:60
-   }
+      height:50
+   },
 
-
+   container: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 20,
+    },
+    input: {
+      borderWidth: 1,
+      borderColor: '#333',
+      borderRadius: 5,
+      padding: 10,
+      fontSize: 16,
+      width: 50, // Adjust width based on your design
+      textAlign: 'center',
+    },
 
 });

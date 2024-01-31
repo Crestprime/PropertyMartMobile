@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const IndexPage = () => {
+const MarketPlace = () => {
   return (
     <View>
-      <Text>IndexPage</Text>
+      <Text>MarketPlace</Text>
     </View>
   )
 }
 
-export default IndexPage
+export default MarketPlace
