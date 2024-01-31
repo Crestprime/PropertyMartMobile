@@ -75,11 +75,13 @@ const InspectionSchema = z.object({
     cvv: z.string().min(3, 'cvv is required'),
     expDate: z.string().min(3, 'card expiry date is required')
   })
+  const searchSchema = z.object({
+    search: z.string().min(0, 'search'),
+  })
+
 
 
   
-export { loginSchema, signupSchema,
-   requestOTPSchema, newPasswordSchema,
-    setAddressSchema, InspectionSchema,
-    reservationSchema, PaymentSchema, cardSchema
+export { loginSchema, signupSchema,requestOTPSchema, newPasswordSchema,setAddressSchema, InspectionSchema,
+    reservationSchema, PaymentSchema, cardSchema, searchSchema
    }
