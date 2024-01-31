@@ -14,7 +14,7 @@ const myPortfolio = () => {
           </Box>
           <CustomText paddingLeft={'2xl'} variant={'medium'} >My Portfolio</CustomText>
 
-          <Box>
+          <Box minHeight={400}justifyContent={'space-between'} >
               <ListProperty/>
               <ListProperty/>
               <ListProperty/>

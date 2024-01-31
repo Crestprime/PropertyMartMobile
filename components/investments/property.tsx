@@ -2,6 +2,7 @@ import { ImageBackground, Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const backgroundImg = require('../../assets/images/bgDesign.png');
 const pptIcon =require('../../assets/images/propertyIcon.png')
@@ -11,7 +12,8 @@ const coinIcon =require('../../assets/images/coins-stacked-03.png')
 
 const property = () => {
   return (
-      <Box height={128} width={365} borderRadius={10} backgroundColor={'errorColor'} padding={'lg'} marginLeft={'sm'} marginBottom={'xl'}>
+      <TouchableOpacity>
+             <Box height={128} width={365} borderRadius={10} backgroundColor={'errorColor'} padding={'lg'} marginLeft={'sm'} marginBottom={'xl'}>
            {/* <ImageBackground source={backgroundImg} resizeMode='cover' ><Text>Test</Text></ImageBackground> */}
           <CustomText variant={'medium'} fontSize={18} color={'white'} fontWeight={'400'}>Properties in Abuja</CustomText>
           <Box flexDirection={'row'} paddingTop={'lg'}>
@@ -29,6 +31,7 @@ const property = () => {
               </Box>
           </Box>
     </Box>
+   </TouchableOpacity>
   )
 }
 

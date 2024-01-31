@@ -6,8 +6,8 @@ import CustomText from '@component/general/CustomText';
 import { PrimaryButton } from '@component/general/CustomButton';
 import Property from '@component/investments/property';
 import { router } from 'expo-router';
-import listProperty from '../../../../components/investments/ListProperty';
-import ListProperty from '../../../../components/investments/ListProperty';
+import ListProperty from '@component/investments/listProperty';
+// import ListProperty from '../../../../components/investments/ListProperty';
 
 const Investment = () => {
   const [amount, setAmount] = React.useState('6,000,000');
