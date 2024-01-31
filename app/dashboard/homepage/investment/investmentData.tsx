@@ -6,9 +6,11 @@ import CustomText from '@component/general/CustomText';
 import { PrimaryButton } from '@component/general/CustomButton';
 import Property from '@component/investments/property';
 import { router } from 'expo-router';
+import listProperty from '../../../../components/investments/ListProperty';
+import ListProperty from '../../../../components/investments/ListProperty';
 
 const Investment = () => {
-  const [amount, setAmount] = React.useState('6,000,000.00');
+  const [amount, setAmount] = React.useState('6,000,000');
   const [remaining, setRemaining] = React.useState('0.00');
 
   return (
@@ -53,6 +55,7 @@ const Investment = () => {
           </Box>
 
           {/* Property cards //////////////////////////// */}
+
           <Box height={164} width={396} marginTop={'2xl'}>
             <Box flexDirection={'row'} justifyContent={'space-between'}>
               <CustomText variant={'medium'} fontSize={18}>
@@ -70,22 +73,22 @@ const Investment = () => {
           </Box>
 
           <Box paddingLeft={'sm'} paddingTop={'2xl'}>
-            <CustomText onPress={()=>router.push('/dashboard/homepage/investment/investmentData')} variant={'medium'}>My Portfolio</CustomText>
-
             <Box
-              height={185}
+              flexDirection={'row'}
+              alignItems={'center'}
               width={'100%'}
-              justifyContent={'center'}
-                          alignItems={'center'}
-                          
-
-              // alignSelf={'center'}
+              justifyContent={'space-between'}
+              paddingBottom={'lg'}
             >
-              <Image source={require('../../../../assets/images/shinyCoin.png')} />
+              <CustomText variant={'medium'}>My Portfolio</CustomText>
+
+              <CustomText color={'primaryColor'} onPress={()=>router.push('/dashboard/homepage/investment/myPortfolio')}>View All</CustomText>
             </Box>
 
-            <Box width={'100%'} alignItems={'center'} top={20}>
-              <CustomText>You haven’t invested in any property</CustomText>
+            <Box>
+              <ListProperty />
+              <ListProperty />
+              <ListProperty />
             </Box>
           </Box>
 
@@ -102,11 +105,19 @@ const Investment = () => {
 
               // alignSelf={'center'}
             >
-              <Image source={require('../../../../assets/images/shinyCoin.png')} />
+              <Image
+                source={require('../../../../assets/images/shinyCoin.png')}
+              />
             </Box>
 
             <Box width={'100%'} alignItems={'center'} top={20}>
-              <CustomText>You have nothing to harvest at the moment</CustomText>
+              <CustomText variant={'medium'}>
+                No Recent Activities Yet
+              </CustomText>
+              <CustomText textAlign={'center'}>
+                Looks like your financial world is quiet for now – no recent
+                activities to report
+              </CustomText>
             </Box>
           </Box>
         </Box>
