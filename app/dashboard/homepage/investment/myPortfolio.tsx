@@ -4,12 +4,13 @@ import Box from '@component/general/Box';
 import { Ionicons } from '@expo/vector-icons';
 import CustomText from '@component/general/CustomText';
 import ListProperty from '@component/investments/ListProperty';
+import { router } from 'expo-router';
 
 const myPortfolio = () => {
   return (
     <SafeAreaView>
       <Box padding={'xl'}>
-        <Ionicons name="arrow-back-outline" size={19} />
+        <Ionicons name="arrow-back-outline" size={19} onPress={()=> router.push('/dashboard/homepage/investment/investmentData')} />
           </Box>
           <CustomText paddingLeft={'2xl'} variant={'medium'} >My Portfolio</CustomText>
 
