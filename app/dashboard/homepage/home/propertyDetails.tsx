@@ -75,7 +75,7 @@ const propertyDetails = () => {
                               <ImageBackground source={item.image} style={Styles.propDtls}>
                                 <Box height={50} alignItems={'center'} flexDirection={'row'} >
                                   <Box width={'50%'} alignItems={'flex-start'} paddingLeft={'md'}>
-                                    <Link href={'/dashboard/homepage/home/home'}>
+                                    <Link href={'/dashboard/homepage/home/'}>
                                      <Image resizeMode='cover' source={backIcon}/>
                                     </Link>
                                   </Box>

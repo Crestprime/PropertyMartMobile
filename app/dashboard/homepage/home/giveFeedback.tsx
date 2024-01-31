@@ -332,7 +332,7 @@ const UserReplies = () => {
                       </Box>
                         <TouchableOpacity>
                           <Box marginTop={'xl'}>
-                            <PrimaryButton onPress={()=>router.push('/dashboard/homepage/home/home')} label='Back to home' width='100%'/>
+                            <PrimaryButton onPress={()=>router.push('/dashboard/homepage/home/')} label='Back to home' width='100%'/>
                           </Box>
                         </TouchableOpacity>
                       </Box>
