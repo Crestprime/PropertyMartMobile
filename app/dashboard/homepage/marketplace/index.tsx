@@ -13,6 +13,9 @@ import { useRouter } from 'expo-router'
 import useForm from '@hooks/useForm'
 import { CustomTextInput } from '@component/form/CustomInput'
 import { searchSchema } from '@services/validation'
+import Lands from './lands'
+import Building from './building'
+import Materials from './materials'
 // import { useNavigation } from '@react-navigation/native';
 
 
@@ -33,8 +36,6 @@ const logout = require('../../../../assets/images/foreground/logout.png')
 
 const MarketPlace = () => {
 
-  
-  const [username, setUsername] = useState('Jude');
   const [showSidebar, setShowSidebar] = useState(false)
   const [lands, setLands] = useState(false)
   const [building, setBuilding] = useState(true)
@@ -118,19 +119,19 @@ const MarketPlace = () => {
                   </Box>
                   <Box height={40} width={'100%'} marginTop={'lg'} flexDirection={'row'}>
                     <Box borderRadius={10} flexDirection={'row'} borderWidth={1} borderColor={'textInputBorderColor'} height={'100%'} width={'60%'}>
-                       <Pressable style={{width:'30%'}}>
+                       <Pressable style={{width:'30%'}} onPress={()=>[setLands(true), setBuilding(false),setMaterials(false)]}>
                             <Box  justifyContent={'center'} alignItems={'center'} height={'100%'} borderTopLeftRadius={10} borderBottomLeftRadius={10} backgroundColor={lands?'btnBlue':'secondaryBackgroundColor'}>
-                                <CustomText fontSize={12} color={lands?'secondaryBackgroundColor':'black'}>Lands</CustomText>
+                                <CustomText fontSize={10} fontWeight={'800'}  color={lands?'secondaryBackgroundColor':'black'}>Lands</CustomText>
                             </Box>
                        </Pressable>
-                        <Pressable style={{width:'35%'}}>
+                        <Pressable style={{width:'38%'}} onPress={()=>[setLands(false), setBuilding(true),setMaterials(false)]}>
                             <Box  justifyContent={'center'} alignItems={'center'} height={'100%'} backgroundColor={building?'btnBlue':'secondaryBackgroundColor'}>
-                                <CustomText fontSize={12} color={building?'secondaryBackgroundColor':'black'}>Buiding</CustomText>
+                                <CustomText fontSize={10} fontWeight={'800'}  color={building?'secondaryBackgroundColor':'black'}>Buiding</CustomText>
                             </Box>
                        </Pressable>
-                        <Pressable style={{width:'30%'}}>
-                            <Box  justifyContent={'center'} alignItems={'center'} height={'100%'} borderTopRightRadius={10} borderBottomRightRadius={10} backgroundColor={materials?'btnBlue':'secondaryBackgroundColor'}>
-                                <CustomText fontSize={12} color={'black'}>Materials</CustomText>
+                        <Pressable style={{width:'32%'}} onPress={()=>[setLands(false), setBuilding(false),setMaterials(true)]}>
+                            <Box  justifyContent={'center'} alignItems={'center'} padding={'sm'} height={'100%'} width={'100%'} borderTopRightRadius={10} borderBottomRightRadius={10} backgroundColor={materials?'btnBlue':'secondaryBackgroundColor'}>
+                                <CustomText fontSize={10} fontWeight={'800'} color={materials?'secondaryBackgroundColor':'black'}>Materials</CustomText>
                             </Box>
                        </Pressable>
                     </Box>
@@ -138,181 +139,19 @@ const MarketPlace = () => {
                 </Box>
                 {lands?
                   <>
-                  <ScrollView style={{marginTop:60}}>
-                  <Box height={350} style={Styles.containerS}>
-                      <Box height={50} flexDirection={'row'} paddingLeft={'md'} paddingRight={'md'}>
-                          <Box width={'50%'}>
-                            <CustomText variant="subheader" fontSize={16}>Lands for you</CustomText>
-                          </Box>
-                          <Box width={'50%'} alignItems={'flex-end'}>
-                            <CustomText variant="subheader" color={'btnBlue'} fontSize={14}>View all</CustomText>
-                          </Box>
-                      </Box>
-                      <Swiper
-                          dotColor="#ffffff"
-                          activeDotColor="#2D66DD"
-                          showsPagination={false}
-                        >
-                        
-                          {cardImg?.map((image) => (
-                          
-                            <Pressable key={image?.id} android_ripple={{color:'#000000c0'}} style={Styles.slide1} onPress={()=>propertyDetails()}>
-                              <Image source={{ uri: image?.uri }} style={Styles.image1} />
-                              <Box style={Styles.content}>
-                                  <Box width={'100%'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
-                                    <Box width={'90%'} height={130} justifyContent={'center'}>
-                                    <Box>
-                                            <Box flexDirection={'row'}>
-                                                <Box width={'50%'} flexDirection={'row'}>
-                                                  <CustomText variant={'subheader'} fontSize={16}>{image?.header}</CustomText>
-                                                  <Box justifyContent={'center'} padding={'xs'}>
-                                                    <Image source={verified} resizeMode="cover" />
-                                                  </Box>
-                                                </Box>
-                                                <Box width={'50%'} alignItems={'flex-end'}>
-                                                  <CustomText variant={'subheader'} fontSize={16} color={'primaryColor'} >{image?.sqm} SQM</CustomText>
-                                                </Box>
-                                            </Box>
-                                              <CustomText variant={'subheader'} fontSize={12} color={'textColor'} >{image.subheader}</CustomText>
-                                            <Box flexDirection={'row'}>
-                                              <Box justifyContent={'center'} paddingRight={'xs'}>
-                                                <Image source={location} resizeMode="cover" />
-                                              </Box>
-                                                <CustomText variant={'subheader'} fontWeight={'100'} fontSize={12} color={'textColor'}>{image?.text}</CustomText>
-                                              </Box>
-                                        </Box>
-                                    </Box>
-                                  </Box>
-                              </Box>
-                            </Pressable>
-                          
-                          ))}
-                      </Swiper>
-                  </Box>
-                  <Box height={50}>
-                    {/*  this is a vacant space left on purpose */}
-                  </Box>
-                  </ScrollView>
+                  <Lands/>
                   </>
                   :
                   building?
                   <>
-                  <ScrollView style={{marginTop:60}}>
-                  <Box height={350} style={Styles.containerS}>
-                      <Box height={50} flexDirection={'row'} paddingLeft={'md'} paddingRight={'md'}>
-                          <Box width={'50%'}>
-                            <CustomText variant="subheader" fontSize={16}>Building for you</CustomText>
-                          </Box>
-                          <Box width={'50%'} alignItems={'flex-end'}>
-                            <CustomText variant="subheader" color={'btnBlue'} fontSize={14}>View all</CustomText>
-                          </Box>
-                      </Box>
-                      <Swiper
-                          dotColor="#ffffff"
-                          activeDotColor="#2D66DD"
-                          showsPagination={false}
-                        >
-                        
-                          {cardImg?.map((image) => (
-                          
-                            <Pressable key={image?.id} android_ripple={{color:'#000000c0'}} style={Styles.slide1} onPress={()=>propertyDetails()}>
-                              <Image source={{ uri: image?.uri }} style={Styles.image1} />
-                              <Box style={Styles.content}>
-                                  <Box width={'100%'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
-                                    <Box width={'90%'} height={130} justifyContent={'center'}>
-                                    <Box>
-                                            <Box flexDirection={'row'}>
-                                                <Box width={'50%'} flexDirection={'row'}>
-                                                  <CustomText variant={'subheader'} fontSize={16}>{image?.header}</CustomText>
-                                                  <Box justifyContent={'center'} padding={'xs'}>
-                                                    <Image source={verified} resizeMode="cover" />
-                                                  </Box>
-                                                </Box>
-                                                <Box width={'50%'} alignItems={'flex-end'}>
-                                                  <CustomText variant={'subheader'} fontSize={16} color={'primaryColor'} >{image?.sqm} SQM</CustomText>
-                                                </Box>
-                                            </Box>
-                                              <CustomText variant={'subheader'} fontSize={12} color={'textColor'} >{image.subheader}</CustomText>
-                                            <Box flexDirection={'row'}>
-                                              <Box justifyContent={'center'} paddingRight={'xs'}>
-                                                <Image source={location} resizeMode="cover" />
-                                              </Box>
-                                                <CustomText variant={'subheader'} fontWeight={'100'} fontSize={12} color={'textColor'}>{image?.text}</CustomText>
-                                              </Box>
-                                        </Box>
-                                    </Box>
-                                  </Box>
-                              </Box>
-                            </Pressable>
-                          
-                          ))}
-                      </Swiper>
-                  </Box>
-                  <Box height={50}>
-                    {/*  this is a vacant space left on purpose */}
-                  </Box>
-                  </ScrollView>
+                   <Building/>
                   </>
                   :
                   materials?
                   <>
-                  <ScrollView style={{marginTop:60}}>
-                  <Box height={350} style={Styles.containerS}>
-                      <Box height={50} flexDirection={'row'} paddingLeft={'md'} paddingRight={'md'}>
-                          <Box width={'50%'}>
-                            <CustomText variant="subheader" fontSize={16}>Materials for you</CustomText>
-                          </Box>
-                          <Box width={'50%'} alignItems={'flex-end'}>
-                            <CustomText variant="subheader" color={'btnBlue'} fontSize={14}>View all</CustomText>
-                          </Box>
-                      </Box>
-                      <Swiper
-                          dotColor="#ffffff"
-                          activeDotColor="#2D66DD"
-                          showsPagination={false}
-                        >
-                        
-                          {cardImg?.map((image) => (
-                          
-                            <Pressable key={image?.id} android_ripple={{color:'#000000c0'}} style={Styles.slide1} onPress={()=>propertyDetails()}>
-                              <Image source={{ uri: image?.uri }} style={Styles.image1} />
-                              <Box style={Styles.content}>
-                                  <Box width={'100%'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
-                                    <Box width={'90%'} height={130} justifyContent={'center'}>
-                                    <Box>
-                                            <Box flexDirection={'row'}>
-                                                <Box width={'50%'} flexDirection={'row'}>
-                                                  <CustomText variant={'subheader'} fontSize={16}>{image?.header}</CustomText>
-                                                  <Box justifyContent={'center'} padding={'xs'}>
-                                                    <Image source={verified} resizeMode="cover" />
-                                                  </Box>
-                                                </Box>
-                                                <Box width={'50%'} alignItems={'flex-end'}>
-                                                  <CustomText variant={'subheader'} fontSize={16} color={'primaryColor'} >{image?.sqm} SQM</CustomText>
-                                                </Box>
-                                            </Box>
-                                              <CustomText variant={'subheader'} fontSize={12} color={'textColor'} >{image.subheader}</CustomText>
-                                            <Box flexDirection={'row'}>
-                                              <Box justifyContent={'center'} paddingRight={'xs'}>
-                                                <Image source={location} resizeMode="cover" />
-                                              </Box>
-                                                <CustomText variant={'subheader'} fontWeight={'100'} fontSize={12} color={'textColor'}>{image?.text}</CustomText>
-                                              </Box>
-                                        </Box>
-                                    </Box>
-                                  </Box>
-                              </Box>
-                            </Pressable>
-                          
-                          ))}
-                      </Swiper>
-                  </Box>
-                  <Box height={50}>
-                    {/*  this is a vacant space left on purpose */}
-                  </Box>
-                  </ScrollView>
-                  </>: null
-
+                  <Materials/>
+                  </>
+                  : null
                 }
                 
               </Box>
