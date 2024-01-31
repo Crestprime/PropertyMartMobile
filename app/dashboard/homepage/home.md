@@ -71,7 +71,7 @@ const Home = () => {
    }
   
    const propertyDetails = () => {
-      router.push('/dashboard/homepage/propertyDetails',)
+      router.push('/dashboard/homepage/home/propertyDetails',)
    }
   return (
  
@@ -120,7 +120,7 @@ const Home = () => {
                         <Box paddingTop={'md'}>
                           <Box style={{backgroundColor:'#D92D20'}} width={'40%'} flexDirection={'row'} justifyContent={'center'} borderRadius={10}>
                             <TouchableOpacity>
-                                  <Link href={'/dashboard/homepage/setupAccount'}>
+                                  <Link href={'/dashboard/homepage/home/setupAccount'}>
                                     <CustomText variant={'subheader'} color={'secondaryBackgroundColor'} fontSize={12}>Setup now</CustomText>
                                   </Link>
                             </TouchableOpacity>
@@ -295,3 +295,15 @@ const Home = () => {
 
 export default Home;
 
+// import { View, Text } from 'react-native'
+// import React from 'react'
+
+// const home = () => {
+//   return (
+//     <View>
+//       <Text>home</Text>
+//     </View>
+//   )
+// }
+
+// export default home

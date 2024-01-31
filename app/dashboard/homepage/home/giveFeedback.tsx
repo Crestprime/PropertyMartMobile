@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Box from '@component/general/Box'
-import { Styles } from './styles'
+import { Styles } from '../styles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Link, router } from 'expo-router'
 import CustomText from '@component/general/CustomText'
@@ -14,7 +14,7 @@ import useForm from '@hooks/useForm'
 import { setAddressSchema } from '@services/validation'
 import { MessageBox } from '@component/form/MessageBox'
 import { OutlineButton } from '@component/general/OutlineButton'
-const avatar = require('../../../assets/images/foreground/avatar.png')
+const avatar = require('../../../../assets/images/foreground/avatar.png')
 
 const UserReplies = () => {
 
@@ -113,7 +113,7 @@ const UserReplies = () => {
             <Box height={'100%'}> 
                 <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                       <TouchableOpacity>
-                          <Link href='/dashboard/homepage/landReviews'>
+                          <Link href='/dashboard/homepage/home/landReviews'>
                               <Ionicons 
                               name="arrow-back-outline"
                               size={25}
@@ -332,7 +332,7 @@ const UserReplies = () => {
                       </Box>
                         <TouchableOpacity>
                           <Box marginTop={'xl'}>
-                            <PrimaryButton onPress={()=>router.push('/dashboard/homepage/home')} label='Back to home' width='100%'/>
+                            <PrimaryButton onPress={()=>router.push('/dashboard/homepage/home/home')} label='Back to home' width='100%'/>
                           </Box>
                         </TouchableOpacity>
                       </Box>

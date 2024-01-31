@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Box from '@component/general/Box'
-import { Styles } from './styles'
+import { Styles } from '../styles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Link, router } from 'expo-router'
 import CustomText from '@component/general/CustomText'

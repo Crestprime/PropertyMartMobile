@@ -4,7 +4,7 @@ import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
 import { InspectionSchema } from '@services/validation'
-import { Styles } from './styles'
+import { Styles } from '../styles'
 import { CustomTextInput } from '@component/form/CustomInput'
 import { Link, router } from 'expo-router';
 import { SubmitButton } from '@component/form/CustomButton'
@@ -37,7 +37,7 @@ const ScheduleInspection = () => {
         <Box width={'90%'} height={'90%'}>
                 <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                     <TouchableOpacity>
-                        <Link href={'/dashboard/homepage/propertyDetails'}>
+                        <Link href={'/dashboard/homepage/home/propertyDetails'}>
                             <Ionicons 
                             name="arrow-back-outline"
                             size={25}

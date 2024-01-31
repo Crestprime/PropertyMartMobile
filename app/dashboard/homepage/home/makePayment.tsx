@@ -4,7 +4,7 @@ import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
 import { PaymentSchema } from '@services/validation'
-import { Styles } from './styles'
+import { Styles } from '../styles'
 import { Link, router } from 'expo-router';
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'
@@ -75,7 +75,7 @@ const MakePayment = () => {
            <Box width={'90%'} height={'90%'}>
                 <Box marginTop={'md'} height={30} justifyContent={'center'} >
                       <TouchableOpacity>
-                                <Link href={'/dashboard/homepage/reservationForm'}>
+                                <Link href={'/dashboard/homepage/home/reservationForm'}>
                                     <Ionicons 
                                     name="arrow-back-outline"
                                     size={25}
@@ -199,7 +199,7 @@ const MakePayment = () => {
                       showValue();
                       if (item.value === 'card') {
                         // setbyCard(true);
-                        router.push('/dashboard/homepage/payWithCard')
+                        router.push('/dashboard/homepage/home/payWithCard')
 
                       }
                     }}

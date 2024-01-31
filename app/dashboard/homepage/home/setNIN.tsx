@@ -4,7 +4,7 @@ import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
 import { setAddressSchema } from '@services/validation'
-import { Styles } from './styles'
+import { Styles } from '../styles'
 import { CustomTextInput } from '@component/form/CustomInput'
 import { Link, router } from 'expo-router';
 import { SubmitButton } from '@component/form/CustomButton'
@@ -15,7 +15,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'
 // const logo = require('../../assets/images/logo/logo.png')
 
-const SetBVN = ({toggleBVN, setStep2}:any) => {
+const SetNIN = ({toggleNIN, setStep3}:any) => {
   
   const [checked, setChecked] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -34,8 +34,8 @@ const SetBVN = ({toggleBVN, setStep2}:any) => {
   })
 
   const handleSubmit = (data: any) => {
-    toggleBVN()
-    setStep2()
+    toggleNIN()
+    setStep3()
   }
  
 
@@ -44,7 +44,7 @@ const SetBVN = ({toggleBVN, setStep2}:any) => {
         <Box width={'90%'} height={'95%'}>
         <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                     <TouchableOpacity>
-                        <Pressable onPress={()=> toggleBVN()}>
+                        <Pressable onPress={()=> toggleNIN()}>
                             <Ionicons 
                             name="arrow-back-outline"
                             size={25}
@@ -71,7 +71,7 @@ const SetBVN = ({toggleBVN, setStep2}:any) => {
                             name="locate-outline" color={'#2D66DD'}
                             size={25}
                             />
-                      <CustomText marginLeft={'xs'}>SET BVN</CustomText>
+                      <CustomText marginLeft={'xs'}>SET NIN</CustomText>
                     </Box>
                   </Pressable>
                 </Box>
@@ -123,4 +123,4 @@ const SetBVN = ({toggleBVN, setStep2}:any) => {
     </Box>
   )
 }
-export default SetBVN;
+export default SetNIN;

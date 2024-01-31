@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Box from '@component/general/Box'
-import { Styles } from './styles'
+import { Styles } from '../styles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Link, router } from 'expo-router'
 import CustomText from '@component/general/CustomText'
@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { PrimaryButton } from '@component/general/CustomButton'
 import { Pressable, Image } from 'react-native'
 import { ScrollView } from 'tamagui'
-const avatar = require('../../../assets/images/foreground/avatar.png')
+const avatar = require('../../../../assets/images/foreground/avatar.png')
 
 export default function setupAccount() {
 
@@ -36,7 +36,7 @@ export default function setupAccount() {
               <Box height={'100%'}>
                   <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                       <TouchableOpacity>
-                          <Link href='/dashboard/homepage/propertyDetails'>
+                          <Link href='/dashboard/homepage/home/propertyDetails'>
                               <Ionicons 
                               name="arrow-back-outline"
                               size={25}
@@ -51,7 +51,7 @@ export default function setupAccount() {
                         </CustomText> 
                       </Box>
                       <Box width={'40%'} justifyContent={'center'}>
-                        <PrimaryButton label='Give Feedback' onPress={()=>router.push('/dashboard/homepage/giveFeedback')} width={'100%'}/>
+                        <PrimaryButton label='Give Feedback' onPress={()=>router.push('/dashboard/homepage/home/giveFeedback')} width={'100%'}/>
                       </Box>
                   </Box>
                   <Box marginTop={'xs'}>
@@ -191,7 +191,7 @@ export default function setupAccount() {
                               </Box>
                                 <Box width={'50%'} flexDirection={'row'} justifyContent={'flex-end'} alignItems={'center'}>
                                 <CustomText textDecorationLine={'underline'} fontSize={10} fontWeight={'800'} style={{color:'#2D66DD'}}>
-                                  <Link href='/dashboard/homepage/userReplies'>
+                                  <Link href='/dashboard/homepage/home/userReplies'>
                                   {item.replies} {item.replies == 1 || 0? 'Reply':'Replies'}
                                   </Link>
                                 </CustomText>

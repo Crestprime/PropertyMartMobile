@@ -2,7 +2,7 @@ import Box from '@component/general/Box'
 import React, { useState } from 'react'
 import CustomText from '@component/general/CustomText'
 import Swiper from 'react-native-swiper'
-import { Styles } from './styles'
+import { Styles } from '../styles'
 import { Pressable, Image, ImageBackground } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { ScrollView } from 'tamagui'
@@ -10,17 +10,17 @@ import { PrimaryButton } from '@component/general/CustomButton'
 import { OutlineButtonColored } from '@component/general/OutlineButtonColored'
 import { Link, router } from 'expo-router'
 
-const property = require('../../../assets/images/foreground/property.png')
-const backIcon = require('../../../assets/images/foreground/back.png')
-const mass = require('../../../assets/images/foreground/mass.png')
-const road = require('../../../assets/images/foreground/road.png')
-const dojo = require('../../../assets/images/foreground/dojo.png')
-const tap = require('../../../assets/images/foreground/tap.png')
-const roadx = require('../../../assets/images/foreground/roadx.png')
-const badge = require('../../../assets/images/foreground/badge.png')
-const skyscrapper = require('../../../assets/images/foreground/skyscrapper.png')
-const house = require('../../../assets/images/foreground/house.png')
-const plots = require('../../../assets/images/foreground/plotsx.png')
+const property = require('../../../../assets/images/foreground/property.png')
+const backIcon = require('../../../../assets/images/foreground/back.png')
+const mass = require('../../../../assets/images/foreground/mass.png')
+const road = require('../../../../assets/images/foreground/road.png')
+const dojo = require('../../../../assets/images/foreground/dojo.png')
+const tap = require('../../../../assets/images/foreground/tap.png')
+const roadx = require('../../../../assets/images/foreground/roadx.png')
+const badge = require('../../../../assets/images/foreground/badge.png')
+const skyscrapper = require('../../../../assets/images/foreground/skyscrapper.png')
+const house = require('../../../../assets/images/foreground/house.png')
+const plots = require('../../../../assets/images/foreground/plotsx.png')
 
 const propertyDetails = () => {
   
@@ -75,7 +75,7 @@ const propertyDetails = () => {
                               <ImageBackground source={item.image} style={Styles.propDtls}>
                                 <Box height={50} alignItems={'center'} flexDirection={'row'} >
                                   <Box width={'50%'} alignItems={'flex-start'} paddingLeft={'md'}>
-                                    <Link href={'/dashboard/homepage/home'}>
+                                    <Link href={'/dashboard/homepage/home/home'}>
                                      <Image resizeMode='cover' source={backIcon}/>
                                     </Link>
                                   </Box>
@@ -128,7 +128,7 @@ const propertyDetails = () => {
                 </Pressable>
               </Box>
               <Box>
-                <Link href="/dashboard/homepage/landReviews">
+                <Link href="/dashboard/homepage/home/landReviews">
                   <CustomText textDecorationLine={'underline'} fontSize={12} fontWeight={'800'} style={{color:'#2D66DD'}}>Land Reviews (10)</CustomText>
                 </Link>
               </Box>
@@ -235,10 +235,10 @@ const propertyDetails = () => {
                 </Box>
                 <Box flexDirection={'row'} justifyContent={'space-between'} marginTop={'lg'}>
                   <Box width={'48%'}>
-                  <OutlineButtonColored label='Schedule Inspection' onPress={()=>router.push('/dashboard/homepage/scheduleInspection')} width={'100%'}/>
+                  <OutlineButtonColored label='Schedule Inspection' onPress={()=>router.push('/dashboard/homepage/home/scheduleInspection')} width={'100%'}/>
                   </Box>
                   <Box width={'48%'}>
-                    <PrimaryButton label='Make Reservations' onPress={()=>router.push('/dashboard/homepage/makeReservations')} width={'100%'}/>
+                    <PrimaryButton label='Make Reservations' onPress={()=>router.push('/dashboard/homepage/home/makeReservations')} width={'100%'}/>
                   </Box>
                 </Box>
               </Box>
