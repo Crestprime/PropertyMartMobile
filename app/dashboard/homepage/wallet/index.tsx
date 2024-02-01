@@ -37,7 +37,10 @@ const Wallets = () => {
       </Box>
 
 
-    <CustomText variant={'subheader'} color={'black'} fontSize={16}>Recent Transactions</CustomText>
+    <Box width='100%' flexDirection={'row'} justifyContent={'space-between'}>
+      <CustomText variant={'subheader'} color={'black'} fontSize={16}>Recent Transactions</CustomText>
+      <CustomText variant={'body'} color={'primaryColor'} fontSize={14} onPress={() => navigation.push('/dashboard/transactions/')}>view all</CustomText>
+    </Box>
 
     { transactions.length <  1 && (
         <Box flex={1} justifyContent={'center'} alignItems={'center'}>
