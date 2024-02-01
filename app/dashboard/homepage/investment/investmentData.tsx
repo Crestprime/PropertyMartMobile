@@ -6,7 +6,7 @@ import CustomText from '@component/general/CustomText';
 import { PrimaryButton } from '@component/general/CustomButton';
 import Property from '@component/investments/property';
 import { router } from 'expo-router';
-import ListProperty from '@component/investments/listProperty';
+import ListProperty from '@component/investments/ListProperty';
 // import ListProperty from '../../../../components/investments/ListProperty';
 
 const Investment = () => {
