@@ -79,11 +79,7 @@ const Login = () => {
           </Box>
         </Box>
         <Box height={'20%'} flexDirection={'row'} alignItems={'flex-end'}>
-          <Box height={5} width={'100%'} flexDirection={'row'} justifyContent={'center'} >
-            <Box height={5} width={'30%'} backgroundColor={'black'} borderRadius={10}>
-              <CustomText>Hello</CustomText>
-            </Box>
-          </Box>
+         c
         </Box>
       </Box>
     </Box>

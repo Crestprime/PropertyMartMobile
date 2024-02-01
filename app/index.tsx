@@ -7,6 +7,7 @@ import Onboarding from './splash/onboarding'
 
 const Home = () => {
   const router = useRouter();
+
   return (
     <>
     <Onboarding/>

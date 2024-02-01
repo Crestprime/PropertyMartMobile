@@ -1,5 +1,5 @@
-import { Text, Image, TextInput, Pressable,  Alert } from 'react-native'
-import React, { useState, useRef } from 'react'
+import { Image, Alert, Pressable } from 'react-native'
+import React, { useState } from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
@@ -21,7 +21,7 @@ const logo = require('../../assets/images/logo/logo.png')
 
 const Signup: React.FC = () => {
 
-  const [step,setStep ] = useState(1);
+  const [step,setStep ] = useState(0);
   const [checked, setChecked] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false)
 
