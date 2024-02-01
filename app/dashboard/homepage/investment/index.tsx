@@ -12,18 +12,20 @@ const Investment = () => {
   const [remaining, setRemaining] = React.useState('00.00');
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <Box justifyContent={'center'} padding={'sm'}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <Box width='100%' paddingHorizontal={'md'}>
+
+          {/* HEADER SECTION */}
           <Box
             height={36}
-            width={396}
+            width={'100%'}
             flexDirection={'row'}
             justifyContent={'space-between'}
           >
             <CustomText variant={'medium'}>Investment</CustomText>
             <PrimaryButton
-              onPress={undefined}
+              onPress={() => {}}
               label={'Invest Now'}
               width={97}
             />
@@ -31,7 +33,7 @@ const Investment = () => {
 
           <Box
             height={124}
-            width={428}
+            width={'100%'}
             marginTop={'5xl'}
             justifyContent={'center'}
             alignItems={'center'}
@@ -53,7 +55,7 @@ const Investment = () => {
           </Box>
 
           {/* Property cards //////////////////////////// */}
-          <Box height={164} width={396} marginTop={'2xl'}>
+          <Box height={164} width={'100%'} marginTop={'2xl'}>
             <Box flexDirection={'row'} justifyContent={'space-between'}>
               <CustomText variant={'medium'} fontSize={18}>
                 Verified Opportunities
