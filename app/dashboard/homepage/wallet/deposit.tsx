@@ -10,6 +10,7 @@ import { PrimaryButton } from '@component/general/CustomButton'
 import { RoundedButton } from '@component/general/RoundedButton'
 import ModalWarpper from '@component/modals/ModalWarpper'
 import DepositMethodModal from '@component/modals/DepositMethodModal'
+import CustomHeader from '@component/general/CustomHeader'
 
 type IKeypadDetails = {
     label: string;
@@ -127,14 +128,11 @@ const Deposit = () => {
         {/* MODAL SECTION */}
         <DepositMethodModal isOpen={showModal} toggle={() => setShowModal(prev => !prev)} setType={(data) => setMethod(data)} />
 
-        <Box width='100%' height={100} justifyContent={'flex-end'}>
-            <Feather name='arrow-left' color={theme.colors.black} size={25} onPress={() => router.back()} />
-            <CustomText variant={'medium'} color={'black'} fontSize={22} marginTop={'md'}>How much do you want to fund?</CustomText>
-        </Box>
+        <CustomHeader title='How much do you want to fund?' />
 
         <Box width={'100%'} height={200}  justifyContent={'center'} alignItems={'center'}>
             <CustomText variant={'header'} fontSize={40} color={'black'}>N{amount}</CustomText>
-        </Box>
+        C</Box>
 
         <Box width={'100%'} height={80}>
             <CustomText variant={'medium'} fontSize={16} style={{ color: 'grey' }}>Selected method</CustomText>
