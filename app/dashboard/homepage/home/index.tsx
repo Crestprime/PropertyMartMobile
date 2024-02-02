@@ -75,12 +75,13 @@ const Home = () => {
   }
   return (
 
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white'}}>
       {/* <ScrollView> */}
       <Box style={Styles.martContainer} >
         <Box flexDirection={'row'} height={'100%'} width={'100%'} alignItems={'center'} justifyContent={'center'} >
-          <Box width={'95%'} height={'90%'}>
-            <Box height={100} width={'100%'} >
+          <Box width={'95%'} height={'100%'}>
+
+            <Box height={100} width={'100%'}  >
 
               <Box flexDirection={'row'} height={50} justifyContent={'space-between'} alignItems={'center'} >
                 <Box width={40} height={40} flexDirection={'row'} alignItems={'center'} justifyContent={'center'} borderRadius={100}>
@@ -103,6 +104,7 @@ const Home = () => {
                 <CustomText variant={'header'} lineHeight={14} fontSize={16}> What do you want to do today? </CustomText>
               </Box>
             </Box>
+
             <ScrollView>
               <Box height={150} width={'100%'} borderRadius={10} style={{ backgroundColor: '#FEF3F2' }} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Box height={'90%'} width={'95%'} flexDirection={'row'} >
@@ -163,7 +165,7 @@ const Home = () => {
               </Box>
               <Box height={220} style={Styles.containerS}>
                 <Swiper
-                  dotColor="#ffffff"
+                  dotColor="lightgrey"
                   activeDotColor="#2D66DD"
                   showsPagination={true}
                 >
@@ -239,7 +241,7 @@ const Home = () => {
           </Box>
           <Box width={'100%'} height={'100%'} style={{ backgroundColor: '#000000c0', opacity: 10 }}>
             <Box height={'100%'} alignItems={'center'} justifyContent={'center'} borderTopRightRadius={10} borderTopLeftRadius={10} backgroundColor={'secondaryBackgroundColor'}>
-              <Box alignItems={'flex-end'} width={'95%'} paddingRight={'xs'} marginTop={'3xl'}>
+              <Box alignItems={'flex-end'} height={80} width={'100%'} justifyContent={'flex-end'} paddingRight={'xs'} marginTop={'5xl'}>
                 <Pressable onPress={() => toggleSidebar()}>
                   <Ionicons name="close-outline" fontweight='600' size={30} />
                 </Pressable>

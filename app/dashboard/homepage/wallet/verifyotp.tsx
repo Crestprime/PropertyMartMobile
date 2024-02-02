@@ -14,11 +14,11 @@ const VerifyOtp = () => {
     const theme = useTheme<Theme>();
     const router = useRouter();
   return (
-   <Box flex={1} padding='md'>
+   <Box flex={1} padding='md' bg='white'>
         {/* MODALS */}
         <WithdrawalSuccessModal isOpen={showModal} toggle={() => setShowModal(prev => !prev)} />
 
-        <Box width='100%' height={100} justifyContent={'flex-end'}>
+        <Box width='100%' height={100} justifyContent={'flex-end'} marginTop={'2xl'}>
             <Feather name='arrow-left' color={theme.colors.black} size={25} onPress={() => router.back()} />
             <CustomText variant={'medium'} color={'black'} fontSize={22} marginTop={'md'}>Withdraw Funds</CustomText>
         </Box>
