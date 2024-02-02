@@ -29,5 +29,22 @@ export const Styles = StyleSheet.create({
         borderRadius: 16,
         backgroundColor: '#FEF3F2',
         
+    },
+    declineCard: {
+        height: 100,
+        width: '100%',
+        marginTop:20,
+        backgroundColor: '#FEF3F2',
+        padding: 10,
+        borderRadius:10
+    },
+
+    declineText: {
+        color: '#B42318',
+        // fontSize: 16,
+    },
+
+    subText: {
+        color: '#B42318',
     }
 })
