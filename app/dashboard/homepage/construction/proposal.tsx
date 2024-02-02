@@ -7,11 +7,12 @@ import Ionicons from '@expo/vector-icons/build/Ionicons';
 import { router } from 'expo-router';
 import { PrimaryButton } from '@component/general/CustomButton';
 import ConstructionCard from '@component/construction/ConstructionCard';
+import { TouchableOpacity } from 'react-native-ui-lib/src/incubator';
 
 const proposal = () => {
   return (
     <SafeAreaView>
-      <Box width={'100%'}padding={'sm'}>
+      <Box width={'100%'} padding={'sm'}>
         <Box>
           <Box padding={'sm'}>
             <Ionicons
@@ -53,18 +54,20 @@ const proposal = () => {
                 Proposal
               </CustomText>
             </Box>
-            <Box
-              height={42}
-              width={85}
-              borderWidth={1}
-              borderColor={'lightGrey'}
-              justifyContent={'center'}
-              alignItems={'center'}
-            >
-              <CustomText variant={'medium'} fontSize={14} color={'black'}>
-                Ongoing
-              </CustomText>
-            </Box>
+            <TouchableOpacity onPress={()=>router.push('/dashboard/homepage/construction/ongoing')}>
+              <Box
+                height={42}
+                width={85}
+                borderWidth={1}
+                borderColor={'lightGrey'}
+                justifyContent={'center'}
+                alignItems={'center'}
+              >
+                <CustomText variant={'medium'} fontSize={14} color={'black'}>
+                  Ongoing
+                </CustomText>
+              </Box>
+            </TouchableOpacity>
             <Box
               height={42}
               width={102}
