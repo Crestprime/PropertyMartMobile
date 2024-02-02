@@ -1,15 +1,36 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View, Image, Modal } from 'react-native';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomText from '@component/general/CustomText';
 import Box from '@component/general/Box';
 import Ionicons from '@expo/vector-icons/build/Ionicons';
 import { router } from 'expo-router';
 import { PrimaryButton } from '@component/general/CustomButton';
+import SelectBankModal from '@component/modals/SelectBankModal';
+import BankAddedCompleteModal from '@component/modals/BankAddedSuccesfulModal';
+import { Feather } from '@expo/vector-icons';
+import theme from '@theme/themes';
 
 const singleProperty = () => {
+    const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <SafeAreaView>
+      <SafeAreaView>
+          {/* <Modal
+           animationType="slide"
+              transparent={true}
+              
+             visible={modalVisible}
+          
+          >
+            <CustomText>TEST</CustomText>
+              
+          </Modal>
+         */}
+
+
+        
+
       <Box padding={'2xl'} width={'100%'}>
         <Box padding={'xl'}>
           <Ionicons

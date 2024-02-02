@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Construction = () => {
+const ongoingDetail = () => {
   return (
     <View>
-      <Text>Construction</Text>
+      <Text>ongoingDetail</Text>
     </View>
   )
 }
 
-export default Construction
+export default ongoingDetail
