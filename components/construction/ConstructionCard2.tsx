@@ -11,7 +11,7 @@ const ConstructionCard2 = () => {
   return (
     <SafeAreaView>
       <TouchableOpacity
-        onPress={() => router.push('/dashboard/homepage/construction/summary')}
+        onPress={() => router.push('/dashboard/homepage/construction/ongoingDetail')}
       >
         <Box style={[Styles.cardContainer]}>
           <Box flexDirection={'row'} padding={'sm'}>
