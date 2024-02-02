@@ -38,9 +38,9 @@ const Paywithbank = () => {
     }, 4000);
   }
   return renderForm(
-    <Box flex={1} paddingHorizontal={'md'}>
+    <Box flex={1} paddingHorizontal={'md'} bg='white'>
 
-      <Box width='100%' height={100} justifyContent={'flex-end'}>
+      <Box width='100%' height={100} marginTop={'3xl'} justifyContent={'flex-end'}>
         <Feather name='arrow-left' color={theme.colors.black} size={25} onPress={() => router.back()} />
         <CustomText variant={'medium'} color={'black'} fontSize={22} marginTop={'md'}>Bank Transfer</CustomText>
       </Box>

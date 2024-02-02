@@ -14,7 +14,7 @@ const WhatisPaystack = ({ isOpen, toggle }: {
     const theme = useTheme<Theme>();
     const { height } = useWindowDimensions();
   return (
-    <ModalWarpper isOpen={isOpen} toggle={() => toggle()} height={height/100*40} >
+    <ModalWarpper isOpen={isOpen} toggle={() => toggle()} height={height/100*45} >
         <Box width='100%' padding='md'>
             <CustomText variant={'medium'} fontSize={24} style={{ color: 'black' }}>What is Paystack</CustomText>
             <CustomText variant={'body'} marginTop={'md'}>

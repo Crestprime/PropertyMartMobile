@@ -40,7 +40,7 @@ const Transactions = () => {
                     <Box flex={1} alignItems={'flex-end'}  >
                         <Box width={'80%'} height={'100%'} bg='white' padding='md'>
                             {/* FILTER SECTION */}
-                            <Box width={'100%'} height={50} flexDirection={'row'} justifyContent={'space-between'} alignItems={'flex-end'}>
+                            <Box width={'100%'} height={50} flexDirection={'row'} justifyContent={'space-between'} alignItems={'flex-end'} marginTop={'2xl'}>
                                 <CustomText variant={'subheader'} fontSize={20} color={'black'}>Filter</CustomText>
                                 <Feather name='x' size={25} color={'black'} onPress={() => setShowFilter(false)} />
                             </Box>

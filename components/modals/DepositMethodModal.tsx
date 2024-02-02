@@ -16,7 +16,6 @@ const DepositMethodModal = ({ isOpen, toggle, setType }: {
 
     const selectPayment = (method: 'card'|'bank') => {
         setType(method);
-        toggle();
     }
 
   return (

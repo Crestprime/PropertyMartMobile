@@ -69,17 +69,26 @@ const InspectionSchema = z.object({
     method_of_payment: z.string().min(3, 'Time is required'),
     amount: z.string().min(0, 'Notes is required'),
   });
+
   const cardSchema = z.object({
     cardName: z.string().min(3, 'Card name is required'),
     cardNumber: z.string().min(11, 'card number is required'),
     cvv: z.string().min(3, 'cvv is required'),
     expDate: z.string().min(3, 'card expiry date is required')
-  })
+  });
+
+  const editProfileSchema = z.object({
+    firstName: z.string().min(3, 'first name is required'),
+    lastName: z.string().min(3, 'last name is required'),
+    email: z.string().min(3, 'first is required').email('Invalid email'),
+    phone: z.string().min(3, 'phone is required')
+  });
 
 
   
 export { loginSchema, signupSchema,
    requestOTPSchema, newPasswordSchema,
     setAddressSchema, InspectionSchema,
-    reservationSchema, PaymentSchema, cardSchema
+    reservationSchema, PaymentSchema, cardSchema,
+    editProfileSchema
    }

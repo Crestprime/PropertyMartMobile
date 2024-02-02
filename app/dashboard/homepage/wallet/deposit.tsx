@@ -126,13 +126,16 @@ const Deposit = () => {
   return (
     <Box flex={1} bg='white' paddingHorizontal={'md'}>
         {/* MODAL SECTION */}
-        <DepositMethodModal isOpen={showModal} toggle={() => setShowModal(prev => !prev)} setType={(data) => setMethod(data)} />
-
+        <DepositMethodModal isOpen={showModal} toggle={() => setShowModal(false)} setType={(data) => {
+            setMethod(data);
+            setShowModal(false);
+        }} />
+        <Box height={30} />
         <CustomHeader title='How much do you want to fund?' />
 
         <Box width={'100%'} height={200}  justifyContent={'center'} alignItems={'center'}>
             <CustomText variant={'header'} fontSize={40} color={'black'}>N{amount}</CustomText>
-        C</Box>
+        </Box>
 
         <Box width={'100%'} height={80}>
             <CustomText variant={'medium'} fontSize={16} style={{ color: 'grey' }}>Selected method</CustomText>

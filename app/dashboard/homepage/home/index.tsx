@@ -40,16 +40,16 @@ const Home = () => {
     { id: 3, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
   ];
   const sidebarPages = [
-    { id: 1, icon: marketPlace, title: 'My Properties', isNotify: false },
-    { id: 2, icon: love, title: 'Reservations', isNotify: true },
-    { id: 3, icon: cart, title: 'Cart', isNotify: true },
-    { id: 4, icon: calendar, title: 'My Appointments', isNotify: false },
-    { id: 5, icon: user, title: 'My Account', isNotify: false },
-    { id: 6, icon: chat, title: 'Chat With Us', isNotify: false },
-    { id: 7, icon: bell, title: 'Notification Preference', isNotify: false },
-    { id: 8, icon: preferencesettings, title: 'Settings', isNotify: false },
-    { id: 9, icon: star, title: 'Rate Us', isNotify: false },
-    { id: 10, icon: logout, title: 'Logout', isNotify: false },
+    { id: 1, icon: marketPlace, title: 'My Properties', isNotify: false, hasLink: false, link: '' },
+    { id: 2, icon: love, title: 'Reservations', isNotify: true, hasLink: false, link: '' },
+    { id: 3, icon: cart, title: 'Cart', isNotify: true, hasLink: false, link: '' },
+    { id: 4, icon: calendar, title: 'My Appointments', isNotify: false, hasLink: false, link: '/dashboard/account/appointments' },
+    { id: 5, icon: user, title: 'My Account', isNotify: false, hasLink: true, link: '/dashboard/account' },
+    { id: 6, icon: chat, title: 'Chat With Us', isNotify: false, hasLink: true, link: '' },
+    { id: 7, icon: bell, title: 'Notification Preference', isNotify: false, hasLink: true, link: '/dashboard/account/notification_settings' },
+    { id: 8, icon: preferencesettings, title: 'Settings', isNotify: false, hasLink: true, link: '' },
+    { id: 9, icon: star, title: 'Rate Us', isNotify: false, hasLink: true, link: '' },
+    { id: 10, icon: logout, title: 'Logout', isNotify: false, hasLink: true, link: '' },
   ];
   const cardImg = [
     {
@@ -75,12 +75,13 @@ const Home = () => {
   }
   return (
 
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white'}}>
       {/* <ScrollView> */}
       <Box style={Styles.martContainer} >
         <Box flexDirection={'row'} height={'100%'} width={'100%'} alignItems={'center'} justifyContent={'center'} >
-          <Box width={'95%'} height={'90%'}>
-            <Box height={100} width={'100%'} >
+          <Box width={'95%'} height={'100%'}>
+
+            <Box height={100} width={'100%'}  >
 
               <Box flexDirection={'row'} height={50} justifyContent={'space-between'} alignItems={'center'} >
                 <Box width={40} height={40} flexDirection={'row'} alignItems={'center'} justifyContent={'center'} borderRadius={100}>
@@ -103,6 +104,7 @@ const Home = () => {
                 <CustomText variant={'header'} lineHeight={14} fontSize={16}> What do you want to do today? </CustomText>
               </Box>
             </Box>
+
             <ScrollView>
               <Box height={150} width={'100%'} borderRadius={10} style={{ backgroundColor: '#FEF3F2' }} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Box height={'90%'} width={'95%'} flexDirection={'row'} >
@@ -163,7 +165,7 @@ const Home = () => {
               </Box>
               <Box height={220} style={Styles.containerS}>
                 <Swiper
-                  dotColor="#ffffff"
+                  dotColor="lightgrey"
                   activeDotColor="#2D66DD"
                   showsPagination={true}
                 >
@@ -239,7 +241,7 @@ const Home = () => {
           </Box>
           <Box width={'100%'} height={'100%'} style={{ backgroundColor: '#000000c0', opacity: 10 }}>
             <Box height={'100%'} alignItems={'center'} justifyContent={'center'} borderTopRightRadius={10} borderTopLeftRadius={10} backgroundColor={'secondaryBackgroundColor'}>
-              <Box alignItems={'flex-end'} width={'95%'} paddingRight={'xs'} marginTop={'3xl'}>
+              <Box alignItems={'flex-end'} height={80} width={'100%'} justifyContent={'flex-end'} paddingRight={'xs'} marginTop={'5xl'}>
                 <Pressable onPress={() => toggleSidebar()}>
                   <Ionicons name="close-outline" fontweight='600' size={30} />
                 </Pressable>
@@ -260,7 +262,9 @@ const Home = () => {
                             </Box>
                           </Box>
                           <Box padding={'xs'} paddingLeft={'md'} justifyContent={'center'}>
+                            <Link href={item.link}>
                             <CustomText variant={'subheader'} fontSize={14} >{item.title}</CustomText>
+                            </Link>
                           </Box>
                         </Box>
                         <Box width={'20%'} alignItems={'flex-end'} justifyContent={'center'}>

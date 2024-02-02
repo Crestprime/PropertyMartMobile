@@ -4,7 +4,7 @@ import Box from '@component/general/Box';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomText from '@component/general/CustomText';
 import { PrimaryButton } from '@component/general/CustomButton';
-import Property from '@component/investments/Property';
+import Property from '@component/investments/property';
 import { Link, router } from 'expo-router';
 import ListProperty from '@component/investments/ListProperty';
 // import ListProperty from '../../../../components/investments/ListProperty';
