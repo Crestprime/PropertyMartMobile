@@ -8,7 +8,9 @@ import { router } from 'expo-router';
 
 const index = () => {
   return (
+
     <SafeAreaView style={{ backgroundColor: 'white', padding: 20, flex: 1 }}>
+
       <Box padding={'2xl'}>
         <CustomText variant={'medium'}>Construction</CustomText>
       </Box>
@@ -42,7 +44,9 @@ const index = () => {
           <PrimaryButton
             onPress={()=>router.push('/dashboard/homepage/construction/proposal')}
             label={'Send Proposal'}
+
             width={'100%'}
+
           />
         </Box>
       </Box>

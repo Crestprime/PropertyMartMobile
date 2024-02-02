@@ -220,3 +220,4 @@ const ongoingDetail = () => {
 };
 
 export default ongoingDetail;
+
