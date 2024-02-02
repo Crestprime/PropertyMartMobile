@@ -40,16 +40,16 @@ const Home = () => {
     { id: 3, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
   ];
   const sidebarPages = [
-    { id: 1, icon: marketPlace, title: 'My Properties', isNotify: false },
-    { id: 2, icon: love, title: 'Reservations', isNotify: true },
-    { id: 3, icon: cart, title: 'Cart', isNotify: true },
-    { id: 4, icon: calendar, title: 'My Appointments', isNotify: false },
-    { id: 5, icon: user, title: 'My Account', isNotify: false },
-    { id: 6, icon: chat, title: 'Chat With Us', isNotify: false },
-    { id: 7, icon: bell, title: 'Notification Preference', isNotify: false },
-    { id: 8, icon: preferencesettings, title: 'Settings', isNotify: false },
-    { id: 9, icon: star, title: 'Rate Us', isNotify: false },
-    { id: 10, icon: logout, title: 'Logout', isNotify: false },
+    { id: 1, icon: marketPlace, title: 'My Properties', isNotify: false, hasLink: false, link: '' },
+    { id: 2, icon: love, title: 'Reservations', isNotify: true, hasLink: false, link: '' },
+    { id: 3, icon: cart, title: 'Cart', isNotify: true, hasLink: false, link: '' },
+    { id: 4, icon: calendar, title: 'My Appointments', isNotify: false, hasLink: false, link: '/dashboard/account/appointments' },
+    { id: 5, icon: user, title: 'My Account', isNotify: false, hasLink: true, link: '/dashboard/account' },
+    { id: 6, icon: chat, title: 'Chat With Us', isNotify: false, hasLink: true, link: '' },
+    { id: 7, icon: bell, title: 'Notification Preference', isNotify: false, hasLink: true, link: '/dashboard/account/notification_settings' },
+    { id: 8, icon: preferencesettings, title: 'Settings', isNotify: false, hasLink: true, link: '' },
+    { id: 9, icon: star, title: 'Rate Us', isNotify: false, hasLink: true, link: '' },
+    { id: 10, icon: logout, title: 'Logout', isNotify: false, hasLink: true, link: '' },
   ];
   const cardImg = [
     {
@@ -260,7 +260,9 @@ const Home = () => {
                             </Box>
                           </Box>
                           <Box padding={'xs'} paddingLeft={'md'} justifyContent={'center'}>
+                            <Link href={item.link}>
                             <CustomText variant={'subheader'} fontSize={14} >{item.title}</CustomText>
+                            </Link>
                           </Box>
                         </Box>
                         <Box width={'20%'} alignItems={'flex-end'} justifyContent={'center'}>
