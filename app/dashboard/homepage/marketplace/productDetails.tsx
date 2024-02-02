@@ -222,9 +222,9 @@ const propertyDetails = () => {
                 </Box>
                 
                 <Box marginTop={'xl'} paddingLeft={'md'}>
-                  
                   <TouchableOpacity>
-                    <PrimaryButton label='Buy Now (₦21,000)' onPress={()=>window.alert('hehe bought')} width={'95%'}/>
+                    <PrimaryButton label='Buy Now (₦21,000)' 
+                    onPress={()=>router.push('/dashboard/homepage/marketplace/cart')} width={'95%'}/>
                   </TouchableOpacity>
                 </Box>
               </Box>
