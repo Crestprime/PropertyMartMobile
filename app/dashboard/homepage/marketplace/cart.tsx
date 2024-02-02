@@ -26,7 +26,7 @@ const del = require('../../../../assets/images/foreground/delete.png')
 const Cart = () => {
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [cart, setCart] = useState(true);
-  const [delet, setDelete] = useState(true)
+  const [delet, setDelete] = useState(false)
   const [count, setCount] = useState(0)
   
   const { renderForm, formState: { isValid } } = useForm({
@@ -173,7 +173,7 @@ const Cart = () => {
                         </Box>
                         <Box marginTop={'md'}>
                             <TouchableOpacity>
-                                <PrimaryButton onPress={undefined} label={'checkout'} width={''}/>
+                                <PrimaryButton onPress={()=>router.push('/dashboard/homepage/marketplace/deliverymethod')} label={'checkout'} width={''}/>
                             </TouchableOpacity>
                         </Box>
                       </Box>
