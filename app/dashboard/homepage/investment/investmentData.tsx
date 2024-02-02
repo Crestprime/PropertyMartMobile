@@ -4,8 +4,8 @@ import Box from '@component/general/Box';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomText from '@component/general/CustomText';
 import { PrimaryButton } from '@component/general/CustomButton';
-import Property from '@component/investments/property';
-import { router } from 'expo-router';
+import Property from '@component/investments/Property';
+import { Link, router } from 'expo-router';
 import ListProperty from '@component/investments/ListProperty';
 // import ListProperty from '../../../../components/investments/ListProperty';
 
@@ -61,7 +61,7 @@ const Investment = () => {
               <CustomText variant={'medium'} fontSize={18}>
                 Verified Opportunities
               </CustomText>
-              <CustomText variant={'medium'} color={'btnBlue'} fontSize={16}>
+              <CustomText onPress={()=>router.push('/dashboard/homepage/investment/verifiedOportunities')} variant={'medium'} color={'btnBlue'} fontSize={16}>
                 View all
               </CustomText>
             </Box>
@@ -80,7 +80,9 @@ const Investment = () => {
               justifyContent={'space-between'}
               paddingBottom={'lg'}
             >
-              <CustomText variant={'medium'}>My Portfolio</CustomText>
+                          <CustomText variant={'medium'}>My Portfolio</CustomText>
+                          
+                        
 
               <CustomText color={'primaryColor'} onPress={()=>router.push('/dashboard/homepage/investment/myPortfolio')}>View All</CustomText>
             </Box>
