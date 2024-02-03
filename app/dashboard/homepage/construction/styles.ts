@@ -18,9 +18,29 @@ export const Styles = StyleSheet.create({
         
     },
 
+    activeBtn: {
+        // borderWidth: 1,
+        backgroundColor: '#2D66DD',
+        color: 'white',
+    },
+
+    inactiveBtn: {
+        borderWidth: 1,
+        borderColor: 'grey',
+   
+    },
+
+    activeBtnTxt: {
+        color:'white'
+    },
+
+    inActiveBtnTxt: {
+        color:'black'
+    },
+
     decline: {
         height: 30,
-        width: 80,
+        minWidthidth: 80,
         marginRight:10,
         borderWidth: 1,
         borderColor: '#FECDCA',
@@ -28,6 +48,7 @@ export const Styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 16,
         backgroundColor: '#FEF3F2',
+        padding:5
         
     },
     declineCard: {
@@ -46,5 +67,10 @@ export const Styles = StyleSheet.create({
 
     subText: {
         color: '#B42318',
+    },
+
+    bgDuration: {
+        backgroundColor: '#F9FAFB',
+        borderRadius:10
     }
 })
