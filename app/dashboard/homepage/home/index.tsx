@@ -47,7 +47,7 @@ const Home = () => {
     { id: 5, icon: user, title: 'My Account', isNotify: false, hasLink: true, link: '/dashboard/account' },
     { id: 6, icon: chat, title: 'Chat With Us', isNotify: false, hasLink: true, link: '' },
     { id: 7, icon: bell, title: 'Notification Preference', isNotify: false, hasLink: true, link: '/dashboard/account/notification_settings' },
-    { id: 8, icon: preferencesettings, title: 'Settings', isNotify: false, hasLink: true, link: '' },
+    { id: 8, icon: preferencesettings, title: 'Settings', isNotify: false, hasLink: true, link: 'dashboard/settings/' },
     { id: 9, icon: star, title: 'Rate Us', isNotify: false, hasLink: true, link: '' },
     { id: 10, icon: logout, title: 'Logout', isNotify: false, hasLink: true, link: '' },
   ];

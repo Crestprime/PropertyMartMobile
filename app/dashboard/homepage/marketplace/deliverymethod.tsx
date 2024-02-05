@@ -53,7 +53,6 @@ const MakeReservation = () => {
   const reservations = [
     {id: 22457, method:'Doorstep Delivery', desc:'Your order would be delivered to your doorstep by capital city development agent' },
     {id: 12452,  method:'Pickup', desc:'You’ll be required to pickup your order at any of our location close to you.'},
-    
   ]
 
   const paymentOption = [

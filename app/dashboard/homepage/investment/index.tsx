@@ -55,7 +55,7 @@ const Investment = () => {
             </Box>
           </Box>
 
-          {/* Property cards //////////////////////////// */}
+          {/* Property cards */}
           <Box height={164} width={'100%'} marginTop={'2xl'}>
             <Box flexDirection={'row'} justifyContent={'space-between'}>
               <CustomText variant={'medium'} fontSize={18}>
