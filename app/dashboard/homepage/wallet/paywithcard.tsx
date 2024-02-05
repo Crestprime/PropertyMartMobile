@@ -38,11 +38,11 @@ const Paywithcard = () => {
     }, 4000);
   }
   return renderForm(
-    <Box flex={1} paddingHorizontal={'md'}>
+    <Box flex={1} paddingHorizontal={'md'} bg='white'>
       {/* MODALS */}
-      <WhatisPaystack isOpen={showModal} toggle={() => setShowModal(prev => !prev)} />
+      <WhatisPaystack isOpen={showModal} toggle={() => setShowModal(false)} />
       <DepositCompleteModal isOpen={showCompletedModal} toggle={() => setShowCompletedModal(prev => !prev)} />
-      <Box width='100%' height={100} justifyContent={'flex-end'}>
+      <Box width='100%' height={100} justifyContent={'flex-end'} marginTop={'2xl'}>
         <Feather name='arrow-left' color={theme.colors.black} size={25} onPress={() => router.back()} />
         <CustomText variant={'medium'} color={'black'} fontSize={22} marginTop={'md'}>Pay with your card</CustomText>
       </Box>

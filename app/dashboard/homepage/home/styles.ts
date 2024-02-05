@@ -5,7 +5,8 @@ export const Styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     display: 'flex',
-    flexDirection:'column'
+    flexDirection:'column',
+    backgroundColor: 'white'
    },
    subContainer: {
     height:'90%',
@@ -90,7 +91,8 @@ export const Styles = StyleSheet.create({
       height: '100%',
       width: '100%',
       position: 'absolute',
-      zIndex:999
+      zIndex:999,
+      backgroundColor: 'white'
     },
     propDtls: {
       width: '100%',

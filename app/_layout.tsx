@@ -28,7 +28,7 @@ export default function RootLayout() {
     BasierMedium: require('../assets/fonts/BasierMedium.otf'),
     BasierSemiBold: require('../assets/fonts/BasierSemiBold.otf'),
     BasierBold: require('../assets/fonts/BasierBold.otf'),
-    ...FontAwesome.font,
+    // ...FontAwesome.font,
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
