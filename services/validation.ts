@@ -80,14 +80,6 @@ const InspectionSchema = z.object({
   const searchSchema = z.object({
     search: z.string().min(0, 'search'),
   })
-
-
-
-  
-export { loginSchema, signupSchema,requestOTPSchema, newPasswordSchema,setAddressSchema, InspectionSchema,
-    reservationSchema, PaymentSchema, cardSchema, searchSchema
-  });
-
   const editProfileSchema = z.object({
     firstName: z.string().min(3, 'first name is required'),
     lastName: z.string().min(3, 'last name is required'),
@@ -95,8 +87,6 @@ export { loginSchema, signupSchema,requestOTPSchema, newPasswordSchema,setAddres
     phone: z.string().min(3, 'phone is required')
   });
 
-
-  
 export { loginSchema, signupSchema,
    requestOTPSchema, newPasswordSchema,
     setAddressSchema, InspectionSchema,
