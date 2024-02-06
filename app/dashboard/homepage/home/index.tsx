@@ -40,7 +40,7 @@ const Home = () => {
     { id: 3, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
   ];
   const sidebarPages = [
-    { id: 1, icon: marketPlace, title: 'My Properties', isNotify: false, hasLink: false, link: '' },
+    { id: 1, icon: marketPlace, title: 'My Properties', isNotify: false, hasLink: true, link: 'dashboard/properties' },
     { id: 2, icon: love, title: 'Reservations', isNotify: true, hasLink: false, link: '' },
     { id: 3, icon: cart, title: 'Cart', isNotify: true, hasLink: true, link: 'dashboard/homepage/marketplace/cart' },
     { id: 4, icon: calendar, title: 'My Appointments', isNotify: false, hasLink: false, link: '/dashboard/account/appointments' },
