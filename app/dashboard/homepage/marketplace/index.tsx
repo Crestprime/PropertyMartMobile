@@ -16,6 +16,7 @@ import { searchSchema } from '@services/validation'
 import Lands from './lands'
 import Building from './building'
 import Materials from './materials'
+import SearchBar from '@component/form/SearchBar'
 // import { useNavigation } from '@react-navigation/native';
 
 
@@ -40,7 +41,8 @@ const MarketPlace = () => {
   const [lands, setLands] = useState(false)
   const [building, setBuilding] = useState(true)
   const [materials, setMaterials] = useState(false)
-
+  const [val, setVal] = React.useState('');
+  const [showFilter, setShowFilter] = React.useState(true);
 
   const router = useRouter()
 
@@ -101,7 +103,7 @@ const MarketPlace = () => {
                   <Box marginTop={'xl'}>
                     <CustomText fontSize={18} variant={'header'}>Marketplace</CustomText>
                   </Box>
-                  <Box flexDirection={'row'} marginTop={'md'}>
+                  {/* <Box flexDirection={'row'} marginTop={'md'}>
                      <Box width={'80%'} justifyContent={'center'}>
                         <Box style={{marginTop:-35}}>
                             <CustomTextInput name='search' placeholder='' label='' isPassword={false}  />
@@ -116,7 +118,28 @@ const MarketPlace = () => {
                             </Pressable>
                        </Box>
                     </Box>
+                  </Box> */}
+                         <Box zIndex={1} flexDirection={'row'} width={'100%'} justifyContent={'space-between'} marginTop={'md'}>
+                  <Box flex={0.95}>
+                      <SearchBar value={val} onChange={(e) => setVal(e)} borderColor='lightgrey' />
                   </Box>
+
+                  <Pressable 
+                      onPress={() => setShowFilter(true)}
+                      style={{
+                          width: 48,
+                          height: 48,
+                          borderWidth: 1,
+                          borderColor: '#EAECF0',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          backgroundColor: '#EAECF0',
+                          borderRadius: 10,
+                      }}>
+                      <Ionicons name='filter-outline' size={24} color='grey' />
+                  </Pressable>
+                  </Box>
+                  
                   <Box height={40} width={'100%'} marginTop={'lg'} flexDirection={'row'}>
                     <Box borderRadius={10} flexDirection={'row'} borderWidth={1} borderColor={'textInputBorderColor'} height={'100%'} width={'60%'}>
                        <Pressable style={{width:'30%'}} onPress={()=>[setLands(true), setBuilding(false),setMaterials(false)]}>

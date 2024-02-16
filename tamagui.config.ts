@@ -6,6 +6,7 @@ const customConfig = {
     ...config,
 }
 
+
 const tamaguiConfig = createTamagui({
     ...customConfig,
    tokens,

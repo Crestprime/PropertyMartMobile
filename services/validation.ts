@@ -91,6 +91,6 @@ export { loginSchema, signupSchema,
    requestOTPSchema, newPasswordSchema,
     setAddressSchema, InspectionSchema,
     reservationSchema, PaymentSchema, cardSchema,
-    editProfileSchema
+    editProfileSchema, searchSchema
 
    }
