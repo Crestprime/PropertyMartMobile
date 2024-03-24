@@ -75,8 +75,11 @@ const InspectionSchema = z.object({
     cardNumber: z.string().min(11, 'card number is required'),
     cvv: z.string().min(3, 'cvv is required'),
     expDate: z.string().min(3, 'card expiry date is required')
-  });
 
+  })
+  const searchSchema = z.object({
+    search: z.string().min(0, 'search'),
+  })
   const editProfileSchema = z.object({
     firstName: z.string().min(3, 'first name is required'),
     lastName: z.string().min(3, 'last name is required'),
@@ -84,11 +87,10 @@ const InspectionSchema = z.object({
     phone: z.string().min(3, 'phone is required')
   });
 
-
-  
 export { loginSchema, signupSchema,
    requestOTPSchema, newPasswordSchema,
     setAddressSchema, InspectionSchema,
     reservationSchema, PaymentSchema, cardSchema,
     editProfileSchema
+
    }

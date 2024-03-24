@@ -195,7 +195,7 @@ export default function setupAccount() {
                                   {item.replies} {item.replies == 1 || 0? 'Reply':'Replies'}
                                   </Link>
                                 </CustomText>
-                                </Box>
+                             </Box>
                             </Box>
                             <Box marginTop={'sm'} flexDirection={'row'} alignItems={'center'}>
                               <Pressable style={[

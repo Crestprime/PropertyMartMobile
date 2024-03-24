@@ -42,7 +42,7 @@ const Home = () => {
   const sidebarPages = [
     { id: 1, icon: marketPlace, title: 'My Properties', isNotify: false, hasLink: false, link: '' },
     { id: 2, icon: love, title: 'Reservations', isNotify: true, hasLink: false, link: '' },
-    { id: 3, icon: cart, title: 'Cart', isNotify: true, hasLink: false, link: '' },
+    { id: 3, icon: cart, title: 'Cart', isNotify: true, hasLink: true, link: 'dashboard/homepage/marketplace/cart' },
     { id: 4, icon: calendar, title: 'My Appointments', isNotify: false, hasLink: false, link: '/dashboard/account/appointments' },
     { id: 5, icon: user, title: 'My Account', isNotify: false, hasLink: true, link: '/dashboard/account' },
     { id: 6, icon: chat, title: 'Chat With Us', isNotify: false, hasLink: true, link: '' },
@@ -79,7 +79,7 @@ const Home = () => {
       {/* <ScrollView> */}
       <Box style={Styles.martContainer} >
         <Box flexDirection={'row'} height={'100%'} width={'100%'} alignItems={'center'} justifyContent={'center'} >
-          <Box width={'95%'} height={'100%'}>
+          <Box width={'95%'} height={'90%'}>
 
             <Box height={100} width={'100%'}  >
 
