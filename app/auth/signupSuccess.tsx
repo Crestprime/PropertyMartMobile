@@ -1,10 +1,11 @@
-import { TouchableOpacity, Image, } from 'react-native'
+import {  Image, Pressable, } from 'react-native'
 import React from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import { PrimaryButton } from '@component/general/CustomButton'
-import { Link } from 'expo-router'
-import { Styles } from './styles'
+import { Link, router } from 'expo-router'
+import { Styles } from '../../styles/auth/styles'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 const palmfone = require('../../assets/images/foreground/acctcreated.png')
 
 const SignupSuccess = () => {
@@ -13,14 +14,16 @@ const SignupSuccess = () => {
     <Box style={[Styles.martContainer, Styles.flex]} >
     <Box style={Styles.subContainer}>
         <Box width={'100%'} height={'100%'}>
-                <Box height={'30%'} width={'100%'} flexDirection={'row'} justifyContent={'flex-end'} >
-                        <Link href={'/auth/login'}>
+                  <Box height={'30%'} width={'100%'} flexDirection={'row'} justifyContent={'flex-end'} >
+                        
                         <TouchableOpacity>
-                            <CustomText variant={'xs'} fontSize={12} lineHeight={20} 
-                            color={'btnBlue'} fontWeight={'800'}>I’ll do this later
-                            </CustomText>
+                              <Pressable onPress={()=>(router.push('/auth/login'))}>
+                                <CustomText variant={'xs'} fontSize={12} lineHeight={20} 
+                                    color={'btnBlue'} fontWeight={'800'}>I’ll do this later
+                                </CustomText>
+                              </Pressable>
                         </TouchableOpacity>
-                        </Link>
+                        
                     </Box> 
                     <Box height={'70%'} width={'100%'} flexDirection={'column'} alignItems={'center'}>
                     <Box height={'20%'} paddingBottom={'xl'}>
@@ -29,7 +32,7 @@ const SignupSuccess = () => {
                     <Box height={10}></Box>
                     <Box height={'10%'} marginTop={'xl'}>
                         <CustomText variant={'subheader'} textAlign={'left'} fontSize={20} lineHeight={25} marginTop={'sm'} 
-                            color={'black'} fontWeight={'800'}>Account created successfully!
+                            color={'black'} fontWeight={'800'}>Account Verified successfully!
                         </CustomText>
                     </Box>
                     <Box height={'10%'}>

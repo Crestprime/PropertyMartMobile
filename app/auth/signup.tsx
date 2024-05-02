@@ -1,14 +1,14 @@
 import { Image, Alert, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
 import { signupSchema } from '@services/validation'
-import { Styles } from './styles'
+import { Styles } from '../../styles/auth/styles'
 import { CustomTextInput } from '@component/form/CustomInput'
 import { Link } from 'expo-router';
 import { SubmitButton } from '@component/form/CustomButton'
-import { PrimaryButton } from '@component/general/CustomButton'
+// import { PrimaryButton } from '@component/general/CustomButton'
 import { Separator } from 'tamagui'
 import { Ionicons } from '@expo/vector-icons'
 import { Checkbox } from 'tamagui'
@@ -17,13 +17,21 @@ import { useMutation } from 'react-query'
 import httpService from '../../utils/httpService'
 import SignupVerify from './signupVerify'
 
+import Loader from '@component/loader'
+import AlertSuccess from '@component/alerts/success'
+import AlertFailed from '@component/alerts/failed'
+
 const logo = require('../../assets/images/logo/logo.png')
 
 const Signup: React.FC = () => {
 
   const [step,setStep ] = useState(0);
   const [checked, setChecked] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const [success, isSuccess] = React.useState(false)
+  const [failed, isFailed] = React.useState(false)
+  const [message, setMessage] = React.useState('')
 
   // store server props
   const [userId, setUserId] = useState<string | null>(null);
@@ -31,39 +39,61 @@ const Signup: React.FC = () => {
    
   const { renderForm, formState: { isValid }, values, } = useForm({
     defaultValues: {
-      name: '',
+      firstName: '',
+      lastName:'',
       email: '',
       phone: '',
       password: '',
     },
     validationSchema: signupSchema,
   });
+  
+  const turnOffAlert = () =>{
+    function setFalse(){
+      isFailed(false);
+      isSuccess(false);
+      setIsLoading(false);
+     }
+    const timeoutId = setTimeout(setFalse, 3000);
+  }
 
-  // This is the method we use for mutation
-  // do not use the httpService directly
-  // we use react-query for all queries and mutations
-  // signup mutation
+
   const { isLoading: signupMutationLoading, mutate } = useMutation({
-    mutationFn: (data: any) => httpService.post(`/authentication/create-account`, data),
+    mutationFn: (data: any) => httpService.post(`/authentication/user/create-account`, data),
     onSuccess: (data) => {
-      setStep(1)
       console.log(data.data);
-      const {email} = data.data;
-      console.log(email)
-      setUserEmail(data.data.data.email);
-      setUserId(data.data.data._id);
+      const email = data.data.data.email
+      const userId = data.data.data.id
+      const {message} = data.data
+      setMessage(message)
+      isSuccess(true)
+      // console.log(email)
+      // console.log(userId)
+      setUserEmail(email);
+      setUserId(userId);
+      setIsLoading(false)
+      setStep(1)
+      turnOffAlert()
     },
     onError: (error: any) => {
-      alert(error?.message)
+      // alert(error?.message)
+      const message = error?.message
+      setMessage(message)
+      isFailed(true)
+      turnOffAlert()
     },
   })
 
-  // const showToast = useToast
+
   const handleSubmit = async (data: any) => {
     if(!checked){
       Alert.alert('You have to accept our term & conditions to continue')
+     
     } else{
       mutate(data);
+      const formvalues = values()
+      console.log(formvalues)
+      setIsLoading(true)
     } 
   };
 
@@ -72,6 +102,7 @@ const Signup: React.FC = () => {
  }
 
   return renderForm(
+    <>
     <Box style={[Styles.martContainer, Styles.flex]} >
       <Box style={Styles.subContainer}>
         <Box height={'100%'}>
@@ -80,17 +111,20 @@ const Signup: React.FC = () => {
             <>
             <Box height={'100%'} width={'100%'}>
                 <Image source={logo} resizeMode="cover" style={Styles.logo} />
-                  <CustomText variant={'subheader'} textAlign={'left'} fontSize={20} lineHeight={25} marginTop={'sm'} 
-                      color={'black'} fontWeight={'800'}>Welcome to Property Mart
+                  <CustomText variant={'subheader'} textAlign={'left'} marginTop={'sm'} 
+                      color={'black'} >Welcome to Property Mart
                   </CustomText>
                   
-                  <CustomText variant={'xs'} textAlign={'left'} fontSize={12} lineHeight={25} 
-                        color={'black'} fontWeight={'400'}>Finding your perfect home, one dream at a Time.
+                  <CustomText variant={'xs'} textAlign={'left'}
+                        color={'black'}>Finding your perfect home, one dream at a Time.
                   </CustomText>
 
                   <Box width={'100%'} flexDirection={'row'} justifyContent={'space-between'} marginTop={'lg'}>
-                    <Box width={'100%'}>
-                      <CustomTextInput name='name' placeholder='Name' label='Name' isPassword={false} />
+                    <Box width={'45%'}>
+                      <CustomTextInput name='firstName' placeholder='First Name' label='First Name' isPassword={false} />
+                    </Box>
+                    <Box width={'45%'}>
+                      <CustomTextInput name='lastName' placeholder='Last Name' label='Last Name' isPassword={false} />
                     </Box>
                   </Box>
 
@@ -101,27 +135,22 @@ const Signup: React.FC = () => {
                       <CustomTextInput name='phone' placeholder='+234' label='Phone Number' />
                         <Box marginBottom={'sm'} />
 
-                      <CustomTextInput name='password' placeholder='Password' label='Password' isPassword 
+                      <CustomTextInput name='password' placeholder='Password' label='Password' isPassword  isSignup
                        />
-                      <Box height={5} width={'100%'} marginTop={'md'}  flexDirection={'row'} justifyContent={'flex-start'} >
-                        <Box height={5} width={'5%'} backgroundColor={'errorColor'} borderRadius={10}>
-                            <CustomText>length</CustomText>  
-                        </Box>
-                      </Box>
-                      
+                          
                   </Box>
 
-                  <Box width='100%' marginBottom={'sm'} height={40} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
+                  <Box width='100%' marginBottom={'sm'}  height={60} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
 
-                 <Checkbox onCheckedChange={(checked)=> setChecked(checked as boolean)} checked={checked}>
-                  <Checkbox.Indicator>
-                    <Ionicons name="checkmark-circle" size={20} color="#2D66DD" />
-                  </Checkbox.Indicator>
-                 </Checkbox>
+                    <Checkbox onCheckedChange={(checked)=> setChecked(checked as boolean)} checked={checked}>
+                      <Checkbox.Indicator>
+                        <Ionicons name="checkmark-circle" size={20} color="#2D66DD" />
+                      </Checkbox.Indicator>
+                    </Checkbox>
 
-                  <CustomText variant={'xs'}  fontSize={12} fontWeight={'800'} marginLeft={'xs'} >
-                      I agree to our  <Link href="/" style={{color:'#2D66DD'}}> Terms of Service & Privacy Policy </Link> 
-                  </CustomText>
+                      <CustomText variant={'xs'} >
+                          I agree to our  <Link href="/" style={{color:'#2D66DD'}}> Terms of Service & Privacy Policy </Link> 
+                      </CustomText>
 
                   </Box>
                   <TouchableOpacity>
@@ -129,14 +158,14 @@ const Signup: React.FC = () => {
                   </TouchableOpacity>
                   <Box width='100%' flexDirection={'row'} height={60} alignItems={'center'} >
                     <Separator />
-                    <CustomText variant={'xs'} fontSize={12} fontWeight={'800'} color={'black'}>OR</CustomText>
+                    <CustomText variant={'xs'} fontWeight={'800'} color={'black'}>OR</CustomText>
                     <Separator />
                   </Box>
 
                   <Box flexDirection={'row'} width='100%' justifyContent={'center'} alignItems={'center'}>
-                    <CustomText variant={'xs'} fontSize={12}>Already a user?</CustomText>
-                    <Link href={'/auth/test'} style={{ marginLeft: 4 }}>
-                    <CustomText variant={'body'} fontSize={12} fontWeight={'800'} color={'primaryColor'} marginLeft={'xs'}>Log in</CustomText>
+                    <CustomText variant={'xs'} >Already a user?</CustomText>
+                    <Link href={'/auth/signup'} style={{ marginLeft: 4 }}>
+                    <CustomText variant={'xs'} color={'primaryColor'} marginLeft={'xs'}>Log in</CustomText>
                     </Link>
                   </Box>
 
@@ -153,7 +182,7 @@ const Signup: React.FC = () => {
             <>  
             <Box marginTop={'xl'}>
                 <TouchableOpacity>
-                  <Pressable   onPress={back} >
+                  <Pressable  onPress={back} >
                   <Ionicons
                     name="arrow-back-outline"
                     size={25}
@@ -161,13 +190,39 @@ const Signup: React.FC = () => {
                     </Pressable>
                  </TouchableOpacity>
               </Box>   
-            <SignupVerify userEmail={userEmail} userId={userId} />
+            <SignupVerify userEmail={userEmail} userId={userId} setIsLoading={setIsLoading} isLoading={isLoading}
+             isFailed={isFailed} isSuccess={isSuccess} setMessage={setMessage} />
             </>
             : null
           }
+          
         </Box>
       </Box>
     </Box>
+    {
+      isLoading && (
+        <>
+          <Loader/>
+        </>
+      )
+    }
+
+    {
+      success && (
+        <>
+         <AlertSuccess message={message}/>
+        </>
+      )
+    }
+    {
+      failed && (
+        <>
+         <AlertFailed message={message}/>
+        </>
+      )
+    }
+
+    </>
   )
 }
 

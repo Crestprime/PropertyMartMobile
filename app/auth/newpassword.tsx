@@ -5,14 +5,14 @@ import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
 import { newPasswordSchema } from '@services/validation'
-import { Styles } from './styles'
+import { Styles } from '../../styles/auth/styles'
 import { CustomTextInput } from '@component/form/CustomInput'
 import { Link } from 'expo-router';
 import { SubmitButton } from '@component/form/CustomButton'
-import { Ionicons } from '@expo/vector-icons'
+// import { Ionicons } from '@expo/vector-icons'
 import { PrimaryButton } from '@component/general/CustomButton'
 const palmfone = require('../../assets/images/foreground/acctcreated.png')
-import HttpClient from '../../utils/httpService'
+// import HttpClient from '../../utils/httpService'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useMutation } from 'react-query'
 import httpService from '../../utils/httpService'
@@ -151,5 +151,6 @@ const  NewPassword = ({userId}:any) => {
     </Box>
   )
 }
+
 
 export default NewPassword

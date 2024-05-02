@@ -9,15 +9,12 @@ import { PrimaryButton } from '@component/general/CustomButton'
 
 import { useMutation } from 'react-query'
 import httpService from '../../utils/httpService'
-import { router } from 'expo-router'
+import { Link, router } from 'expo-router'
+import { Ionicons } from '@expo/vector-icons'
 
-import Loader from '@component/loader'
-import AlertSuccess from '@component/alerts/success'
-import AlertFailed from '@component/alerts/failed'
 // import { SubmitButton } from '@component/form/CustomButton'
-
-
-const SignupVerify = ({userEmail, userId, setIsLoading, isLoading, isFailed, isSuccess, setMessage }:any) => {
+const LoginVerify = ({userEmail, userId, setIsLoading, isLoading,
+   isFailed, isSuccess, setMessage, setStep }:any) => {
  
     // OTP form Values
     const [otpInput_1, setOtpInput_1] = useState('');
@@ -47,6 +44,7 @@ const SignupVerify = ({userEmail, userId, setIsLoading, isLoading, isFailed, isS
         isSuccess(true)
         turnOffAlert()
         setIsLoading(false)
+        setStep(0)
         router.push('/auth/signupSuccess')
       },
       onError: (error: any) => {
@@ -159,7 +157,14 @@ const SignupVerify = ({userEmail, userId, setIsLoading, isLoading, isFailed, isS
   return (
     <>
     <Box>
-       <Box >        
+       <Box > 
+             <Box>
+                <TouchableOpacity>
+                  <Pressable onPress={()=>setStep(0)}>
+                    <Ionicons name='arrow-back' size={25} />
+                  </Pressable>
+                </TouchableOpacity>
+              </Box>       
               <CustomText variant={'subheader'} marginTop={'xl'}>Verify your Email
               </CustomText>
                <CustomText variant={'xs'}  marginTop={'xs'}>
@@ -240,8 +245,7 @@ const SignupVerify = ({userEmail, userId, setIsLoading, isLoading, isFailed, isS
                   <CustomText>
                     <Countdown ref={countdownRef} initialTime={60} onTimerEnd={handleTimerEnd} />
                   </CustomText>
-                  {/* <Button title="Restart" onPress={handleRestartClick} /> */}
-                  {/* <Text>(0:05s)</Text> */}
+                  
                 </Box>
                 <Box height={'55%'} flexDirection={'row'} alignItems={'flex-end'}>
                 <Box height={5} width={'100%'}  flexDirection={'row'} justifyContent={'center'} >
@@ -258,4 +262,4 @@ const SignupVerify = ({userEmail, userId, setIsLoading, isLoading, isFailed, isS
   )
 }
 
-export default SignupVerify;
+export default LoginVerify;

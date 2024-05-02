@@ -2,12 +2,11 @@
 import Box from '@component/general/Box';
 import CustomText from '@component/general/CustomText';
 import React, { useRef, useState } from 'react'
-import { Styles } from './styles';
+import { Styles } from '../../styles/auth/styles';
 import { Alert, Pressable, TextInput } from 'react-native';
 import { useMutation } from 'react-query';
 import httpService from '../../utils/httpService'
 import Countdown, { CountdownRef } from '@component/general/Countdown'
-import { router } from 'expo-router';
 import { PrimaryButton } from '@component/general/CustomButton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import NewPassword from './newpassword';
