@@ -22,7 +22,7 @@ const logo = require('../../assets/images/logo/logo.png')
 
 const Login = () => {
   
-  const [step, setStep ] = React.useState(1);
+  const [step, setStep ] = React.useState(0);
   const [success, isSuccess] = React.useState(false)
   const [failed, isFailed] = React.useState(false)
   const [message, setMessage] = React.useState('')
