@@ -6,8 +6,8 @@ import axios, {
 import * as SecureStorage from "expo-secure-store";
 
 
-export const FRONTEND_BASE_URL = "https://propertymartserver-06e7eac41e27.herokuapp.com/api/v1"
-export const BASE_URL = "https://propertymartserver-06e7eac41e27.herokuapp.com/api/v1";
+export const FRONTEND_BASE_URL = "NEW BASE URL => https://pmserver-production.up.railway.app/"
+export const BASE_URL = "NEW BASE URL => https://pmserver-production.up.railway.app/";
 export const IMAGE_BASE = "";
 const SITE_URL=''
 

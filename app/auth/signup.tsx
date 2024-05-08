@@ -19,7 +19,7 @@ import SignupVerify from './signupVerify'
 
 import Loader from '@component/loader'
 import AlertSuccess from '@component/alerts/success'
-import AlertFailed from '@component/alerts/failed'
+import AlertFailed from '@component/alerts/failed';
 
 const logo = require('../../assets/images/logo/logo.png')
 
@@ -59,7 +59,7 @@ const Signup: React.FC = () => {
 
 
   const { isLoading: signupMutationLoading, mutate } = useMutation({
-    mutationFn: (data: any) => httpService.post(`/authentication/user/create-account`, data),
+    mutationFn: (data: any) => httpService.post(`/authentication/create-account`, data),
     onSuccess: (data) => {
       console.log(data.data);
       const email = data.data.data.email
@@ -169,13 +169,6 @@ const Signup: React.FC = () => {
                     </Link>
                   </Box>
 
-                  {/* <Box height={'5%'} flexDirection={'row'} alignItems={'flex-end'}>
-                    <Box height={5} width={'100%'}  flexDirection={'row'} justifyContent={'center'} >
-                        <Box height={5} width={'30%'} backgroundColor={'black'} borderRadius={10}>
-                            <CustomText>Hello</CustomText>
-                        </Box>
-                    </Box>
-                  </Box> */}
             </Box>
             </> 
             : step === 1?
