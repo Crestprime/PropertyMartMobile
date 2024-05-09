@@ -26,7 +26,6 @@ export default function setupAccount() {
  const displayBVNInput = () => {
     showBVNinput(1)
     setSelectBVN(0)
-   
  }
  const displayNINInput = () => {
     showNINinput(1)

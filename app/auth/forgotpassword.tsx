@@ -18,7 +18,6 @@ import AlertSuccess from '@component/alerts/success'
 import AlertFailed from '@component/alerts/failed';
 import NewPassword from './newpassword'
 
-
 const  ForgotPassword = () => {
 
   const { renderForm, formState: { isValid }, values } = useForm({
@@ -52,7 +51,8 @@ const  ForgotPassword = () => {
       setIsLoading(false)
       const {message} = data.data;
       console.log(data.data);
-      const {id} = data.data;
+      const id = data.data.data.id;
+      console.log(id)
       setUserId(id)
       setMessage(message)
       isSuccess(true)
