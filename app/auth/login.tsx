@@ -43,14 +43,15 @@ const Login = () => {
 
   // login mutation
   const { isLoading, mutate } = useMutation({
-    mutationFn: (data: any) => httpService.post(`/user/login-as-seller`, data),
+    mutationFn: (data: any) => httpService.post(`/authentication/user/login`, data),
     onSuccess: (data) => {
-      console.log(data.data.data.data);
+      console.log(data.data.data);
       const { message } = data.data;
       const { token } = data.data.data;
-      const  user  = data.data.data.data;
+      const  {user}  = data.data.data;
       const {id, email, profilePicture, emailVerified, firstName, lastName, phone, roles, accountVerified, addressVerified, createdAt} = user;
-      // console.log(user)
+      console.log(user)
+
       console.log(message)
       console.log(token)
       console.log(email)
@@ -59,11 +60,16 @@ const Login = () => {
       console.log(lastName)
       console.log(phone)
       console.log(emailVerified)
-      console.log(profilePicture)
+      // console.log(profilePicture)
       console.log(roles)
       console.log(accountVerified)
       console.log(addressVerified)
       console.log(createdAt)
+
+      setIsLoading(false)
+      setMessage(message)
+      isSuccess(true)
+      turnOffAlert()
 
       if(emailVerified === true ){
         console.log("succefully logged in")
@@ -84,19 +90,12 @@ const Login = () => {
                 createdAt: createdAt
               }
               const userDetailsString = JSON.stringify(userDetails);
-              // console.log("Token to be stored:", userDetailsString);
               await SecureStorage.setItemAsync("userDetails", userDetailsString);
-              // console.log("userdetails stored successfully.");
-              // If you need to redirect after storing the token
-              router.replace("/dashboard/");
-
+              router.replace("/dashboard/homepage/home/");
           } catch (error) {
-            // console.error("Error storing user details:", error);
           }
       }
       storeSession()
-
-
       } else(
         setMessage("Verify your email"),
         isFailed(true),
@@ -105,8 +104,6 @@ const Login = () => {
         setUserId(id),
         setStep(1)
       )
-    
-  
     },
     onError: (error: any) => {
       const message = error?.message

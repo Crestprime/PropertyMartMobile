@@ -27,7 +27,7 @@ const LoginVerify = ({userEmail, userId, setIsLoading, isLoading,isFailed, isSuc
       const timeoutId = setTimeout(setFalse, 3000);
     }
     const { isLoading: signupMutationLoading, mutate:verifyMutate } = useMutation({
-      mutationFn: (data: any) => httpService.put(`/authentication/user/verify-email`, data),
+      mutationFn: (data: any) => httpService.put(`authentication/user/verify-email`, data),
       onSuccess: (data) => {
         const {message} = data.data;
         console.log(data.data);

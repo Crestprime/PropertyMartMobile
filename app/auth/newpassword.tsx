@@ -17,7 +17,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useMutation } from 'react-query'
 import httpService from '../../utils/httpService'
 
-const  NewPassword = ({userId}:any) => {
+const  NewPassword = ({userId, setIsLoading, isLoading,isFailed, isSuccess, setMessage, }:any) => {
 
   const { renderForm, formState: { isValid },values } = useForm({
     defaultValues: {
@@ -27,43 +27,53 @@ const  NewPassword = ({userId}:any) => {
   })
 
   const [step, setStep] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+
   const Router = router
   const login = () => {
     Router.push("/auth/login") 
   }
+
+  const turnOffAlert = () =>{
+    function setFalse(){
+      isFailed(false);
+      isSuccess(false);
+      setIsLoading(false);
+     }
+    const timeoutId = setTimeout(setFalse, 3000);
+  }
+
   const { isLoading: Saving, mutate } = useMutation({
-    mutationFn: (data: any) => httpService.put('/authentication/user/reset-password/', data),
+    mutationFn: (data: any) => httpService.post('authentication/user/reset-password', data),
     onSuccess: (data) => {
       setStep(1)
       setIsLoading(false)
       const {message} = data.data;
+      setMessage(message)
+      isSuccess(true)
       console.log(data.data);
-      Alert.alert(message);
     },
     onError: (error: any) => {
-      alert(error?.message)
+     setMessage(error?.message)
+     isFailed(true)
+     turnOffAlert()
     },
   })
 
   const SaveChanges = async ({data}:any) => {
     const formdata = values()
-    console.log(formdata)
     const password = formdata.newPassword
-    console.log(password)
-    const user_id = userId
-    console.log('stored Id', user_id)
 
     const newformdata = {
-      user_id: user_id,
+      userId: userId,
       password: password,
     }; 
     
     console.log(newformdata)
+
     if(formdata){
       let data = newformdata
       setIsLoading(true)
-      mutate(data)
+      // mutate(data)
     }
 };
 

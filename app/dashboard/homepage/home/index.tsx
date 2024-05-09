@@ -1,5 +1,5 @@
-import { View, Text, Image, Pressable, } from 'react-native'
-import React, { useState } from 'react'
+import { View, Image, Pressable, } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import { ScrollView } from 'tamagui'
@@ -10,8 +10,7 @@ import Swiper from 'react-native-swiper'
 import { SafeAreaView } from 'react-native'
 import { Link } from 'expo-router'
 import { useRouter } from 'expo-router'
-// import { useNavigation } from '@react-navigation/native';
-
+import { getUserDetails } from '@utils/getUser'
 
 const sidebar = require('../../../../assets/images/foreground/breadcrumb.png')
 const setup_icon = require('../../../../assets/images/foreground/setup-icon.png')
@@ -30,15 +29,28 @@ const logout = require('../../../../assets/images/foreground/logout.png')
 
 const Home = () => {
 
-  const [username, setUsername] = useState('Jude');
   const [showSidebar, setShowSidebar] = useState(false)
   const router = useRouter()
+
+  useEffect(() => {
+    async function getUser() {
+      const userDetails = await getUserDetails();
+      setUserProps(userDetails);
+    }
+    getUser()
+  }, []); 
+
+  const [user, setUserProps] = useState<any>();
 
   const images = [
     { id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
     { id: 2, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
     { id: 3, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
   ];
+
+  const handleLogout = () => {
+    router.push('/auth/logout')
+  }
   const sidebarPages = [
     { id: 1, icon: marketPlace, title: 'My Properties', isNotify: false },
     { id: 2, icon: love, title: 'Reservations', isNotify: true },
@@ -49,7 +61,7 @@ const Home = () => {
     { id: 7, icon: bell, title: 'Notification Preference', isNotify: false },
     { id: 8, icon: preferencesettings, title: 'Settings', isNotify: false },
     { id: 9, icon: star, title: 'Rate Us', isNotify: false },
-    { id: 10, icon: logout, title: 'Logout', isNotify: false },
+    { id: 10, icon: logout, title: 'Logout', isNotify: false, onPress: handleLogout },
   ];
   const cardImg = [
     {
@@ -81,13 +93,11 @@ const Home = () => {
         <Box flexDirection={'row'} height={'100%'} width={'100%'} alignItems={'center'} justifyContent={'center'} >
           <Box width={'95%'} height={'90%'}>
             <Box height={100} width={'100%'} >
-
               <Box flexDirection={'row'} height={50} justifyContent={'space-between'} alignItems={'center'} >
                 <Box width={40} height={40} flexDirection={'row'} alignItems={'center'} justifyContent={'center'} borderRadius={100}>
                   <Pressable onPress={() => toggleSidebar()}>
                     <Image source={sidebar} resizeMode="cover" />
                   </Pressable>
-
                 </Box>
                 <Box width={40} height={40} backgroundColor={'textInputBorderColor'} flexDirection={'row'} alignItems={'center'} justifyContent={'center'} borderRadius={100}>
                   <Link href='/dashboard/notifications/'>
@@ -95,35 +105,34 @@ const Home = () => {
                   </Link>
                 </Box>
               </Box>
-
               <Box marginTop={'xs'} >
-                <CustomText variant={'subheader'} fontWeight={'100'} fontSize={14}> Welcome {username} </CustomText>
+                <CustomText variant={'xs'} textTransform={'capitalize'} > Welcome {user?.firstname} </CustomText>
               </Box>
-              <Box >
-                <CustomText variant={'header'} lineHeight={14} fontSize={16}> What do you want to do today? </CustomText>
+              <Box>
+                <CustomText variant={'medium'}> What do you want to do today? </CustomText>
               </Box>
             </Box>
             <ScrollView>
-              <Box height={150} width={'100%'} borderRadius={10} style={{ backgroundColor: '#FEF3F2' }} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
+            <Box height={'auto'} marginTop={'lg'} width={'100%'} borderRadius={10} style={{ backgroundColor: '#FEF3F2' }} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
                 <Box height={'90%'} width={'95%'} flexDirection={'row'} >
-                  <Box width={'75%'}>
-                    <Box paddingTop={'md'} paddingBottom={'xs'}>
-                      <CustomText variant={'header'} style={{ color: '#7A271A' }} lineHeight={14} fontSize={15}>Complete your account setup </CustomText>
+                  <Box width={'75%'} justifyContent={'center'} paddingBottom={'md'} paddingTop={'md'}>
+                    <Box paddingTop={'sm'}>
+                      <CustomText variant={'body'} fontWeight={'800'} style={{ color: '#912018' }}>Complete your account setup </CustomText>
                     </Box>
-                    <Box >
-                      <CustomText variant={'subheader'} style={{ color: '#912018' }} lineHeight={14} fontSize={10}>Complete your account setup to access more features on Property Mart </CustomText>
+                    <Box paddingTop={'sm'}>
+                      <CustomText variant={'xs'} style={{ color: '#912018' }}>Complete your account setup to access more features on Property Mart </CustomText>
                     </Box>
                     <Box paddingTop={'md'}>
-                      <Box style={{ backgroundColor: '#D92D20' }} width={'40%'} flexDirection={'row'} justifyContent={'center'} borderRadius={10}>
+                      <Box style={{ backgroundColor: '#D92D20' }} width={'45%'} padding={'sm'} flexDirection={'row'} justifyContent={'center'} borderRadius={10}>
                         <TouchableOpacity>
-                          <Link href={'/dashboard/homepage/home/setupAccount'}>
-                            <CustomText variant={'subheader'} color={'secondaryBackgroundColor'} fontSize={12}>Setup now</CustomText>
+                          <Link href={'/'}>
+                            <CustomText variant={'xs'} fontWeight={'800'} color={'secondaryBackgroundColor'}>Setup now</CustomText>
                           </Link>
                         </TouchableOpacity>
                       </Box>
                     </Box>
                   </Box>
-                  <Box width={'25%'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
+                  <Box width={'20%'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
                     <Image source={setup_icon} resizeMode="cover" />
                   </Box>
                 </Box>
@@ -235,7 +244,7 @@ const Home = () => {
       {showSidebar &&
         <Box style={Styles.sidebar} >
           <Box width={'100%'} height={'0%'} style={{ backgroundColor: '#000000c0', opacity: 5, }}>
-            {/* <CustomText>Hello</CustomText> */}
+            
           </Box>
           <Box width={'100%'} height={'100%'} style={{ backgroundColor: '#000000c0', opacity: 10 }}>
             <Box height={'100%'} alignItems={'center'} justifyContent={'center'} borderTopRightRadius={10} borderTopLeftRadius={10} backgroundColor={'secondaryBackgroundColor'}>
@@ -250,28 +259,30 @@ const Home = () => {
                   return (
 
                     <Box key={item.id}>
-                      <Box borderBottomWidth={1} borderBottomColor={'textInputBorderColor'} height={50}
-                        flexDirection={'row'} paddingLeft={'md'} paddingRight={'lg'} >
-                        <Box width={'80%'} flexDirection={'row'}>
-                          <Box justifyContent={'center'} alignItems={'center'}>
-                            <Box height={30} width={30} borderRadius={100} backgroundColor={'textInputBorderColor'}
-                              padding={'md'} alignItems={'center'} justifyContent={'center'}>
-                              <Image source={item.icon} resizeMode='cover' />
+                      <Pressable onPress={()=>item.onPress()}>
+                        <Box borderBottomWidth={1} borderBottomColor={'textInputBorderColor'} height={50}
+                          flexDirection={'row'} paddingLeft={'md'} paddingRight={'lg'} >
+                          <Box width={'80%'} flexDirection={'row'}>
+                            <Box justifyContent={'center'} alignItems={'center'}>
+                              <Box height={30} width={30} borderRadius={100} backgroundColor={'textInputBorderColor'}
+                                padding={'md'} alignItems={'center'} justifyContent={'center'}>
+                                <Image source={item.icon} resizeMode='cover' />
+                              </Box>
+                            </Box>
+                            <Box padding={'xs'} paddingLeft={'md'} justifyContent={'center'}>
+                              <CustomText variant={'subheader'} fontSize={14} >{item.title}</CustomText>
                             </Box>
                           </Box>
-                          <Box padding={'xs'} paddingLeft={'md'} justifyContent={'center'}>
-                            <CustomText variant={'subheader'} fontSize={14} >{item.title}</CustomText>
+                          <Box width={'20%'} alignItems={'flex-end'} justifyContent={'center'}>
+                            {item.isNotify === true ?
+                              <Box height={20} width={20} backgroundColor={'btnBlue'} borderRadius={100}
+                                alignItems={'center'} justifyContent={'center'}>
+                                <CustomText variant={'xs'} color={'secondaryBackgroundColor'} fontSize={12}>2</CustomText>
+                              </Box> : null
+                            }
                           </Box>
                         </Box>
-                        <Box width={'20%'} alignItems={'flex-end'} justifyContent={'center'}>
-                          {item.isNotify === true ?
-                            <Box height={20} width={20} backgroundColor={'btnBlue'} borderRadius={100}
-                              alignItems={'center'} justifyContent={'center'}>
-                              <CustomText variant={'xs'} color={'secondaryBackgroundColor'} fontSize={12}>2</CustomText>
-                            </Box> : null
-                          }
-                        </Box>
-                      </Box>
+                      </Pressable>
                     </Box>
                   )
                 })

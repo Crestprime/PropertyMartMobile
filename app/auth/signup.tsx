@@ -59,7 +59,7 @@ const Signup: React.FC = () => {
 
 
   const { isLoading: signupMutationLoading, mutate } = useMutation({
-    mutationFn: (data: any) => httpService.post(`/authentication/create-account`, data),
+    mutationFn: (data: any) => httpService.post(`/authentication/user/create-account`, data),
     onSuccess: (data) => {
       console.log(data.data);
       const email = data.data.data.email

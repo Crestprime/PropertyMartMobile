@@ -13,37 +13,53 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useMutation } from 'react-query'
 import httpService from '../../utils/httpService'
 import ForgotPasswordVerify from './forgotpasswordVerify'
+import Loader from '@component/loader'
+import AlertSuccess from '@component/alerts/success'
+import AlertFailed from '@component/alerts/failed';
+import NewPassword from './newpassword'
+
 
 const  ForgotPassword = () => {
 
-  // Email Form
   const { renderForm, formState: { isValid }, values } = useForm({
     defaultValues: {
       email: ''
     },
     validationSchema: requestOTPSchema,
   })
-  // UI States  
-  const [step, setStep] = useState(0);
+ 
+  const [step, setStep] = useState(2);
   const [isLoading, setIsLoading] = useState(false);
-  // store server props
-  const [userId, setUserId] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
-  
+  const [userId, setUserId] = useState<string | null>(null);
+  const [success, isSuccess] = React.useState(false)
+  const [failed, isFailed] = React.useState(false)
+  const [message, setMessage] = React.useState('')
+
+  const turnOffAlert = () =>{
+    function setFalse(){
+      isFailed(false);
+      isSuccess(false);
+      setIsLoading(false);
+     }
+    const timeoutId = setTimeout(setFalse, 3000);
+  }
+
   const { isLoading: signupMutationLoading, mutate } = useMutation({
-    mutationFn: (data: any) => httpService.get(`/authentication/user/request-password-reset-otp/${data}`,),
+    mutationFn: (data: any) => httpService.post(`/authentication/user/reset-password-request`,data),
     onSuccess: (data) => {
       setStep(1)
       setIsLoading(false)
       const {message} = data.data;
-      const {id} = data.data.data
       console.log(data.data);
-      Alert.alert(message);
-      console.log('userid:',id);
-      setUserId(id);
+      setMessage(message)
+      isSuccess(true)
+      turnOffAlert()
     },
     onError: (error: any) => {
-      alert(error?.message)
+      setMessage(error?.message)
+      isFailed(true)
+      turnOffAlert()
     },
   })
 
@@ -51,7 +67,9 @@ const  ForgotPassword = () => {
     const formdata = values()
     const resetEmail = formdata.email
     if(formdata){
-      let data = resetEmail
+      let data = {
+        email: resetEmail
+      }
       console.log(data)
       setIsLoading(true)
       setUserEmail(resetEmail)
@@ -62,6 +80,7 @@ const  ForgotPassword = () => {
   };
 
   return renderForm(
+  <>
     <Box style={[Styles.martContainer, Styles.flex]} >
       <Box style={Styles.subContainer}  marginTop={'xl'}>
         <Box height={'80%'}>
@@ -118,7 +137,7 @@ const  ForgotPassword = () => {
                   </Box>
               </TouchableOpacity>
 
-              <Box height={'62%'} flexDirection={'row'} alignItems={'flex-end'}>
+              <Box height={'80%'} flexDirection={'row'} alignItems={'flex-end'}>
                     <Box height={5} width={'100%'}  flexDirection={'row'} justifyContent={'center'} >
                         <Box height={5} width={'30%'} backgroundColor={'black'} borderRadius={10}>
                             <CustomText>Hello</CustomText>
@@ -129,16 +148,44 @@ const  ForgotPassword = () => {
             :
             step === 1?
               <>
-              <ForgotPasswordVerify userId={userId} userEmail={userEmail} />
+              <ForgotPasswordVerify userEmail={userEmail} setIsLoading={setIsLoading} isLoading={isLoading} setStep={setStep}
+             isFailed={isFailed} isSuccess={isSuccess} setMessage={setMessage} />
               </>
             : 
-            null
+            step === 2?
+            <>
+              <NewPassword userEmail={userEmail} setIsLoading={setIsLoading} isLoading={isLoading} setStep={setStep}
+              isFailed={isFailed} isSuccess={isSuccess} setMessage={setMessage} />
+            </> :
+             null
           }     
           </Box>
         </Box>
        
       </Box>
     </Box>
+    {
+      isLoading && (
+        <>
+          <Loader/>
+        </>
+      )
+    }
+    {
+      success && (
+        <>
+         <AlertSuccess message={message}/>
+        </>
+      )
+    }
+    {
+      failed && (
+        <>
+         <AlertFailed message={message}/>
+        </>
+      )
+    }
+  </>
   )
 }
 
