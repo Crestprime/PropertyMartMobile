@@ -58,7 +58,7 @@ clearSession();
                                 </TouchableOpacity>
                                 <TouchableOpacity>
                                   <Box marginTop={'md'}>
-                                    <OutlineButton onPress={()=>router.replace('/dashboard/')} label={'Cancel'} width={''}/>
+                                    <OutlineButton onPress={()=>router.replace('/dashboard/homepage/home/')} label={'Cancel'} width={''}/>
                                   </Box>
                                 </TouchableOpacity>
                               </Box>

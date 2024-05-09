@@ -1,30 +1,51 @@
-import React,{ useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { router } from 'expo-router'
-import { Image } from 'react-native'
+import { Image, Pressable } from 'react-native'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
-import { newPasswordSchema } from '@services/validation'
+import { changePasswordSchema } from '@services/validation'
 import { Styles } from '../../styles/auth/styles'
 import { CustomTextInput } from '@component/form/CustomInput'
 import { SubmitButton } from '@component/form/CustomButton'
 import { PrimaryButton } from '@component/general/CustomButton'
-const palmfone = require('../../assets/images/foreground/acctcreated.png')
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useMutation } from 'react-query'
 import httpService from '../../utils/httpService'
+import { Ionicons } from '@expo/vector-icons'
+import AlertSuccess from '@component/alerts/success'
+import AlertFailed from '@component/alerts/failed'
+import Loader from '@component/loader'
+import { getUserDetails } from '@utils/getUser'
 
-const  NewPassword = ({userId, setIsLoading, isLoading,isFailed, isSuccess, setMessage, }:any) => {
+const palmfone = require('../../assets/images/foreground/acctcreated.png')
 
+const  ChangePassword = () => {
   const { renderForm, formState: { isValid },values } = useForm({
     defaultValues: {
-      newPassword: '',
-      confirmPassword: '',
+      oldPassword: '',
+      newPassword: ''
     },
-    validationSchema: newPasswordSchema,
+    validationSchema: changePasswordSchema,
   })
 
+  const [user, setUserProps] = useState<any>()
+  
+  useEffect(() => {
+    async function getUser() {
+      const userDetails = await getUserDetails();
+      setUserProps(userDetails);
+    }
+    getUser()
+  }, []); 
+
   const [step, setStep] = useState(0);
+  const [success, isSuccess] = React.useState(false)
+  const [failed, isFailed] = React.useState(false)
+  const [message, setMessage] = React.useState('')
+//   const [loading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const Router = router
   const login = () => {
     Router.push("/auth/login") 
@@ -39,8 +60,16 @@ const  NewPassword = ({userId, setIsLoading, isLoading,isFailed, isSuccess, setM
     const timeoutId = setTimeout(setFalse, 3000);
   }
 
+  const token = user?.token;
+  console.log(token)
+
   const { isLoading: Saving, mutate } = useMutation({
-    mutationFn: (data: any) => httpService.post('authentication/user/reset-password', data),
+    mutationFn: (data: any) => httpService.post('/authentication/user/update-password', data,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+      }
+    }),
     onSuccess: (data) => {
       setStep(1)
       setIsLoading(false)
@@ -56,52 +85,56 @@ const  NewPassword = ({userId, setIsLoading, isLoading,isFailed, isSuccess, setM
     },
   })
 
-  const SaveChanges = async ({data}:any) => {
+  const SaveChanges = ({data}:any) => {
+
     const formdata = values()
-    const password = formdata.newPassword
+     if(formdata){
+        data = {
+            oldPassword: formdata.oldPassword,
+            newPassword: formdata.newPassword
+        }
+        console.log(data)
+        mutate(data)
+        setIsLoading(true)
+     }
 
-    const newformdata = {
-      userId: userId,
-      password: password,
-    }; 
     
-    console.log(newformdata)
 
-    if(formdata){
-      let data = newformdata
-      setIsLoading(true)
-      // mutate(data)
-    }
 };
 
 
 
   return renderForm(
+   <>
     <Box style={[Styles.martContainer, Styles.flex]} >
       <Box style={Styles.subContainer}  marginTop={'xs'}>
         {step === 0?
         <>
         <Box height={'100%'}>
+          <Box>
+                <TouchableOpacity>
+                  <Pressable onPress={()=>router.push('/account/')}>
+                    <Ionicons name='arrow-back' size={25} />
+                  </Pressable>
+                </TouchableOpacity>
+          </Box>  
           <Box height={'100%'} width={'100%'}>   
             <CustomText variant={'subheader'} textAlign={'left'} fontSize={26} lineHeight={25} marginTop={'xl'} 
-                  color={'black'} fontWeight={'800'}>Reset Password
+                  color={'black'} fontWeight={'800'}>Create New Password
             </CustomText>
               <Box marginTop={'xl'} marginBottom={'xs'}>
-                  <CustomTextInput name='newPassword' placeholder='****' label='New Password' isPassword  />
+                  <CustomTextInput name='oldPassword' placeholder='****' label='Old Password' isPassword  />
               </Box>
 
               <Box marginTop={'xl'} marginBottom={'xs'}>
-                  <CustomTextInput name='confirmPassword' placeholder='****' label='Confirm Password' isPassword  />
+                  <CustomTextInput name='newPassword' placeholder='****' label='New Password' isPassword isSignup  />
               </Box>
 
-              {/* <Box width='100%' marginTop={'xl'} height={40} justifyContent={'center'} alignItems={'flex-end'}> */}
               <TouchableOpacity>
                   <Box width='100%' marginTop={'xs'} height={50} justifyContent={'center'} alignItems={'flex-end'}>
-                      {/* <PrimaryButton label='Request OTP' width='100%' onPress={handleRequest} isLoading={isLoading}/> */}
                       <SubmitButton label='Save Changes' width='100%' onSubmit={(data) => SaveChanges(data)} isLoading={isLoading} /> 
                   </Box>
               </TouchableOpacity>
-              {/* </Box> */}
           </Box>
         </Box>
         <Box height={'20%'} flexDirection={'row'} alignItems={'flex-end'}>
@@ -156,8 +189,30 @@ const  NewPassword = ({userId, setIsLoading, isLoading,isFailed, isSuccess, setM
          : null }
       </Box>
     </Box>
+    {
+        isLoading && (
+          <>
+            <Loader/>
+          </>
+        )
+      }
+      {
+        success && (
+          <>
+           <AlertSuccess message={message}/>
+          </>
+        )
+      }
+      {
+        failed && (
+          <>
+           <AlertFailed message={message}/>
+          </>
+        )
+      }
+   </>
   )
 }
 
 
-export default NewPassword
+export default ChangePassword

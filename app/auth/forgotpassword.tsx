@@ -28,7 +28,7 @@ const  ForgotPassword = () => {
     validationSchema: requestOTPSchema,
   })
  
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
@@ -52,6 +52,8 @@ const  ForgotPassword = () => {
       setIsLoading(false)
       const {message} = data.data;
       console.log(data.data);
+      const {id} = data.data;
+      setUserId(id)
       setMessage(message)
       isSuccess(true)
       turnOffAlert()
@@ -97,8 +99,8 @@ const  ForgotPassword = () => {
                   /></Link>
                 </TouchableOpacity>
               </Box>
-              <CustomText variant={'subheader'} textAlign={'left'} fontSize={26} lineHeight={25} marginTop={'xl'} 
-                    color={'black'} fontWeight={'800'}>Forgot Password
+              <CustomText variant={'subheader'} textAlign={'left'} marginTop={'xl'} 
+                    color={'black'} >Forgot Password
               </CustomText> 
             </>
                  :
@@ -122,8 +124,8 @@ const  ForgotPassword = () => {
           {
             step === 0? 
             <>
-              <CustomText variant={'xs'} textAlign={'left'} fontSize={14} lineHeight={20}  marginTop={'lg'}
-                    color={'black'} fontWeight={'400'}>Please enter the email connected to your account to reset your password.
+              <CustomText variant={'body'} textAlign={'left'}  marginTop={'lg'}
+                    color={'black'} >Please enter the email connected to your account to reset your password.
               </CustomText>
 
               <Box marginTop={'xl'} marginBottom={'xs'}>
@@ -148,7 +150,7 @@ const  ForgotPassword = () => {
             :
             step === 1?
               <>
-              <ForgotPasswordVerify userEmail={userEmail} setIsLoading={setIsLoading} isLoading={isLoading} setStep={setStep}
+              <ForgotPasswordVerify userEmail={userEmail} userId={userId} setIsLoading={setIsLoading} isLoading={isLoading} setStep={setStep}
              isFailed={isFailed} isSuccess={isSuccess} setMessage={setMessage} />
               </>
             : 

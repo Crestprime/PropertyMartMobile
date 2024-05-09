@@ -51,16 +51,19 @@ const Home = () => {
   const handleLogout = () => {
     router.push('/auth/logout')
   }
+  const handleAccount = () => {
+    router.push('/account/')
+  }
   const sidebarPages = [
     { id: 1, icon: marketPlace, title: 'My Properties', isNotify: false },
     { id: 2, icon: love, title: 'Reservations', isNotify: true },
     { id: 3, icon: cart, title: 'Cart', isNotify: true },
     { id: 4, icon: calendar, title: 'My Appointments', isNotify: false },
-    { id: 5, icon: user, title: 'My Account', isNotify: false },
+    { id: 5, icon: user, title: 'My Account', isNotify: false, onPress: handleAccount },
     { id: 6, icon: chat, title: 'Chat With Us', isNotify: false },
     { id: 7, icon: bell, title: 'Notification Preference', isNotify: false },
     { id: 8, icon: preferencesettings, title: 'Settings', isNotify: false },
-    { id: 9, icon: star, title: 'Rate Us', isNotify: false },
+    { id: 9, icon: star, title: 'Rate Us', isNotify: false , },
     { id: 10, icon: logout, title: 'Logout', isNotify: false, onPress: handleLogout },
   ];
   const cardImg = [
@@ -125,7 +128,7 @@ const Home = () => {
                     <Box paddingTop={'md'}>
                       <Box style={{ backgroundColor: '#D92D20' }} width={'45%'} padding={'sm'} flexDirection={'row'} justifyContent={'center'} borderRadius={10}>
                         <TouchableOpacity>
-                          <Link href={'/'}>
+                          <Link href={'/setup/setupAccount'}>
                             <CustomText variant={'xs'} fontWeight={'800'} color={'secondaryBackgroundColor'}>Setup now</CustomText>
                           </Link>
                         </TouchableOpacity>
@@ -165,10 +168,7 @@ const Home = () => {
                       </Box>
                     </Box>
                   </Box>
-
-
                 </Box>
-
               </Box>
               <Box height={220} style={Styles.containerS}>
                 <Swiper
@@ -197,9 +197,7 @@ const Home = () => {
                   activeDotColor="#2D66DD"
                   showsPagination={false}
                 >
-
                   {cardImg?.map((image) => (
-
                     <Pressable key={image?.id} android_ripple={{ color: '#000000c0' }} style={Styles.slide1} onPress={() => propertyDetails()}>
                       <Image source={{ uri: image?.uri }} style={Styles.image1} />
                       <Box style={Styles.content}>
@@ -234,7 +232,6 @@ const Home = () => {
                 </Swiper>
               </Box>
               <Box height={50}>
-                {/*  this is a vacant space left on purpose */}
               </Box>
             </ScrollView>
           </Box>
@@ -244,8 +241,8 @@ const Home = () => {
       {showSidebar &&
         <Box style={Styles.sidebar} >
           <Box width={'100%'} height={'0%'} style={{ backgroundColor: '#000000c0', opacity: 5, }}>
-            
           </Box>
+
           <Box width={'100%'} height={'100%'} style={{ backgroundColor: '#000000c0', opacity: 10 }}>
             <Box height={'100%'} alignItems={'center'} justifyContent={'center'} borderTopRightRadius={10} borderTopLeftRadius={10} backgroundColor={'secondaryBackgroundColor'}>
               <Box alignItems={'flex-end'} width={'95%'} paddingRight={'xs'} marginTop={'3xl'}>

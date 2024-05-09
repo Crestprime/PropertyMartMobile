@@ -24,8 +24,13 @@ const requestOTPSchema = z.object({
     email: z.string().email('Invalid email').min(3, 'Email is required'),
   });
 const newPasswordSchema = z.object({
-    newPassword: z.string().min(6, 'Password is required'),
-    confirmPassword: z.string().min(6, 'Password is required'),
+    newPassword: z.string().min(6, 'New Password is required'),
+    confirmPassword: z.string().min(6, 'Confirm new password'),
+  });
+
+const changePasswordSchema = z.object({
+    oldPassword: z.string().min(8, 'Old Password must be atleast 8 charatcers'),
+    newPassword: z.string().min(8, 'New Password must be atleast 8 charatcers'),
   });
 const setAddressSchema = z.object({
     country: z.string().min(3, 'Country is required'),
@@ -78,5 +83,5 @@ const InspectionSchema = z.object({
 export { loginSchema, signupSchema,
    requestOTPSchema, newPasswordSchema,
     setAddressSchema, InspectionSchema,
-    reservationSchema, PaymentSchema, cardSchema
+    reservationSchema, PaymentSchema, cardSchema, changePasswordSchema
    }

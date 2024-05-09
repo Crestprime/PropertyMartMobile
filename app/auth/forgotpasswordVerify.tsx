@@ -11,7 +11,7 @@ import { router } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import OtpInput from '@component/form/OtpInput'
 
-const ForgotPasswordVerify = ({userEmail,  setIsLoading, isLoading,isFailed, isSuccess, setMessage, setStep }:any) => {
+const ForgotPasswordVerify = ({userEmail, userId, setIsLoading, isLoading,isFailed, isSuccess, setMessage, setStep }:any) => {
  
     const [code, setCode] = useState('');
     const [pinReady, setPinReady] = useState<boolean>(false);
@@ -66,22 +66,24 @@ const ForgotPasswordVerify = ({userEmail,  setIsLoading, isLoading,isFailed, isS
     })
   
     const handleVerify = async (data: any) => {
-    let otpData = code;
-    console.log(otpData)
-    if(otpData.length < 6){
-      setMessage("Enter complete OTP code!!")
-      isFailed(true)
-      turnOffAlert()
-     } else {
-      const token = otpData;
-      const data = {
-        "token": token,
-      }
-      setIsLoading(true)
-      console.log(data)
-      verifyMutate(data)
-     }
-    };
+      let otpData = code;
+      console.log(otpData)
+      if(otpData.length < 6){
+        setMessage("Enter complete OTP code!!")
+        isFailed(true)
+        turnOffAlert()
+       } else {
+        const token = otpData;
+        const id = userId
+        const data = {
+          "token": token,
+          "id": id,
+        }
+        setIsLoading(true)
+        console.log(data)
+        verifyMutate(data)
+       }
+      };
 
     const handleResend = async () => {
       const email = userEmail

@@ -51,21 +51,6 @@ const Login = () => {
       const  {user}  = data.data.data;
       const {id, email, profilePicture, emailVerified, firstName, lastName, phone, roles, accountVerified, addressVerified, createdAt} = user;
       console.log(user)
-
-      console.log(message)
-      console.log(token)
-      console.log(email)
-      console.log(id)
-      console.log(firstName)
-      console.log(lastName)
-      console.log(phone)
-      console.log(emailVerified)
-      // console.log(profilePicture)
-      console.log(roles)
-      console.log(accountVerified)
-      console.log(addressVerified)
-      console.log(createdAt)
-
       setIsLoading(false)
       setMessage(message)
       isSuccess(true)
@@ -73,7 +58,6 @@ const Login = () => {
 
       if(emailVerified === true ){
         console.log("succefully logged in")
-
         async function storeSession() {
           try {
               const userDetails = {
@@ -130,11 +114,11 @@ const Login = () => {
             step == 0? 
           <Box height={'100%'} width={'100%'}>
             <Image source={logo} resizeMode="cover" style={Styles.logo} />
-            <CustomText variant={'subheader'} textAlign={'left'} fontSize={26} lineHeight={25} marginTop={'md'}
-              color={'black'} fontWeight={'800'}>Welcome Back
+            <CustomText variant={'subheader'} textAlign={'left'} marginTop={'md'}
+              color={'black'} >Welcome Back
             </CustomText>
-            <CustomText variant={'xs'} textAlign={'left'} fontSize={12} lineHeight={25}
-              color={'black'} fontWeight={'400'}>Enter your email address and password to gain access.
+            <CustomText variant={'body'} textAlign={'left'} 
+              color={'black'} >Enter your email address and password to gain access.
             </CustomText>
 
             <Box marginTop={'xl'}>
@@ -145,7 +129,7 @@ const Login = () => {
 
             <Box width='100%' marginBottom={'md'} height={40} justifyContent={'center'} alignItems={'flex-end'}>
               <Link href="/auth/forgotpassword">
-                <CustomText variant={'xs'} color={'primaryColor'} fontSize={12} fontWeight={'800'} >Forgot Password?</CustomText>
+                <CustomText variant={'xs'} color={'primaryColor'}  >Forgot Password?</CustomText>
               </Link>
             </Box>
             <SubmitButton label='Log in' width='100%' isLoading={isLoading} onSubmit={(data) => {
@@ -154,14 +138,14 @@ const Login = () => {
 
             <Box width='100%' flexDirection={'row'} height={60} alignItems={'center'} >
               <Separator />
-              <CustomText variant={'xs'} fontSize={12} fontWeight={'800'} color={'black'}>OR</CustomText>
+              <CustomText variant={'medium'}  color={'black'}>OR</CustomText>
               <Separator />
             </Box>
 
             <Box flexDirection={'row'} width='100%' justifyContent={'center'} alignItems={'center'}>
-              <CustomText variant={'xs'} fontSize={12}>Don't have an account?</CustomText>
+              <CustomText variant={'xs'} >Don't have an account?</CustomText>
               <Link href={'/auth/signup'} style={{ marginLeft: 4 }}>
-                <CustomText variant={'body'} fontSize={12} fontWeight={'800'} color={'primaryColor'} marginLeft={'xs'}>Create Account</CustomText>
+                <CustomText variant={'xs'}  color={'primaryColor'} marginLeft={'xs'}>Create Account</CustomText>
               </Link>
             </Box>
 

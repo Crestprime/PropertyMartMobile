@@ -164,7 +164,7 @@ const Signup: React.FC = () => {
 
                   <Box flexDirection={'row'} width='100%' justifyContent={'center'} alignItems={'center'}>
                     <CustomText variant={'xs'} >Already a user?</CustomText>
-                    <Link href={'/auth/signup'} style={{ marginLeft: 4 }}>
+                    <Link href={'/auth/login'} style={{ marginLeft: 4 }}>
                     <CustomText variant={'xs'} color={'primaryColor'} marginLeft={'xs'}>Log in</CustomText>
                     </Link>
                   </Box>
