@@ -4,7 +4,8 @@ import Box from '@component/general/Box';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomText from '@component/general/CustomText';
 import { PrimaryButton } from '@component/general/CustomButton';
-import Property from '@component/investments/Property';
+// import Property from '@component/investments/Property';
+// import {Property} from '@component/investments/Property'
 import { router } from 'expo-router';
 
 const Investment = () => {
@@ -66,8 +67,8 @@ const Investment = () => {
             </Box>
 
             <ScrollView horizontal={true}>
-              <Property />
-              <Property />
+              {/* <Property /> */}
+
             </ScrollView>
           </Box>
 

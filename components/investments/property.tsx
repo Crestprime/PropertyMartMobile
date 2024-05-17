@@ -10,7 +10,7 @@ const markerIcon =require('../../assets/images/marker-pin.png')
 const coinIcon =require('../../assets/images/coins-stacked-03.png')
 
 
-const property = () => {
+const Property = () => {
   return (
       <TouchableOpacity>
              <Box height={128} width={365} borderRadius={10} backgroundColor={'errorColor'} padding={'lg'} marginLeft={'sm'} marginBottom={'xl'}>
@@ -35,5 +35,5 @@ const property = () => {
   )
 }
 
-export default property
+export default Property
 
