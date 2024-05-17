@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Box from '@component/general/Box'
-import { Styles } from 'styles/setup/styles'
+import {Styles}  from 'styles/setup/styles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Link, router } from 'expo-router'
 import CustomText from '@component/general/CustomText'
@@ -10,6 +10,8 @@ import { Pressable } from 'react-native'
 import SetAddress from './setAddress'
 import SetBVN from './setBVN'
 import SetNIN from './setNIN'
+import AlertSuccess from '@component/alerts/success'
+import AlertFailed from '@component/alerts/failed';
 
 export default function setupAccount() {
  const [selectAddress, setSelectAddress ] = useState(0)
@@ -18,6 +20,10 @@ export default function setupAccount() {
  const [homeInput, showHomeInput ] = useState(0)
  const [BVNInput, showBVNinput ] = useState(0)
  const [NINInput, showNINinput ] = useState(0)
+
+ const [success, isSuccess] = React.useState(false)
+ const [failed, isFailed] = React.useState(false)
+ const [message, setMessage] = React.useState('')
 
  const displayHomeInput = () => {
     showHomeInput(1)
@@ -51,11 +57,12 @@ export default function setupAccount() {
  )
  
   return (
-    <>{homeInput === 0 && BVNInput === 0 && NINInput === 0?
-    <Box style={Styles.martContainer}alignItems={'center'} justifyContent={'center'} >
-        <Box width={'90%'} height={'95%'}>
+    <>
+    {homeInput === 0 && BVNInput === 0 && NINInput === 0?
+    <Box style={Styles.martContainer} alignItems={'center'} justifyContent={'center'} >
+        <Box width={'90%'} height={'90%'}>
             <Box height={'60%'} >
-                <Box marginTop={'xl'} height={40} justifyContent={'center'} >
+                <Box marginTop={'xs'} height={40} justifyContent={'center'} >
                     <TouchableOpacity>
                         <Link href='/dashboard/homepage/home/'>
                             <Ionicons 
@@ -66,49 +73,53 @@ export default function setupAccount() {
                       
                     </TouchableOpacity>
                 </Box>
-                <Box height={30}>
-                    <CustomText variant={'subheader'} textAlign={'left'} fontSize={16} lineHeight={25} 
-                            color={'black'} fontWeight={'800'}>Set up Account
+                <Box height={'auto'}>
+                    <CustomText variant={'subheader'} textAlign={'left'}
+                            color={'black'}>Set up Account
                     </CustomText> 
                 </Box>
-                <Box height={50}>
-                    <CustomText variant={'xs'} textAlign={'left'} fontSize={14} lineHeight={20}  marginTop={'xs'}
+                <Box height={'auto'}>
+                    <CustomText variant={'xs'} textAlign={'left'}  marginTop={'xs'}
                         color={'black'} fontWeight={'400'}>
                         We need a little more information about you to enable us setup your account
                     </CustomText>
                 </Box>
+
                 {/* stepper Form */}
-                <Box style={{height:'60%'}}  marginTop={'lg'}>
-                   <Pressable onPress={()=> displayHomeInput()}>
-                        <Box height={50} flexDirection={'row'}>
-                                <Box width={'10%'} alignItems={'center'} paddingTop={'xs'}>
-                                        <Box height={20} width={20} borderRadius={100} borderWidth={selectAddress === 1?2:1} style={{backgroundColor:selectAddress ===1?'#e6f2ff':'transparent'}}
-                                        borderColor={selectAddress === 1?'btnBlue' : 'textInputBorderColor' } alignItems={'center'} justifyContent={'center'}>
-                                            {selectAddress === 1 &&
-                                            <Ionicons name="checkmark-outline" size={15} color={'#2D66DD'} />
-                                            }   
-                                        </Box>
-                                        <Box style={{height:'100%'}} width={1} borderWidth={1} borderColor={selectAddress === 1?'btnBlue' : 'textInputBorderColor' }></Box>
-                                </Box>
-                                <Box width={'90%'}>
-                                        <Box>
-                                            <Box height={20}>
-                                                <CustomText variant={'subheader'} textAlign={'left'} fontSize={14} lineHeight={25} 
-                                                        color={'black'} fontWeight={'800'}>Home Address
-                                                </CustomText> 
+                <Box style={{height:'80%'}}  marginTop={'lg'}>
+                <Box >
+                    <Pressable onPress={()=> displayHomeInput()}>
+                            <Box height={90} flexDirection={'row'}>
+                                    <Box width={'10%'} alignItems={'center'} paddingTop={'xs'} height={'100%'}>
+                                            <Box height={20} width={20} borderRadius={100} borderWidth={selectAddress === 1?2:1} style={{backgroundColor:selectAddress ===1?'#e6f2ff':'transparent'}}
+                                            borderColor={selectAddress === 1?'btnBlue' : 'textInputBorderColor' } alignItems={'center'} justifyContent={'center'}>
+                                                {selectAddress === 1 &&
+                                                <Ionicons name="checkmark-outline" size={15} color={'#2D66DD'} />
+                                                }   
                                             </Box>
+                                            <Box style={{height:'80%'}} width={1} borderWidth={1} borderColor={selectAddress === 1?'btnBlue' : 'textInputBorderColor' }></Box>
+                                    </Box>
+                                    <Box width={'90%'}>
                                             <Box>
-                                                <CustomText variant={'xs'} textAlign={'left'} fontSize={12} lineHeight={20}  marginTop={'xs'}
-                                                    color={'black'} fontWeight={'200'}>
-                                                    We need your home address to ensure your identity and prevent fraudulent activities.
-                                                </CustomText>
+                                                <Box height={30}>
+                                                    <CustomText variant={'medium'} textAlign={'left'} 
+                                                            color={'black'} >Home Address
+                                                    </CustomText> 
+                                                </Box>
+                                                <Box>
+                                                    <CustomText variant={'xs'} textAlign={'left'} marginTop={'xs'}
+                                                        color={'black'}>
+                                                        We need your home address to ensure your identity and prevent fraudulent activities.
+                                                    </CustomText>
+                                                </Box>
                                             </Box>
-                                        </Box>
-                                </Box>
-                        </Box>
-                    </Pressable>
-                    <Pressable onPress={()=>displayBVNInput()}>
-                        <Box height={50} flexDirection={'row'} marginTop={'xl'}>
+                                    </Box>
+                            </Box>
+                        </Pressable>
+                    </Box>
+
+                    <Pressable onPress={()=>displayBVNInput()} >
+                        <Box height={90} flexDirection={'row'}>
                                 <Box width={'10%'} alignItems={'center'} paddingTop={'xs'}>
                                     <Box height={20} width={20} borderRadius={100} borderWidth={selectAddress === 1?2:1} style={{backgroundColor:selectAddress ===1 ?'#e6f2ff':'transparent'}}
                                     borderColor={selectAddress === 1?'btnBlue' : 'textInputBorderColor' } alignItems={'center'} justifyContent={'center'}>
@@ -119,18 +130,18 @@ export default function setupAccount() {
                                         // <Ionicons name="checkmark-outline" size={15} color={'#2D66DD'} />
                                         }   
                                     </Box>
-                                    <Box style={{height:'100%'}} width={1} borderWidth={1} borderColor={selectBVN === 1?'btnBlue' : 'textInputBorderColor' }></Box>
+                                    <Box style={{height:'80%'}} width={1} borderWidth={1} borderColor={selectBVN === 1?'btnBlue' : 'textInputBorderColor' }></Box>
                                 </Box>
                                 <Box width={'90%'}>
-                                    <Box>
-                                        <Box height={20}>
-                                            <CustomText variant={'subheader'} textAlign={'left'} fontSize={14} lineHeight={25} 
-                                                    color={'black'} fontWeight={'800'}>Bank Verification Number
+                                    <Box> 
+                                        <Box height={30}>
+                                            <CustomText variant={'medium'} textAlign={'left'}
+                                                    color={'black'}>Bank Verification Number
                                             </CustomText> 
                                         </Box>
                                         <Box>
-                                            <CustomText variant={'xs'} textAlign={'left'} fontSize={12} lineHeight={20}  marginTop={'xs'}
-                                                color={'black'} fontWeight={'200'}>
+                                            <CustomText variant={'xs'} textAlign={'left'} 
+                                                color={'black'} >
                                             We need your BVN to add extra layer of security for financial transactions.
                                             </CustomText>
                                         </Box>
@@ -140,7 +151,7 @@ export default function setupAccount() {
                         </Box>
                     </Pressable>
                     <Pressable onPress={()=>displayNINInput()}>
-                        <Box height={50} flexDirection={'row'} marginTop={'xl'}>
+                        <Box height={90} flexDirection={'row'}>
                                     <Box width={'10%'} alignItems={'center'} paddingTop={'xs'}>
                                         <Box height={20} width={20} borderRadius={100} borderWidth={selectBVN === 1?2:1} style={{backgroundColor:selectBVN === 1?'#e6f2ff':'transparent'}}
                                         borderColor={selectBVN === 1?'btnBlue' : 'textInputBorderColor' } alignItems={'center'} justifyContent={'center'}>
@@ -151,18 +162,18 @@ export default function setupAccount() {
                                             // <Ionicons name="checkmark-outline" size={15} color={'#2D66DD'} />
                                             }   
                                         </Box>
-                                        <Box style={{height:'100%'}} width={1} borderWidth={1} borderColor={selectNIN?'btnBlue' : 'textInputBorderColor' }></Box>
+                                        <Box style={{height:'80%'}} width={1} borderWidth={1} borderColor={selectNIN?'btnBlue' : 'textInputBorderColor' }></Box>
                                     </Box>
                                     <Box width={'90%'}>
                                         <Box>
-                                            <Box height={20}>
-                                                <CustomText variant={'subheader'} textAlign={'left'} fontSize={14} lineHeight={25} 
-                                                        color={'black'} fontWeight={'800'}>National Identification Number
+                                            <Box height={30}>
+                                                <CustomText variant={'medium'} textAlign={'left'} 
+                                                        color={'black'}> National Identification Number
                                                 </CustomText> 
                                             </Box>
                                             <Box>
-                                                <CustomText variant={'xs'} textAlign={'left'} fontSize={12} lineHeight={20}  marginTop={'xs'}
-                                                    color={'black'} fontWeight={'200'}>
+                                                <CustomText variant={'xs'} textAlign={'left'} marginTop={'xs'}
+                                                    color={'black'} >
                                                     We need your NIN to add extra layer of security for financial transactions.
                                                 </CustomText>
                                             </Box>
@@ -173,13 +184,13 @@ export default function setupAccount() {
                     </Pressable>
                 </Box>
             </Box>
-            <Box height={'40%'} justifyContent={'flex-end'}>
-                <Box>
+            <Box height={'46%'} justifyContent={'flex-end'}>
+                <Box height={50}>
                   <TouchableOpacity>
-                    <PrimaryButton label='continue' onPress={()=>window.alert('yes')} width={''}/>
+                    <PrimaryButton label='continue' onPress={()=> router.push('/dashboard/homepage/home/')} width={''}/>
                   </TouchableOpacity>
                 </Box>
-                <Box marginTop={'14xl'}>
+                <Box marginTop={'lg'}>
                  <Box height={'5%'} flexDirection={'row'} alignItems={'flex-end'}>
                     <Box height={5} width={'100%'}  flexDirection={'row'} justifyContent={'center'} >
                         <Box height={5} width={'30%'} backgroundColor={'black'} borderRadius={10}>
@@ -194,11 +205,11 @@ export default function setupAccount() {
     </Box>
    : homeInput === 1?
     <Box>
-        <SetAddress toggleHome={toggleHome} setStep1={setStep1}/> 
+        <SetAddress isSuccess={isSuccess} setMessage={setMessage} isFailed={isFailed} toggleHome={toggleHome} setStep1={setStep1}/> 
     </Box>
     : BVNInput === 1? 
     <>
-     <SetBVN toggleBVN={toggleBVN} setStep2={setStep2}/>
+     <SetBVN isSuccess={isSuccess} setMessage={setMessage} isFailed={isFailed}  toggleBVN={toggleBVN} setStep2={setStep2}/>
     </> 
     : NINInput === 1 ?
     <>
@@ -206,6 +217,21 @@ export default function setupAccount() {
     </>
     : null 
    }
+
+{
+      success && (
+        <>
+         <AlertSuccess message={message}/>
+        </>
+      )
+    }
+    {
+      failed && (
+        <>
+         <AlertFailed message={message}/>
+        </>
+      )
+    }
  
    
     </>

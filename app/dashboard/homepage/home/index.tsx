@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import { ScrollView } from 'tamagui'
-import { Styles } from './styles'
+import { Styles } from '../../../../styles/home/styles'
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Swiper from 'react-native-swiper'
@@ -120,7 +120,7 @@ const Home = () => {
                 <Box height={'90%'} width={'95%'} flexDirection={'row'} >
                   <Box width={'75%'} justifyContent={'center'} paddingBottom={'md'} paddingTop={'md'}>
                     <Box paddingTop={'sm'}>
-                      <CustomText variant={'body'} fontWeight={'800'} style={{ color: '#912018' }}>Complete your account setup </CustomText>
+                      <CustomText variant={'subheader'}  style={{ color: '#912018' }}>Complete your account setup </CustomText>
                     </Box>
                     <Box paddingTop={'sm'}>
                       <CustomText variant={'xs'} style={{ color: '#912018' }}>Complete your account setup to access more features on Property Mart </CustomText>
@@ -129,7 +129,7 @@ const Home = () => {
                       <Box style={{ backgroundColor: '#D92D20' }} width={'45%'} padding={'sm'} flexDirection={'row'} justifyContent={'center'} borderRadius={10}>
                         <TouchableOpacity>
                           <Link href={'/setup/setupAccount'}>
-                            <CustomText variant={'xs'} fontWeight={'800'} color={'secondaryBackgroundColor'}>Setup now</CustomText>
+                            <CustomText variant={'medium'}  color={'secondaryBackgroundColor'}>Setup now</CustomText>
                           </Link>
                         </TouchableOpacity>
                       </Box>
@@ -147,11 +147,11 @@ const Home = () => {
                       <Box marginTop={'md'} height={40} width={40} borderRadius={100} backgroundColor={'btnBlue'} borderWidth={1} borderColor={'textInputBorderColor'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
                         <Ionicons name="settings-outline" size={20} color={'#FFFFFF'} />
                       </Box>
-                      <Box>
-                        <CustomText variant="subheader" lineHeight={30} color={'secondaryBackgroundColor'} fontSize={11}>Owned Properties</CustomText>
+                      <Box marginTop={'xs'}>
+                        <CustomText variant="xs"  color={'secondaryBackgroundColor'} >Owned Properties</CustomText>
                       </Box>
                       <Box>
-                        <CustomText variant="subheader" lineHeight={20} color={'secondaryBackgroundColor'} fontSize={20}>0</CustomText>
+                        <CustomText variant="subheader" color={'secondaryBackgroundColor'}>0</CustomText>
                       </Box>
                     </Box>
                   </Box>
@@ -160,11 +160,11 @@ const Home = () => {
                       <Box marginTop={'md'} height={40} width={40} borderRadius={100} backgroundColor={'errorColor'} borderWidth={1} borderColor={'textInputBorderColor'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
                         <Ionicons name="settings-outline" size={20} color={'#FFFFFF'} />
                       </Box>
-                      <Box>
-                        <CustomText variant="subheader" lineHeight={30} color={'secondaryBackgroundColor'} fontSize={11}>Ongoing Projects</CustomText>
+                      <Box marginTop={'xs'}>
+                        <CustomText variant="xs" color={'secondaryBackgroundColor'}>Ongoing Projects</CustomText>
                       </Box>
                       <Box>
-                        <CustomText variant="subheader" lineHeight={20} color={'secondaryBackgroundColor'} fontSize={20}>0</CustomText>
+                        <CustomText variant="subheader" color={'secondaryBackgroundColor'}>0</CustomText>
                       </Box>
                     </Box>
                   </Box>

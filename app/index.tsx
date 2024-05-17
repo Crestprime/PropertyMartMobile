@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as SecureStorage from 'expo-secure-store';
 import { useRouter } from 'expo-router';
-import Onboarding from './splash/onboarding';
+import LandingPage from './splash/landingPage';
 
 const Home = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const Home = () => {
           if (userDetails.token) {
             console.log("Token Retrieved:", userDetails.token);
             setIsLoggedIn(true);
-      8
+      
             router.replace("/dashboard/homepage/home/");
           } else {
             console.log("Token is not stored.");
@@ -33,13 +33,12 @@ const Home = () => {
         return null;
       }
     }
-
     retrieveUserDetails();
   
   }, []); 
  
   return (
-      <Onboarding/>
+      <LandingPage />
   );
 }
 

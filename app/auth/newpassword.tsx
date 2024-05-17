@@ -13,7 +13,6 @@ const palmfone = require('../../assets/images/foreground/acctcreated.png')
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useMutation } from 'react-query'
 import httpService from '../../utils/httpService'
-
 const  NewPassword = ({userId, setIsLoading, isLoading,isFailed, isSuccess, setMessage, }:any) => {
 
   const { renderForm, formState: { isValid },values } = useForm({
@@ -25,11 +24,11 @@ const  NewPassword = ({userId, setIsLoading, isLoading,isFailed, isSuccess, setM
   })
 
   const [step, setStep] = useState(0);
+  
   const Router = router
   const login = () => {
     Router.push("/auth/login") 
   }
-
   const turnOffAlert = () =>{
     function setFalse(){
       isFailed(false);
@@ -59,22 +58,17 @@ const  NewPassword = ({userId, setIsLoading, isLoading,isFailed, isSuccess, setM
   const SaveChanges = async ({data}:any) => {
     const formdata = values()
     const password = formdata.newPassword
-
     const newformdata = {
       userId: userId,
       password: password,
-    }; 
-    
+    };  
     console.log(newformdata)
-
     if(formdata){
       let data = newformdata
       setIsLoading(true)
-      // mutate(data)
+      mutate(data)
     }
 };
-
-
 
   return renderForm(
     <Box style={[Styles.martContainer, Styles.flex]} >
@@ -87,7 +81,7 @@ const  NewPassword = ({userId, setIsLoading, isLoading,isFailed, isSuccess, setM
                   color={'black'} fontWeight={'800'}>Reset Password
             </CustomText>
               <Box marginTop={'xl'} marginBottom={'xs'}>
-                  <CustomTextInput name='newPassword' placeholder='****' label='New Password' isPassword  />
+                  <CustomTextInput name='newPassword' placeholder='****' label='New Password' isPassword isSignup />
               </Box>
 
               <Box marginTop={'xl'} marginBottom={'xs'}>
@@ -105,11 +99,11 @@ const  NewPassword = ({userId, setIsLoading, isLoading,isFailed, isSuccess, setM
           </Box>
         </Box>
         <Box height={'20%'} flexDirection={'row'} alignItems={'flex-end'}>
-                    <Box height={5} width={'100%'}  flexDirection={'row'} justifyContent={'center'} >
-                        <Box height={5} width={'30%'} backgroundColor={'black'} borderRadius={10}>
-                            <CustomText>Hello</CustomText>
-                        </Box>
-                    </Box>
+            <Box height={5} width={'100%'}  flexDirection={'row'} justifyContent={'center'} >
+                <Box height={5} width={'30%'} backgroundColor={'black'} borderRadius={10}>
+                    <CustomText>Hello</CustomText>
+                </Box>
+              </Box>
         </Box>
         </>
          :

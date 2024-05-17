@@ -47,7 +47,7 @@ const  ForgotPassword = () => {
   const { isLoading: signupMutationLoading, mutate } = useMutation({
     mutationFn: (data: any) => httpService.post(`/authentication/user/reset-password-request`,data),
     onSuccess: (data) => {
-      setStep(1)
+      setStep(2)
       setIsLoading(false)
       const {message} = data.data;
       console.log(data.data);
@@ -156,7 +156,7 @@ const  ForgotPassword = () => {
             : 
             step === 2?
             <>
-              <NewPassword userEmail={userEmail} setIsLoading={setIsLoading} isLoading={isLoading} setStep={setStep}
+              <NewPassword userId={userId} userEmail={userEmail} setIsLoading={setIsLoading} isLoading={isLoading} setStep={setStep}
               isFailed={isFailed} isSuccess={isSuccess} setMessage={setMessage} />
             </> :
              null
