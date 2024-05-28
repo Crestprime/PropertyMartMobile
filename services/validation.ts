@@ -92,10 +92,13 @@ const InspectionSchema = z.object({
     bvn: z.string().min(11  , 'Required!! NIN Should not be less than 11 Digits'),
     
   });
+  const searchSchema = z.object({
+    search: z.string().min(0, 'search'),
+  })
 
   
 export { loginSchema, signupSchema,
-   requestOTPSchema, newPasswordSchema,bvnSchema,
+   requestOTPSchema, newPasswordSchema,bvnSchema, searchSchema,
     setAddressSchema, InspectionSchema, editProfileSchema,
     reservationSchema, PaymentSchema, cardSchema, changePasswordSchema
    }
