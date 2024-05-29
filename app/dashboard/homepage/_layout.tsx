@@ -41,6 +41,7 @@ const _layout = () => {
                 fontSize: 12,
             }
         }} />
+        
         <Tabs.Screen name='construction' options={{
             tabBarIcon: ({ focused}) => <Icon focused={focused} name={'construct-outline'} />,
             tabBarLabelStyle: {
