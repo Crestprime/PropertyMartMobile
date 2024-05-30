@@ -41,6 +41,8 @@ const Home = () => {
   }, []); 
 
   const [user, setUserProps] = useState<any>();
+  console.log('account verified',user.accountVerified)
+  console.log('address verified',user.addressVerified)
 
   const images = [
     { id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
@@ -116,30 +118,35 @@ const Home = () => {
               </Box>
             </Box>
             <ScrollView>
-            <Box height={'auto'} marginTop={'lg'} width={'100%'} borderRadius={10} style={{ backgroundColor: '#FEF3F2' }} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
-                <Box height={'90%'} width={'95%'} flexDirection={'row'} >
-                  <Box width={'75%'} justifyContent={'center'} paddingBottom={'md'} paddingTop={'md'}>
-                    <Box paddingTop={'sm'}>
-                      <CustomText variant={'subheader'}  style={{ color: '#912018' }}>Complete your account setup </CustomText>
-                    </Box>
-                    <Box paddingTop={'sm'}>
-                      <CustomText variant={'xs'} style={{ color: '#912018' }}>Complete your account setup to access more features on Property Mart </CustomText>
-                    </Box>
-                    <Box paddingTop={'md'}>
-                      <Box style={{ backgroundColor: '#D92D20' }} width={'45%'} padding={'sm'} flexDirection={'row'} justifyContent={'center'} borderRadius={10}>
-                        <TouchableOpacity>
-                          <Link href={'/setup/setupAccount'}>
-                            <CustomText variant={'medium'}  color={'secondaryBackgroundColor'}>Setup now</CustomText>
-                          </Link>
-                        </TouchableOpacity>
-                      </Box>
-                    </Box>
+              {/* Display setup if not verified */}
+           {
+            user.accountVerified == false && user.addressVerified == false  && (
+              <Box height={'auto'} marginTop={'lg'} width={'100%'} borderRadius={10} style={{ backgroundColor: '#FEF3F2' }} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
+              <Box height={'90%'} width={'95%'} flexDirection={'row'} >
+                <Box width={'75%'} justifyContent={'center'} paddingBottom={'md'} paddingTop={'md'}>
+                  <Box paddingTop={'sm'}>
+                    <CustomText variant={'subheader'}  style={{ color: '#912018' }}>Complete your account setup </CustomText>
                   </Box>
-                  <Box width={'20%'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
-                    <Image source={setup_icon} resizeMode="cover" />
+                  <Box paddingTop={'sm'}>
+                    <CustomText variant={'xs'} style={{ color: '#912018' }}>Complete your account setup to access more features on Property Mart </CustomText>
+                  </Box>
+                  <Box paddingTop={'md'}>
+                    <Box style={{ backgroundColor: '#D92D20' }} width={'45%'} padding={'sm'} flexDirection={'row'} justifyContent={'center'} borderRadius={10}>
+                      <TouchableOpacity>
+                        <Link href={'/setup/setupAccount'}>
+                          <CustomText variant={'medium'}  color={'secondaryBackgroundColor'}>Setup now</CustomText>
+                        </Link>
+                      </TouchableOpacity>
+                    </Box>
                   </Box>
                 </Box>
+                <Box width={'20%'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
+                  <Image source={setup_icon} resizeMode="cover" />
+                </Box>
               </Box>
+          </Box>
+            )
+           }
               <Box height={150} width={'100%'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-evenly'}>
                 <Box height={'90%'} width={'95%'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'}>
                   <Box width={'48%'} backgroundColor={'primaryColor'} borderRadius={10} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>

@@ -115,22 +115,19 @@ export default function setupAccount() {
                                             </Box>
                                     </Box>
                             </Box>
-                        </Pressable>
+                    </Pressable>
                     </Box>
 
                     <Pressable onPress={()=>displayBVNInput()} >
                         <Box height={90} flexDirection={'row'}>
                                 <Box width={'10%'} alignItems={'center'} paddingTop={'xs'}>
-                                    <Box height={20} width={20} borderRadius={100} borderWidth={selectAddress === 1?2:1} style={{backgroundColor:selectAddress ===1 ?'#e6f2ff':'transparent'}}
-                                    borderColor={selectAddress === 1?'btnBlue' : 'textInputBorderColor' } alignItems={'center'} justifyContent={'center'}>
-                                        {selectAddress ===1 ? 
-                                        <>
-                                        <Box height={5} width={5} borderRadius={100} backgroundColor={'btnBlue'}></Box>
-                                        </> : null
-                                        // <Ionicons name="checkmark-outline" size={15} color={'#2D66DD'} />
-                                        }   
+                                    <Box height={20} width={20} borderRadius={100} borderWidth={selectBVN === 1?2:1} style={{backgroundColor:selectBVN ===1 ?'#e6f2ff':'transparent'}}
+                                    borderColor={selectBVN === 1?'btnBlue' : 'textInputBorderColor' } alignItems={'center'} justifyContent={'center'}>
+                                        {selectBVN === 1 &&
+                                                <Ionicons name="checkmark-outline" size={15} color={'#2D66DD'} />
+                                        }  
                                     </Box>
-                                    <Box style={{height:'80%'}} width={1} borderWidth={1} borderColor={selectBVN === 1?'btnBlue' : 'textInputBorderColor' }></Box>
+                                    <Box style={{height:'50%'}} width={1} borderWidth={1} borderColor={selectBVN === 1?'btnBlue' : 'textInputBorderColor' }></Box>
                                 </Box>
                                 <Box width={'90%'}>
                                     <Box> 
@@ -150,7 +147,7 @@ export default function setupAccount() {
                                 </Box>
                         </Box>
                     </Pressable>
-                    <Pressable onPress={()=>displayNINInput()}>
+                    {/* <Pressable onPress={()=>displayNINInput()}>
                         <Box height={90} flexDirection={'row'}>
                                     <Box width={'10%'} alignItems={'center'} paddingTop={'xs'}>
                                         <Box height={20} width={20} borderRadius={100} borderWidth={selectBVN === 1?2:1} style={{backgroundColor:selectBVN === 1?'#e6f2ff':'transparent'}}
@@ -181,7 +178,7 @@ export default function setupAccount() {
 
                                     </Box>
                         </Box>
-                    </Pressable>
+                    </Pressable> */}
                 </Box>
             </Box>
             <Box height={'46%'} justifyContent={'flex-end'}>
