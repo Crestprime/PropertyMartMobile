@@ -106,53 +106,6 @@ const EditProfile = () => {
           Alert.alert(message)
         //   clearUserDetails()
           setIsLoading(false)
-
-        //   console.log(data.data.data.data);
-            
-            // const { token } = data.data.data;
-            // const  user  = data.data.data.data;
-            // const {id, email, profilePicture, emailVerified, firstName, lastName, phone, roles, accountVerified, addressVerified, createdAt} = user;
-            // // console.log(user)
-            // console.log(message)
-            // console.log(token)
-            // console.log(email)
-            // console.log(id)
-            // console.log(firstName)
-            // console.log(lastName)
-            // console.log(phone)
-            // console.log(emailVerified)
-            // console.log(profilePicture)
-            // console.log(roles)
-            // console.log(accountVerified)
-            // console.log(addressVerified)
-            // console.log(createdAt)
-
-
-    //   async function storeSession() {
-    //       try {
-    //           const userDetails = {
-    //             firstname: firstName,
-    //             lastname: lastName,
-    //             email: email,
-    //             id: id,
-    //             token: token,
-    //             phone: phone,
-    //             profilePicture: profilePicture,
-    //             roles: roles,
-    //             accountVerified: accountVerified,
-    //             addressVerified: addressVerified,
-    //             createdAt: createdAt
-    //           }
-    //           const userDetailsString = JSON.stringify(userDetails);
-    //           await SecureStorage.setItemAsync("userDetails", userDetailsString);
-
-    //       } catch (error) {
-    //         // console.error("Error storing user details:", error);
-    //       }
-    //   }
-    //   storeSession()
-
-
         },
         onError: (error: any) => {
           const message = error?.message

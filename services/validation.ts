@@ -95,10 +95,19 @@ const InspectionSchema = z.object({
   const searchSchema = z.object({
     search: z.string().min(0, 'search'),
   })
-
+  const proposalSchema = z.object({
+    title: z.string().min(1, 'Title is required'),
+    description: z.string().min(1, 'Description is required'),
+    location: z.string().min(1, 'Location is required'),
+    budget: z.string().min(1, 'Budget must be a non-negative number'),
+    duration: z.string().min(1, 'Duration is required'),
+    startDate: z.string().min(1, 'Start date is required').regex(/^\d{4}-\d{2}-\d{2}$/, 'start date must be in YYYY-MM-DD format'),
+    contactName: z.string().min(1, 'Contact name is required'),
+    contactEmail: z.string().email('Invalid email').min(3, 'Email is required'),
+  });
   
 export { loginSchema, signupSchema,
    requestOTPSchema, newPasswordSchema,bvnSchema, searchSchema,
-    setAddressSchema, InspectionSchema, editProfileSchema,
+    setAddressSchema, InspectionSchema, editProfileSchema, proposalSchema,
     reservationSchema, PaymentSchema, cardSchema, changePasswordSchema
    }

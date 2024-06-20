@@ -29,12 +29,12 @@ const _layout = () => {
                 fontSize: 12,
             }
         }} />
-        <Tabs.Screen name='investment' options={{
+        {/* <Tabs.Screen name='investment' options={{
             tabBarIcon: ({ focused}) => <Icon focused={focused} name={'cash-outline'} />,
             tabBarLabelStyle: {
                 fontSize: 12,
             }
-        }} />
+        }} /> */}
         <Tabs.Screen name='wallet' options={{
             tabBarIcon: ({ focused}) => <Icon focused={focused} name={'wallet-outline'} />,
             tabBarLabelStyle: {

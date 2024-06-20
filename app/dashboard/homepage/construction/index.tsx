@@ -13,7 +13,7 @@ const Construction = () => {
         <CustomText variant={'medium'}>Construction</CustomText>
       </Box>
 
-      <Box
+      <Box  paddingLeft={'xs'} paddingRight={'xs'}
         alignSelf={'center'}
         top={20}
         width={'100%'}

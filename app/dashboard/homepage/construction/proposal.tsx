@@ -33,7 +33,7 @@ const proposal = () => {
               Construction
             </CustomText>
             <PrimaryButton
-              onPress={undefined}
+              onPress={()=>router.push('/construction/sendProposal')}
               label={'Send Proposal'}
               width={120}
               height={35}

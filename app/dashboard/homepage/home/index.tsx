@@ -41,8 +41,8 @@ const Home = () => {
   }, []); 
 
   const [user, setUserProps] = useState<any>();
-  console.log('account verified',user.accountVerified)
-  console.log('address verified',user.addressVerified)
+  // console.log('account verified',user.accountVerified)
+  // console.log('address verified',user.addressVerified)
 
   const images = [
     { id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
@@ -119,8 +119,8 @@ const Home = () => {
             </Box>
             <ScrollView>
               {/* Display setup if not verified */}
-           {
-            user.accountVerified == false && user.addressVerified == false  && (
+              {
+                user?.accountVerified === false && user?.addressVerified === false  && (
               <Box height={'auto'} marginTop={'lg'} width={'100%'} borderRadius={10} style={{ backgroundColor: '#FEF3F2' }} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
               <Box height={'90%'} width={'95%'} flexDirection={'row'} >
                 <Box width={'75%'} justifyContent={'center'} paddingBottom={'md'} paddingTop={'md'}>
@@ -145,8 +145,9 @@ const Home = () => {
                 </Box>
               </Box>
           </Box>
-            )
-           }
+                )
+              }
+
               <Box height={150} width={'100%'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-evenly'}>
                 <Box height={'90%'} width={'95%'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'}>
                   <Box width={'48%'} backgroundColor={'primaryColor'} borderRadius={10} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
