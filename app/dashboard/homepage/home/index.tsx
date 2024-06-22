@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import { ScrollView } from 'tamagui'
-import { Styles } from './styles'
+import { Styles } from '../../../../styles/home/styles'
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Swiper from 'react-native-swiper'
@@ -41,6 +41,8 @@ const Home = () => {
   }, []); 
 
   const [user, setUserProps] = useState<any>();
+  // console.log('account verified',user.accountVerified)
+  // console.log('address verified',user.addressVerified)
 
   const images = [
     { id: 1, uri: 'https://res.cloudinary.com/xenxei46/image/upload/v1705888884/banner_legqnq.png' },
@@ -116,30 +118,36 @@ const Home = () => {
               </Box>
             </Box>
             <ScrollView>
-            <Box height={'auto'} marginTop={'lg'} width={'100%'} borderRadius={10} style={{ backgroundColor: '#FEF3F2' }} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
-                <Box height={'90%'} width={'95%'} flexDirection={'row'} >
-                  <Box width={'75%'} justifyContent={'center'} paddingBottom={'md'} paddingTop={'md'}>
-                    <Box paddingTop={'sm'}>
-                      <CustomText variant={'body'} fontWeight={'800'} style={{ color: '#912018' }}>Complete your account setup </CustomText>
-                    </Box>
-                    <Box paddingTop={'sm'}>
-                      <CustomText variant={'xs'} style={{ color: '#912018' }}>Complete your account setup to access more features on Property Mart </CustomText>
-                    </Box>
-                    <Box paddingTop={'md'}>
-                      <Box style={{ backgroundColor: '#D92D20' }} width={'45%'} padding={'sm'} flexDirection={'row'} justifyContent={'center'} borderRadius={10}>
-                        <TouchableOpacity>
-                          <Link href={'/setup/setupAccount'}>
-                            <CustomText variant={'xs'} fontWeight={'800'} color={'secondaryBackgroundColor'}>Setup now</CustomText>
-                          </Link>
-                        </TouchableOpacity>
-                      </Box>
-                    </Box>
+              {/* Display setup if not verified */}
+              {
+                user?.accountVerified === false && user?.addressVerified === false  && (
+              <Box height={'auto'} marginTop={'lg'} width={'100%'} borderRadius={10} style={{ backgroundColor: '#FEF3F2' }} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
+              <Box height={'90%'} width={'95%'} flexDirection={'row'} >
+                <Box width={'75%'} justifyContent={'center'} paddingBottom={'md'} paddingTop={'md'}>
+                  <Box paddingTop={'sm'}>
+                    <CustomText variant={'subheader'}  style={{ color: '#912018' }}>Complete your account setup </CustomText>
                   </Box>
-                  <Box width={'20%'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
-                    <Image source={setup_icon} resizeMode="cover" />
+                  <Box paddingTop={'sm'}>
+                    <CustomText variant={'xs'} style={{ color: '#912018' }}>Complete your account setup to access more features on Property Mart </CustomText>
+                  </Box>
+                  <Box paddingTop={'md'}>
+                    <Box style={{ backgroundColor: '#D92D20' }} width={'45%'} padding={'sm'} flexDirection={'row'} justifyContent={'center'} borderRadius={10}>
+                      <TouchableOpacity>
+                        <Link href={'/setup/setupAccount'}>
+                          <CustomText variant={'medium'}  color={'secondaryBackgroundColor'}>Setup now</CustomText>
+                        </Link>
+                      </TouchableOpacity>
+                    </Box>
                   </Box>
                 </Box>
+                <Box width={'20%'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
+                  <Image source={setup_icon} resizeMode="cover" />
+                </Box>
               </Box>
+          </Box>
+                )
+              }
+
               <Box height={150} width={'100%'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-evenly'}>
                 <Box height={'90%'} width={'95%'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'}>
                   <Box width={'48%'} backgroundColor={'primaryColor'} borderRadius={10} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
@@ -147,11 +155,11 @@ const Home = () => {
                       <Box marginTop={'md'} height={40} width={40} borderRadius={100} backgroundColor={'btnBlue'} borderWidth={1} borderColor={'textInputBorderColor'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
                         <Ionicons name="settings-outline" size={20} color={'#FFFFFF'} />
                       </Box>
-                      <Box>
-                        <CustomText variant="subheader" lineHeight={30} color={'secondaryBackgroundColor'} fontSize={11}>Owned Properties</CustomText>
+                      <Box marginTop={'xs'}>
+                        <CustomText variant="xs"  color={'secondaryBackgroundColor'} >Owned Properties</CustomText>
                       </Box>
                       <Box>
-                        <CustomText variant="subheader" lineHeight={20} color={'secondaryBackgroundColor'} fontSize={20}>0</CustomText>
+                        <CustomText variant="subheader" color={'secondaryBackgroundColor'}>0</CustomText>
                       </Box>
                     </Box>
                   </Box>
@@ -160,11 +168,11 @@ const Home = () => {
                       <Box marginTop={'md'} height={40} width={40} borderRadius={100} backgroundColor={'errorColor'} borderWidth={1} borderColor={'textInputBorderColor'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
                         <Ionicons name="settings-outline" size={20} color={'#FFFFFF'} />
                       </Box>
-                      <Box>
-                        <CustomText variant="subheader" lineHeight={30} color={'secondaryBackgroundColor'} fontSize={11}>Ongoing Projects</CustomText>
+                      <Box marginTop={'xs'}>
+                        <CustomText variant="xs" color={'secondaryBackgroundColor'}>Ongoing Projects</CustomText>
                       </Box>
                       <Box>
-                        <CustomText variant="subheader" lineHeight={20} color={'secondaryBackgroundColor'} fontSize={20}>0</CustomText>
+                        <CustomText variant="subheader" color={'secondaryBackgroundColor'}>0</CustomText>
                       </Box>
                     </Box>
                   </Box>

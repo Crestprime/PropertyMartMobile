@@ -98,11 +98,7 @@ const  ChangePassword = () => {
         setIsLoading(true)
      }
 
-    
-
 };
-
-
 
   return renderForm(
    <>

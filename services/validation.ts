@@ -32,16 +32,17 @@ const changePasswordSchema = z.object({
     oldPassword: z.string().min(8, 'Old Password must be atleast 8 charatcers'),
     newPassword: z.string().min(8, 'New Password must be atleast 8 charatcers'),
   });
-const setAddressSchema = z.object({
-    country: z.string().min(3, 'Country is required'),
-    email: z.string().email('Invalid email').min(3, 'Email is required'),
-    state: z.string().min(3, 'State is required'),
-    city: z.string().min(3, 'City is required'),
-    street: z.string().min(3, 'Street is required'),
-    postalCode: z.string().min(3, 'PostalCode is required'),
-    apartmentNo: z.string().min(0, 'Apartment No is required'),
-    landMark: z.string().min(0, 'Land Mark No is required'),
-  });
+
+  const setAddressSchema = z.object({
+    phone: z.string().min(11, 'Phone  Number is required'), // Assuming minimum length of 1 for phone number
+    country: z.string().min(3, 'Country  Number is required'),
+    address: z.string().min(3, 'Address  Number is required'),
+    state: z.string().min(3),
+    city: z.string().min(3),
+    street_name: z.string().min(3),
+    postal_code: z.string().min(5),
+});
+
 const InspectionSchema = z.object({
     date: z.string().min(3, 'Date is required'),
     time: z.string().min(3, 'Time is required'),
@@ -77,11 +78,36 @@ const InspectionSchema = z.object({
     cvv: z.string().min(3, 'cvv is required'),
     expDate: z.string().min(3, 'card expiry date is required')
   })
-
-
+  const editProfileSchema = z.object({
+    firstName: z.string().min(3, 'first name is required'),
+    lastName: z.string().min(3, 'last name is required'),
+    email: z.string().min(3, 'first is required').email('Invalid email'),
+    phone: z.string().min(3, 'phone is required')
+  });
+ const bvnSchema = z.object({
+    bvn: z.string().min(11  , 'Required!! BVN Should not be less than 11 Digits'),
+    
+  });
+ const ninSchema = z.object({
+    bvn: z.string().min(11  , 'Required!! NIN Should not be less than 11 Digits'),
+    
+  });
+  const searchSchema = z.object({
+    search: z.string().min(0, 'search'),
+  })
+  const proposalSchema = z.object({
+    title: z.string().min(1, 'Title is required'),
+    description: z.string().min(1, 'Description is required'),
+    location: z.string().min(1, 'Location is required'),
+    budget: z.string().min(1, 'Budget must be a non-negative number'),
+    duration: z.string().min(1, 'Duration is required'),
+    startDate: z.string().min(1, 'Start date is required').regex(/^\d{4}-\d{2}-\d{2}$/, 'start date must be in YYYY-MM-DD format'),
+    contactName: z.string().min(1, 'Contact name is required'),
+    contactEmail: z.string().email('Invalid email').min(3, 'Email is required'),
+  });
   
 export { loginSchema, signupSchema,
-   requestOTPSchema, newPasswordSchema,
-    setAddressSchema, InspectionSchema,
+   requestOTPSchema, newPasswordSchema,bvnSchema, searchSchema,
+    setAddressSchema, InspectionSchema, editProfileSchema, proposalSchema,
     reservationSchema, PaymentSchema, cardSchema, changePasswordSchema
    }

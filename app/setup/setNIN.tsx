@@ -1,9 +1,9 @@
 import { View, Text, Image, Pressable } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
-import { setAddressSchema } from '@services/validation'
+import { bvnSchema } from '@services/validation'
 import { Styles } from 'styles/setup/styles'
 import { CustomTextInput } from '@component/form/CustomInput'
 import { Link, router } from 'expo-router';
@@ -13,35 +13,79 @@ import { useMutation } from 'react-query'
 import httpService from '@utils/httpService'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'
-// const logo = require('../../assets/images/logo/logo.png')
+import { getUserDetails } from '@utils/getUser'
 
-const SetNIN = ({toggleNIN, setStep3}:any) => {
+
+const SetNIN = ({toggleNIN, setStep3, isSuccess, isFailed, setMessage }:any) => {
   
-  const [checked, setChecked] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-  const { renderForm, formState: { isValid } } = useForm({
+  const [user, setUserProps] = useState<any>()
+
+  const { renderForm, formState: { isValid }, values } = useForm({
     defaultValues: {
-      country: '',
-      email: '',
-      state: '',
-      city: '',
-      street: '',
-      postalCode: '',
-      apartmentNo: '',
-      landMark: '',
+      bvn: '',  
     },
-    validationSchema: setAddressSchema,
+    validationSchema: bvnSchema,
   })
 
-  const handleSubmit = (data: any) => {
-    toggleNIN()
-    setStep3()
+
+  useEffect(() => {
+    async function getUser() {
+      const userDetails = await getUserDetails();
+      setUserProps(userDetails);
+    }
+    getUser()
+  }, []);
+  const turnOffAlert = () =>{
+    function setFalse(){
+      isFailed(false);
+      isSuccess(false);
+      setIsLoading(false);
+     }
+    const timeoutId = setTimeout(setFalse, 3000);
   }
- 
+
+  const token = user?.token
+  const userId = user?.id
+  console.log('token', token, 'userId', userId)
+  
+  const { mutate } = useMutation({
+    mutationFn: (data: any) => httpService.put(`/user/upload_bvn`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    }
+  }),
+    onSuccess: (data) => {
+      console.log(data.data);
+      const {message} = data.data
+      toggleNIN()
+       setStep3()
+       setMessage(message)
+       isSuccess(true)
+       turnOffAlert()
+
+    },
+    onError: (error: any) => {
+      const message = error?.message
+      setMessage(message)
+      isFailed(true)
+      turnOffAlert()
+
+    },
+  })
+
+
+  const handleSubmit = async (data: any) => {
+    const formvalues = values()
+    console.log(formvalues)
+    data = formvalues;
+    mutate(data)
+  };
 
   return renderForm(
     <Box style={Styles.martContainer} alignItems={'center'} justifyContent={'center'}>
-        <Box width={'90%'} height={'95%'}>
+        <Box width={'90%'} height={'90%'}>
         <Box marginTop={'xl'} height={40} justifyContent={'center'} >
                     <TouchableOpacity>
                         <Pressable onPress={()=> toggleNIN()}>
@@ -52,73 +96,26 @@ const SetNIN = ({toggleNIN, setStep3}:any) => {
                        </Pressable>
                     </TouchableOpacity> 
                 </Box>
-                <Box height={30}>
-                    <CustomText variant={'subheader'} textAlign={'left'} fontSize={16} lineHeight={25} 
-                            color={'black'} fontWeight={'800'}>Home Addresss
+                <Box height={'auto'}>
+                    <CustomText variant={'subheader'} textAlign={'left'} 
+                            color={'black'} >Set NIN
                     </CustomText> 
                 </Box>
-                <Box height={50}>
-                    <CustomText textAlign={'left'} fontSize={14} lineHeight={20}  marginTop={'xs'}
-                        color={'black'} fontWeight={'400'}>
+                <Box height={'auto'}>
+                    <CustomText textAlign={'left'} 
+                        color={'black'} variant={'body'}>
                         We need a little more information about you to enable us setup your account
                     </CustomText>
                 </Box>
-                <Box marginTop={'xl'}>
-                  <Pressable>
-                    <Box height={40} style={{backgroundColor:'#F5F8FF'}} borderRadius={8}
-                     justifyContent={'center'} flexDirection={'row'} alignItems={'center'}>
-                      <Ionicons 
-                            name="locate-outline" color={'#2D66DD'}
-                            size={25}
-                            />
-                      <CustomText marginLeft={'xs'}>SET NIN</CustomText>
-                    </Box>
-                  </Pressable>
-                </Box>
-                <Box width='100%' flexDirection={'row'} height={50} alignItems={'center'} >
-                    <Separator />
-                    <CustomText variant={'xs'} fontSize={12} fontWeight={'800'} color={'black'}>OR</CustomText>
-                    <Separator />
-                </Box>
-                <ScrollView>
-                <Box marginTop={'sm'}>
-                  
-                      <CustomTextInput name='country' placeholder='Country' label='Country' isPassword={false}  />
-                        <Box marginBottom={'sm'} />
 
-                        <CustomTextInput name='email' placeholder='Email' label='Email Address' isPassword={false}  />
-                        <Box marginBottom={'sm'} />
-
-                        <CustomTextInput name='state' placeholder='State' label='State' isPassword={false} 
-                        /><Box marginBottom={'sm'} />
-
-                        <CustomTextInput name='city' placeholder='City' label='City' isPassword={false} 
-                        /><Box marginBottom={'sm'} />
-
-                        <CustomTextInput name='street' placeholder='Street' label='Street' isPassword={false} 
-                        /><Box marginBottom={'sm'} />
-
-                        <CustomTextInput name='postalCode' placeholder='Postal Code' label='Postal Code' isPassword={false} 
-                        /><Box marginBottom={'sm'} />
-
-                        <CustomTextInput name='appartmentNo' placeholder='Apartment No' label='Apartment No (Optional)' isPassword={false} 
-                        /><Box marginBottom={'sm'} />
-
-                        <CustomTextInput name='landMark' placeholder='Land Mark' label='Land Mark (Optional)' isPassword={false} 
-                        /><Box marginBottom={'sm'} />
-                        <Box flexDirection={'row'} paddingBottom={'md'}>
-                          <Checkbox onCheckedChange={(checked)=> setChecked(checked as boolean)} checked={checked}>
-                          <Checkbox.Indicator>
-                            <Ionicons name="checkmark-circle" size={20} color="#2D66DD" />
-                          </Checkbox.Indicator>
-                          {/* <CustomText>Make default Address</CustomText> */}
-                          </Checkbox>
-                        </Box>
-                        <TouchableOpacity>
+                <Box marginTop={'lg'}>
+                      <CustomTextInput name='bvn' placeholder='Enter your NIN'  label='NIN' keyboardType="number-pad"
+                            textContentType="oneTimeCode" isPassword={false}  />
+                        <Box marginBottom={'lg'} />
+                        <TouchableOpacity>  
                           <SubmitButton label='Save & Continue' width='100%' onSubmit={(data) => handleSubmit(data)} isLoading={isLoading} />
                         </TouchableOpacity>
-                  </Box>
-                  </ScrollView> 
+                  </Box>  
         </Box>
     </Box>
   )

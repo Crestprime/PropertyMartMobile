@@ -1,6 +1,6 @@
 import { View, Text, ImageBackground, Image } from 'react-native'
 import React from 'react'
-import { Styles } from './styles'
+import { Styles } from '../../styles/splash/styles'
 import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 
@@ -19,11 +19,14 @@ const LandingPage = () => {
         </Box>
         <Box style={Styles.martSplit48}>
          <ImageBackground source={wave} resizeMode="cover" style={Styles.bgImage}>
-            <CustomText variant={'subheader'} textAlign={'center'} fontSize={36} lineHeight={44} color={'white'}>Property Mart</CustomText>
+            <CustomText variant={'header'} textAlign={'center'} color={'white'}>
+                Property Mart 
+            </CustomText>
+            <CustomText variant={'header'} textAlign={'center'} color={'white'}>
+              (Buyer's App) 
+            </CustomText>
          </ImageBackground>
         </Box>
-       
-        {/* <CustomText>Property Mart</CustomText> */}
       </Box>
     )
   }
