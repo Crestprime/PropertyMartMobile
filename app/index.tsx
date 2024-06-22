@@ -2,7 +2,7 @@ import React from 'react'
 import {
   useRouter  
 } from 'expo-router';
-import Onboarding from './splash/onboarding'
+import Onboarding from '../pages/onboarding/onboarding'
 
 
 const Home = () => {

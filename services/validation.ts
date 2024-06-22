@@ -2,7 +2,8 @@ import { z } from 'zod'
 const phoneRegExp = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 
 const signupSchema = z.object({
-    name: z.string().min(3, 'Last name is required'),
+    firstName: z.string().min(3, 'First name is required'),
+    lastName: z.string().min(3, 'Last name is required'),
     phone: z
       .string()
       .refine((value) => phoneRegExp.test(value), {

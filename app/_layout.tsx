@@ -7,6 +7,7 @@ import config from '../tamagui.config';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ThemeProvider } from '@shopify/restyle'
 import theme from '@theme/themes';
+import { StatusBar } from 'react-native'
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -56,6 +57,7 @@ function RootLayoutNav() {
     <QueryClientProvider client={queryClient}>
        <ThemeProvider theme={theme}>
         <TamaguiProvider config={config}>
+          <StatusBar barStyle={'dark-content'} translucent={true} animated={true} showHideTransition={'slide'} backgroundColor={'transparent'} />
           <Stack screenOptions={{ headerShown: false }} />
         </TamaguiProvider>
        </ThemeProvider>

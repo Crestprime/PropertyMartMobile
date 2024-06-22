@@ -4,7 +4,7 @@ import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
 import { InspectionSchema } from '@services/validation'
-import { Styles } from '../styles'
+import { Styles } from '../../../../styles/dashboard/homepage/styles'
 import { CustomTextInput } from '@component/form/CustomInput'
 import { Link, router } from 'expo-router';
 import { SubmitButton } from '@component/form/CustomButton'

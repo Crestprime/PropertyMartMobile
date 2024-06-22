@@ -1,6 +1,7 @@
 // Countdown.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native';
+import CustomText from "@component/general/CustomText";
 
 interface CountdownProps {
   initialTime: number;
@@ -58,7 +59,7 @@ const Countdown: React.ForwardRefRenderFunction<CountdownRef, CountdownProps> = 
     },
   }));
 
-  return <Text> (0:{time}s)</Text>;
+  return <CustomText variant={'body'}> (0:{time}s)</CustomText>;
 };
 
 export default React.forwardRef(Countdown);

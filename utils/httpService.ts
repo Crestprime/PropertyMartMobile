@@ -7,7 +7,10 @@ import axios, {
   
   
   export const FRONTEND_BASE_URL = "https://propertymart-development-server-production.up.railway.app"
-  export const BASE_URL = "https://propertymart-development-server-production.up.railway.app";
+
+  const LIVE_URL = "https://propertymartserver-06e7eac41e27.herokuapp.com/api/v1/"
+  const AIRTEL_URL = 'http://192.168.1.191:8000/api/v1/'
+  export const BASE_URL = AIRTEL_URL;
   export const IMAGE_BASE = "";
   const SITE_URL=''
   

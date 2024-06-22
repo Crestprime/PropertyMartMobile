@@ -6,33 +6,33 @@ import CustomText from '@component/general/CustomText'
 import { Styles } from './styles'
 import Countdown, { CountdownRef } from '@component/general/Countdown'
 import { PrimaryButton } from '@component/general/CustomButton'
+import OTPTextInput from "react-native-otp-textinput";
 
 import { useMutation } from 'react-query'
 import httpService from '../../utils/httpService'
 import { router } from 'expo-router'
 import { SubmitButton } from '@component/form/CustomButton'
+import {URLS} from "@services/Urls";
+import {useTheme} from "@shopify/restyle";
+import {Theme} from "@theme/index";
 
 
 const SignupVerify = ({userEmail, step, setStep, userId, }:any) => {
 
     // OTP form Values
-    const [otpInput_1, setOtpInput_1] = useState('');
-    const [otpInput_2, setOtpInput_2] = useState('');
-    const [otpInput_3, setOtpInput_3] = useState('');
-    const [otpInput_4, setOtpInput_4] = useState('');
-    const [otpInput_5, setOtpInput_5] = useState('');
-    const [otpInput_6, setOtpInput_6] = useState('');
+    const [code, setCode] = React.useState('');
+    const ref = React.useRef();
+    const theme = useTheme<Theme>();
+
 
     const countdownRef = useRef<CountdownRef>(null);
-    const [isLoading, setIsLoading] = useState(false);
-    
-    const { isLoading: signupMutationLoading, mutate } = useMutation({
-      mutationFn: (data: any) => httpService.put(`/authentication/user/verify-email-otp/${data}/${userId}`,),
+
+    const { isLoading, mutate } = useMutation({
+      mutationFn: (data: any) => httpService.put(`${URLS.verify_email}`,{ token: data, id: userId }),
       onSuccess: (data) => {
         const {message} = data.data;
         console.log(data.data);
         Alert.alert(message);
-        setIsLoading(false)
         router.push('/auth/signupSuccess')
       },
       onError: (error: any) => {
@@ -40,31 +40,33 @@ const SignupVerify = ({userEmail, step, setStep, userId, }:any) => {
       },
     })
     const { isLoading: Loading, mutateAsync } = useMutation({
-      mutationFn: (data: any) => httpService.get(`/authentication/user/resend-email-verification-otp/${userEmail}`),
+      mutationFn: (data: any) => httpService.get(`${URLS.resend_email_verification_code}/${userEmail}`),
       onSuccess: (data) => {
         const {message} = data.data;
         console.log(data.data);
         Alert.alert(message);
         handleRestartClick()
-        setIsLoading(false)
       },
       onError: (error: any) => {
         alert(error?.message)
       },
     })
-  
-    const handleVerify = async (data: any) => {
-    let otpData = otpInput_1 + otpInput_2 + otpInput_3 + otpInput_4 + otpInput_5 + otpInput_6 ;
-    console.log(otpData)
-    if(otpData.length < 6){
-      Alert.alert('You must enter 6 digits')
-     } else {
-      const formdata = otpData;
-      let data = formdata
-      Alert.alert(data)
-      mutate(data)
-     }
-    };
+
+    const handleInputChange = React.useCallback(
+        (code: string) => {
+            if (code.length === 6) {
+                // make api call
+                //mutate(code);
+            } else {
+                setCode(code);
+            }
+        },
+        [code]
+    );
+
+    const handleVerify = () => {
+        mutate(code);
+    }
 
     const handleResend = async ({data}:any) => {
       mutateAsync(data) 
@@ -80,143 +82,60 @@ const SignupVerify = ({userEmail, step, setStep, userId, }:any) => {
     }
   };
   
-  const handleOtpInput_1Change = (text: any) => {
-    // Ensure that the input contains only numbers
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    // Limit the input to 5 characters
-    if (sanitizedText.length <= 5) {
-      setOtpInput_1(sanitizedText);
-    }
-  };
-  const handleOtpInput_2Change = (text: any) => {
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    if (sanitizedText.length <= 5) {
-      setOtpInput_2(sanitizedText);
-    }
-  };
-  const handleOtpInput_3Change = (text: any) => {
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    if (sanitizedText.length <= 5) {
-      setOtpInput_3(sanitizedText);
-    }
-  };
-  const handleOtpInput_4Change = (text: any) => {
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    if (sanitizedText.length <= 5) {
-      setOtpInput_4(sanitizedText);
-    }
-  };
-  const handleOtpInput_5Change = (text: any) => {
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    if (sanitizedText.length <= 5) {
-      setOtpInput_5(sanitizedText);
-    }
-  };
-  const handleOtpInput_6Change = (text: any) => {
-    const sanitizedText = text.replace(/[^0-9]/g, '');
-    if (sanitizedText.length <= 5) {
-      setOtpInput_6(sanitizedText);
-    }
-  };
-  
   return (
-    <Box>
-       <Box>
+       <Box flex={1} backgroundColor={'white'}>
               
-              <CustomText variant={'subheader'} textAlign={'left'} fontSize={25} lineHeight={25} marginTop={'xl'} 
-                    color={'black'} fontWeight={'800'}>Verify your Email
+              <CustomText variant={'subheader'} textAlign={'left'} fontSize={25} marginTop={'xl'}
+                    color={'black'}>Verify your Email
               </CustomText>
-               <CustomText variant={'xs'} textAlign={'left'} fontSize={14} lineHeight={20}  marginTop={'xs'}
-                    color={'black'} fontWeight={'400'}>
+               <CustomText variant={'body'} textAlign={'left'} fontSize={16} marginTop={'xs'}
+                    color={'black'} >
                      Please enter the OTP code sent to {userEmail}
                </CustomText>
 
-                <Box marginTop={'lg'} marginBottom={'lg'}>
-                <Box style={Styles.container}>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_1}
-                      onChangeText={handleOtpInput_1Change}
+                <Box marginTop={'lg'} marginBottom={'lg'} width={'100%'} >
+
+                    <OTPTextInput
+                        inputCount={6}
+                        ref={(e: any) => (ref.current = e)}
+                        handleTextChange={handleInputChange}
+                        keyboardType="phone-pad"
+                        tintColor={"transparent"}
+                        offTintColor={"transparent"}
+                        containerStyle={{
+                            marginVertical: 10,
+                            marginTop: 20,
+
+                        }}
+                        textInputStyle={{
+                            borderWidth: 1,
+                            borderColor: theme.colors.lightGrey,
+                            height: 50,
+                            width: 50,
+                            borderRadius: 3,
+                            backgroundColor: 'whitesmoke',
+                            flex: 1,
+                            color: theme.colors.textColor,
+                            fontFamily: 'BasierMedium',
+                        } as any}
+
                     />
-                  </Box>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_2}
-                      onChangeText={handleOtpInput_2Change}
-                    />
-                  </Box>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_3}
-                      onChangeText={handleOtpInput_3Change}
-                    />
-                  </Box>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_4}
-                      onChangeText={handleOtpInput_4Change}
-                    />
-                  </Box>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_5}
-                      onChangeText={handleOtpInput_5Change}
-                    />
-                  </Box>
-                  <Box paddingRight={'xs'}>
-                    <TextInput
-                      style={Styles.input}
-                      keyboardType="numeric"
-                      maxLength={1}
-                      value={otpInput_6}
-                      onChangeText={handleOtpInput_6Change}
-                    />
-                  </Box>
+
                 </Box>
-                </Box>
-                <TouchableOpacity>
-                    <Box width='100%' marginTop={'xl'} height={50} justifyContent={'center'} alignItems={'center'}>
-                    {/* <SubmitButton label='Verify' width='100%' onSubmit={(data) => handleVerify(data)} isLoading={isLoading} /> */}
-                    <PrimaryButton label='Verify' width='100%' onPress={(data:any) => handleVerify(data)} isLoading={isLoading}/>
-                    </Box>
-                </TouchableOpacity>
+
+               <PrimaryButton label='Verify' width='100%' onPress={(data:any) => handleVerify()} isLoading={isLoading}/>
+
                 <Box width='100%' marginTop={'xs'} flexDirection={'row'} height={50} justifyContent={'center'} alignItems={'center'}>
                   <CustomText variant={'xs'} marginRight={'xs'}>Didn’t get a code?</CustomText>
-                  <TouchableOpacity>
                     <Pressable onPress={handleResend}>
-                        <CustomText variant={'xs'} fontSize={14} style={{color:'#2D66DD', fontWeight:'800'}}>Resend</CustomText>
+                        <CustomText variant={'xs'} fontSize={16} color={'primaryColor'}>Resend</CustomText>
                     </Pressable>
-                  </TouchableOpacity>
-                  <CustomText>
                     <Countdown ref={countdownRef} initialTime={60} onTimerEnd={handleTimerEnd} />
-                  </CustomText>
-                  {/* <Button title="Restart" onPress={handleRestartClick} /> */}
-                  {/* <Text>(0:05s)</Text> */}
                 </Box>
-                <Box height={'45%'} flexDirection={'row'} alignItems={'flex-end'}>
-                <Box height={5} width={'100%'}  flexDirection={'row'} justifyContent={'center'} >
-                    <Box height={5} width={'30%'} backgroundColor={'black'} borderRadius={10}>
-                        <CustomText>Hello</CustomText>
-                    </Box>
-                </Box>
-        </Box>
+
+
        </Box>
-    </Box>
+
   )
 }
 

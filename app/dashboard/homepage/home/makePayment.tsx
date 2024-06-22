@@ -4,7 +4,7 @@ import Box from '@component/general/Box'
 import CustomText from '@component/general/CustomText'
 import useForm from '@hooks/useForm'
 import { PaymentSchema } from '@services/validation'
-import { Styles } from '../styles'
+import { Styles } from '../../../../styles/dashboard/homepage/styles'
 import { Link, router } from 'expo-router';
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'

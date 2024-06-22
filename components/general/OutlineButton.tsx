@@ -41,7 +41,7 @@ export const OutlineButton = ({
       >
         <CustomText
           variant="subheader"
-          fontSize={14}
+          fontSize={16}
           color={'black'}
         >
           {isLoading ? "submitting..." : label}

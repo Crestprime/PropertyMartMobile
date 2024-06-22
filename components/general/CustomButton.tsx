@@ -38,8 +38,8 @@ export const PrimaryButton = ({
         }}
       >
         <CustomText
-          // variant=""
-          fontSize={14}
+          variant="subheader"
+          fontSize={16}
           color={'white'}
         >
           {isLoading ? "submitting..." : label}
